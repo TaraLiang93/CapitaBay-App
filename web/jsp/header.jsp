@@ -3,6 +3,7 @@
 <jsp:useBean id="userBean" class="Bean.UserBean" scope="session" />
 <html>
     <head>
+        <link rel="icon" type="img/ico" href="/images/favicon.ico">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
         <link href="/css/style.css" rel='stylesheet' type='text/css'>      
