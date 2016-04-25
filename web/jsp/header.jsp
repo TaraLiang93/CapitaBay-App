@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="userBean" class="Bean.UserBean" scope="session" />
 <html>
     <head>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -61,7 +62,7 @@
             </div>
             <div id="user-portal">
                 <span id="welcome"> Welcome </span>
-            <a href="#" id="user"> ${userBean.firstname ne null ? userBean.firstname : "Pat"} </a>
+                <a href="${userBean.firstName eq null ? "/login" : "#"}" id="user"> ${userBean.firstName ne null ? userBean.firstName : "Sign In"} </a>
             </div>
         </div>
         <div class="container">           
@@ -94,5 +95,11 @@
                     </li>-->
                 </ul>
             </div><!--/.nav-collapse -->
+            <form action="/getStockByKeyword" method="get" class="input-group col-md-4 search" role="form">
+                <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
+                <span class="input-group-btn">
+                   <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                </span>
+            </form>
         </div>
     </nav>

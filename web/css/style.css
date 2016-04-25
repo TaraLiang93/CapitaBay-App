@@ -226,3 +226,7 @@ background: linear-gradient(to bottom,  #4c4c4c 0%,#595959 12%,#666666 25%,#4747
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); 
 height:50px;
 }
+
+.search {
+    float: right;
+}

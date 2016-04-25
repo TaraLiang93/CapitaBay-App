@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,20 +42,24 @@ public class getStocksByKeyword extends HttpServlet{
         try {
             int c_ssn = userBean.getSocialSecurityNumber();
             String keyword = req.getParameter("keyword");
-            String query = "call getStocksByKeyword("+keyword+","+c_ssn+");";
+            String query = "call getStocksByKeyword('"+keyword+"',"+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<keywordOrder> result = new LinkedList<keywordOrder>();
-            while(res.next()){
+            do{
                 keywordOrder current = new keywordOrder();
                 current.set(res);
                 result.add(current);
-            }
+            }while(res.next());
             req.setAttribute("keywordResult", result);
+            req.setAttribute("searchResultsName", keyword);
+
             
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException |SQLException ex) {
             Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.out.println();
+        } 
+  
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/search.jsp");
+        dispatcher.forward(req, resp);
     }
 }

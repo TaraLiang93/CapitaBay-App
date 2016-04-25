@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 //                {
 //                  results.add(new ListRevenueByStockType(res));
 //                }
-System.out.println("");
+
                         
                         } catch (SQLException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
