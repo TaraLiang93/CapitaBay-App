@@ -5,7 +5,7 @@
 </jsp:include>
 <jsp:useBean id="s" class="Tables.Stock" scope="request"/>
 <script>
-    window.onload = function () {
+    $(document).ready(function(){
 	var chart = new CanvasJS.Chart("chartContainer", {
 		title:{
 			text: ""              
@@ -39,7 +39,7 @@
                 ]
 	});
 	chart.render();
-        };
+        });
 </script>
 
     <div class="container">
