@@ -227,6 +227,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 height:50px;
 }
 
-.search {
+form#search {
     float: right;
 }

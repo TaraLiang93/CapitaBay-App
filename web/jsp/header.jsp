@@ -64,7 +64,15 @@
             <div id="user-portal">
                 <span id="welcome"> Welcome </span>
                 <a href="${userBean.firstName eq null ? "/login" : "#"}" id="user"> ${userBean.firstName ne null ? userBean.firstName : "Sign In"} </a>
+                
+
             </div>
+                                <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
+                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
+                    <span class="input-group-btn">
+                        <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                    </span>
+                </form>
         </div>
         <div class="container">           
             <div class="navbar-header">
@@ -96,11 +104,5 @@
                     </li>-->
                 </ul>
             </div><!--/.nav-collapse -->
-            <form action="/getStockByKeyword" method="get" class="input-group col-md-4 search" role="form">
-                <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
-                <span class="input-group-btn">
-                   <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
-                </span>
-            </form>
         </div>
     </nav>
