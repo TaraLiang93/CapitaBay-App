@@ -10,7 +10,7 @@
 
 
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="container">
+
     <div class="jumbotron" id="home-content1">
       <h1>Welcome to Capita Bay</h1>
       <p>Capita Bay</p>
@@ -18,7 +18,6 @@
       <p>
         <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Register as New User &raquo;</a>
       </p>
-    </div>
     </div>
 
     

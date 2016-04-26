@@ -8,6 +8,7 @@ package CustomerQueries;
 import Bean.UserBean;
 import Bean.keywordOrder;
 import DataBase.CapitaBay;
+import Tables.Stock;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,16 +41,15 @@ public class getStocksByKeyword extends HttpServlet{
         }
                 
         try {
-            int c_ssn = userBean.getSocialSecurityNumber();
             String keyword = req.getParameter("keyword");
-            String query = "call getStocksByKeyword('"+keyword+"',"+c_ssn+");";
+            String query = "call getStockByKeyword('"+keyword+"');";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<keywordOrder> result = new LinkedList<keywordOrder>();
-            do{
-                keywordOrder current = new keywordOrder();
+            LinkedList<Stock> result = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
                 current.set(res);
                 result.add(current);
-            }while(res.next());
+            };
             req.setAttribute("keywordResult", result);
             req.setAttribute("searchResultsName", keyword);
 

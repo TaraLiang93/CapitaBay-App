@@ -17,80 +17,81 @@ import java.util.logging.Logger;
  * @author root
  */
 public class Stock implements Serializable{
-    private String StockSymbol;
-    private String StockType;
-    private String StockName;
-    private double SharePrice;
-    private Date StockDate;
-    private Time StockTime;
-    private int NumberOfSharesAvaliable;
+    private String stockSymbol;
+    private String stockType;
+    private String stockName;
+    private double sharePrice;
+    private Date stockDate;
+    private Time stockTime;
+    private int numberOfSharesAvaliable;
 
     public String getStockSymbol() {
-        return StockSymbol;
+        return stockSymbol;
     }
 
-    public void setStockSymbol(String StockSymbol) {
-        this.StockSymbol = StockSymbol;
+    public void setStockSymbol(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
     }
 
     public String getStockType() {
-        return StockType;
+        return stockType;
     }
 
-    public void setStockType(String StockType) {
-        this.StockType = StockType;
+    public void setStockType(String stockType) {
+        this.stockType = stockType;
     }
 
     public String getStockName() {
-        return StockName;
+        return stockName;
     }
 
-    public void setStockName(String StockName) {
-        this.StockName = StockName;
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
     }
 
     public double getSharePrice() {
-        return SharePrice;
+        return sharePrice;
     }
 
-    public void setSharePrice(double SharePrice) {
-        this.SharePrice = SharePrice;
+    public void setSharePrice(double sharePrice) {
+        this.sharePrice = sharePrice;
     }
 
     public Date getStockDate() {
-        return StockDate;
+        return stockDate;
     }
 
-    public void setStockDate(Date StockDate) {
-        this.StockDate = StockDate;
+    public void setStockDate(Date stockDate) {
+        this.stockDate = stockDate;
     }
 
     public Time getStockTime() {
-        return StockTime;
+        return stockTime;
     }
 
-    public void setStockTime(Time StockTime) {
-        this.StockTime = StockTime;
+    public void setStockTime(Time stockTime) {
+        this.stockTime = stockTime;
     }
 
     public int getNumberOfSharesAvaliable() {
-        return NumberOfSharesAvaliable;
+        return numberOfSharesAvaliable;
     }
 
-    public void setNumberOfSharesAvaliable(int NumberOfSharesAvaliable) {
-        this.NumberOfSharesAvaliable = NumberOfSharesAvaliable;
+    public void setNumberOfSharesAvaliable(int numberOfSharesAvaliable) {
+        this.numberOfSharesAvaliable = numberOfSharesAvaliable;
     }
+
     
     
     public void set(ResultSet res) {
         try {
-            this.StockSymbol = res.getString("StockSymbol");
-            this.NumberOfSharesAvaliable = res.getInt("NumberOfSharesAvaliable");
-            this.StockType = res.getString("StockType");
-            this.StockName = res.getString("StockName");
-            this.StockTime = res.getTime("StockTime");
-            this.StockDate = res.getDate("StockDate");
-            this.SharePrice = res.getDouble("SharePrice");
+            this.stockSymbol = res.getString("StockSymbol");
+            this.numberOfSharesAvaliable = res.getInt("NumberOfSharesAvaliable");
+            this.stockType = res.getString("StockType");
+            this.stockName = res.getString("StockName");
+            this.stockTime = res.getTime("StockTime");
+            this.stockDate = res.getDate("StockDate");
+            this.sharePrice = res.getDouble("SharePrice");
         } catch (SQLException ex) {
             Logger.getLogger(Orders.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -11,7 +11,6 @@
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/jquery.mb.browser.min.js"></script>
-        <link rel="stylesheet" href="/css/style.css">
         <script src="/js/script1.js"></script>
         <script src="js/canvasjs.min.js"></script>
         <script src="js/main.js"></script>
@@ -37,7 +36,7 @@
            
     <nav class="navbar navbar-default navbar-fixed-top">
         <div id="top-header" class="container"> 
-            <img src="/images/capitabay_logo.png" id="logo1"/>
+            <a href="/ "><img src="/images/capitabay_logo.png" id="logo1"/></a>
             <div id="header-carousel" class="carousel slide" data-ride="carousel">
     
 
@@ -106,3 +105,4 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+<div class="container">
