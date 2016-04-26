@@ -71,9 +71,12 @@
                 <h2> Buy this Stock </h2>
               <!--  <input type="range" name="shares" id="shares" value="0" min="0" max="100" data-highlight="true" data-show-value="true">
             </form>-->
+              <fieldset class="form-group">
             <label for="shares">Number of Shares:</label>
             <input id="shares" type="range" name="shares" onchange="alert(this.value)" value="0" min="0" max="100" data-highlight="true" data-show-value="true" />
-            
+            <input id="number-shares" class="form-control" type="text" value="0">
+            <input id="price-shares" class="form-control" type="text" value="0">
+              </fieldset>
             </form>
             </div>
         </div>
