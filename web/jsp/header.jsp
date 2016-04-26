@@ -31,7 +31,7 @@
         <!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
     </head>
     <body>
-    <div id="home-img">
+    <div id="background-img">
            
     <nav class="navbar navbar-default navbar-fixed-top">
         <div id="top-header" class="container"> 

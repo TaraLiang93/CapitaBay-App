@@ -7,16 +7,17 @@
 <script>
     window.onload = function () {
 	var chart = new CanvasJS.Chart("chartContainer", {
+                backgroundColor: "#333",
 		title:{
 			text: ""              
 		},
                 axisX:{
-                    labelFontColor: "#333"
+                    labelFontColor: "#DDD"
                   },
                 axisY:{
-                    interlacedColor: "#CCC",
-                    gridColor: "darkgreen",
-                    labelFontColor: "#333"
+                    interlacedColor: "#555",
+                    gridColor: "DDD",
+                    labelFontColor: "#DDD"
                   },
                 data: [
 		{
@@ -64,12 +65,16 @@
                     </tbody>
                 </table>
             </div>
+            <hr id="specific-separator">
             <div id="buy-form">            
-            <!--<form method="post" action="demoform.asp">
-                <label for="shares">Number of Shares:</label>
-                <input type="range" name="shares" id="shares" value="0" min="0" max="100" data-highlight="true" data-show-value="true">
+            <form method="post" action="demoform.asp">
+                <h2> Buy this Stock </h2>
+              <!--  <input type="range" name="shares" id="shares" value="0" min="0" max="100" data-highlight="true" data-show-value="true">
             </form>-->
-            <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+            <label for="shares">Number of Shares:</label>
+            <input id="shares" type="range" name="shares" onchange="alert(this.value)" value="0" min="0" max="100" data-highlight="true" data-show-value="true" />
+            
+            </form>
             </div>
         </div>
         
