@@ -1,6 +1,6 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Capita Bay Home"/>
-    <jsp:param name="css" value="/css/style.css" />
+    <jsp:param name="css" value="" />
     <jsp:param name="js" value="/js/script1.js" />
 </jsp:include>
 
