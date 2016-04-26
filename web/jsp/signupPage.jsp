@@ -19,26 +19,23 @@
         <div style="width: 100%;height: 80%;margin-top: 20%;">
             <form>
               <div class="form-group">
-              
+                <label for="Username">Username</label>
+                <input type="text" class="form-control" id="Username" placeholder="Username">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" placeholder="Password">
               </div>
               <div class="form-group">
                 <label for="exampleInputFile">File input</label>
                 <input type="file" id="exampleInputFile">
                 <p class="help-block">Example block-level help text here.</p>
               </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Check me out
-                </label>
+              <div class="form-group">
+                  <label for="FirstName">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="First Name">
               </div>
+              
               <button type="submit" class="btn btn-default">Submit</button>
             </form>        
         </div>
