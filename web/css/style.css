@@ -140,6 +140,10 @@ transition: color .3s ease-in-out;
 	margin-top: 300px;
 }
 
+.display-content {
+    margin-top: 200px;
+}
+
 #content2 {
 	background-color:#666666;
 	height: 500px;
@@ -329,4 +333,8 @@ background: -webkit-linear-gradient(top,  #4c4c4c 0%,#595959 12%,#666666 25%,#47
 background: linear-gradient(to bottom,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); 
 height:50px;
+}
+
+form#search {
+    float: right;
 }

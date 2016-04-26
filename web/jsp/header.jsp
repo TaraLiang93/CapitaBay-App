@@ -1,7 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="userBean" class="Bean.UserBean" scope="session" />
 <html>
     <head>
+        <link rel="icon" type="img/ico" href="/images/favicon.ico">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
         <link href="/css/style.css" rel='stylesheet' type='text/css'>      
@@ -9,7 +11,6 @@
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/jquery.mb.browser.min.js"></script>
-        <link rel="stylesheet" href="/css/style.css">
         <script src="/js/script1.js"></script>
         <script src="js/canvasjs.min.js"></script>
         <script src="js/main.js"></script>
@@ -35,7 +36,7 @@
            
     <nav class="navbar navbar-default navbar-fixed-top">
         <div id="top-header" class="container"> 
-            <img src="/images/capitabay_logo.png" id="logo1"/>
+            <a href="/ "><img src="/images/capitabay_logo.png" id="logo1"/></a>
             <div id="header-carousel" class="carousel slide" data-ride="carousel">
     
 
@@ -61,8 +62,16 @@
             </div>
             <div id="user-portal">
                 <span id="welcome"> Welcome </span>
-            <a href="#" id="user"> ${userBean.firstname ne null ? userBean.firstname : "Pat"} </a>
+                <a href="${userBean.firstName eq null ? "/login" : "#"}" id="user"> ${userBean.firstName ne null ? userBean.firstName : "Sign In"} </a>
+                
+
             </div>
+                                <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
+                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
+                    <span class="input-group-btn">
+                        <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                    </span>
+                </form>
         </div>
         <div class="container">           
             <div class="navbar-header">
@@ -96,3 +105,4 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+<div class="container ">

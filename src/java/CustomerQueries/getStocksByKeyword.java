@@ -8,12 +8,14 @@ package CustomerQueries;
 import Bean.UserBean;
 import Bean.keywordOrder;
 import DataBase.CapitaBay;
+import Tables.Stock;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,22 +41,25 @@ public class getStocksByKeyword extends HttpServlet{
         }
                 
         try {
-            int c_ssn = userBean.getSocialSecurityNumber();
             String keyword = req.getParameter("keyword");
-            String query = "call getStocksByKeyword("+keyword+","+c_ssn+");";
+            String query = "call getStockByKeyword('"+keyword+"');";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<keywordOrder> result = new LinkedList<keywordOrder>();
+            LinkedList<Stock> result = new LinkedList<Stock>();
             while(res.next()){
-                keywordOrder current = new keywordOrder();
+                Stock current = new Stock();
                 current.set(res);
                 result.add(current);
-            }
+            };
             req.setAttribute("keywordResult", result);
+            req.setAttribute("searchResultsName", keyword);
+
             
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException |SQLException ex) {
             Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.out.println();
+        } 
+  
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/search.jsp");
+        dispatcher.forward(req, resp);
     }
 }

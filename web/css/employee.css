@@ -4,11 +4,12 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Mar 31, 2016, 10:14:02 PM
+    Created on : Apr 26, 2016, 4:38:39 PM
     Author     : Jason
 */
-/*body{
-    margin-top: 155px;
-    
-}*/
+
+.employeeTabs {
+    background-color: white;
+    height: 65%
+}
 
