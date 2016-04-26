@@ -140,6 +140,10 @@ transition: color .3s ease-in-out;
 	margin-top: 300px;
 }
 
+.display-content {
+    margin-top: 200px;
+}
+
 #content2 {
 	background-color:#666666;
 	height: 500px;

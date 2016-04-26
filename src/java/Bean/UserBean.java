@@ -7,6 +7,7 @@ package Bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -20,7 +21,13 @@ public class UserBean implements Serializable{
     private String email;
     private ArrayList<Integer> accountNumbers;
     private String creditCardNumber;
-
+    private double rating;
+    
+    private String position;
+    private DateTime startDate;
+    private double hourRate;
+    
+    
     public int getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
@@ -68,7 +75,38 @@ public class UserBean implements Serializable{
     public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
-    
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public DateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(DateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public double getHourRate() {
+        return hourRate;
+    }
+
+    public void setHourRate(double hourRate) {
+        this.hourRate = hourRate;
+    }
     
     
     
