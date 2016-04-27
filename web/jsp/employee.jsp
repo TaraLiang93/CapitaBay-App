@@ -24,7 +24,7 @@
    <caption>Edit Employees</caption>
    <thead>
       <tr>
-         <th>Remove</th>
+         <th>Lay Off</th>
          <th>First Name</th>
          <th>Last Name</th>
          <th>Address</th>
@@ -39,7 +39,10 @@
    <tbody>
     <c:forEach var="e" items="${employees}" >
       <tr>
-          <td><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button></td>
+          <td><button class="btn btn-danger deleteEmployee">
+                  <i class="glyphicon glyphicon-remove"></i></button>
+              <div class="EmployeeId" style="display:none">${e.socialSecurityNumber}</div>
+          </td>
          <td>${e.firstName}</td>
          <td>${e.lastName}</td>
          <td>${e.address}</td>
