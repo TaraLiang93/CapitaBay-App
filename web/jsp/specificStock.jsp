@@ -132,8 +132,7 @@
     </c:forEach>
         </table>
         
-        
-            <hr id="specific-separator">           
+                   
             <div id="chartContainer"></div>
                                   
         </div>

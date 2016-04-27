@@ -193,7 +193,8 @@ transition: color .3s ease-in-out;
 #chart-container {
     width: 100%;
     margin-top: 200px;
-    height:1000px;
+    margin-bottom: 100px;
+    height:auto;
     padding:10px 0;
 }
 
