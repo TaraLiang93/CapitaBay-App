@@ -1,7 +1,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Capita Bay Home"/>
     <jsp:param name="css" value="/css/style.css" />
-    <jsp:param name="js" value="/js/script1.js" />
+    <jsp:param name="js" value="/js/specificStock.js" />
 </jsp:include>
 <jsp:useBean id="s" class="Tables.Stock" scope="request"/>
 <script>
@@ -40,6 +40,13 @@
                 ]
 	});
 	chart.render();
+        
+        $("[type=range]").change(function(){
+            var newval=$(this).val();
+            $("#number-shares").val(newval);
+            $("#number-shares").val(newval * 100);
+        });
+        
         });
 </script>
 
@@ -67,17 +74,20 @@
             </div>
             <hr id="specific-separator">
             <div id="buy-form">            
-            <form method="post" action="demoform.asp">
-                <h2> Buy this Stock </h2>
-              <!--  <input type="range" name="shares" id="shares" value="0" min="0" max="100" data-highlight="true" data-show-value="true">
-            </form>-->
-              <fieldset class="form-group">
-            <label for="shares">Number of Shares:</label>
-            <input id="shares" type="range" name="shares" onchange="alert(this.value)" value="0" min="0" max="100" data-highlight="true" data-show-value="true" />
-            <input id="number-shares" class="form-control" type="text" value="0">
-            <input id="price-shares" class="form-control" type="text" value="0">
-              </fieldset>
-            </form>
+                <form method="post" action="demoform.asp">
+                    <h2> Buy this Stock </h2>
+                    <fieldset class="form-group">                       
+                        <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                        <input id="shares" type="range" name="shares" onchange="sharesChange(this.value);"
+                               value="0" min="0" max="100" data-highlight="true" data-show-value="true" />  
+                        <h3 id="shares-upper" class="shares-bounds"> 100 </h3>
+                        <br><br><br>
+                        <label for="number-shares">Number of Shares:</label>
+                        <input id="number-shares" class="form-control buy-text" type="text" value="0">
+                        <label for="price-shares">Total Price:</label>
+                        <input id="price-shares" class="form-control buy-text" type="text" value="0">
+                    </fieldset>
+                </form>
             </div>
         </div>
         

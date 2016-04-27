@@ -233,10 +233,19 @@ transition: color .3s ease-in-out;
    text-align: center;
 }
 
+.buy-text {
+   width:15%;
+}
+
+.shares-bounds {
+    color: #00f417;
+    float:left;
+    margin: 0 5px;
+}
+
 #shares {
-    width:90%;
-    display:block;
-    margin-left: 5%;
+    width:60%;  
+    float:left;
 }
 
 input[type=range] {

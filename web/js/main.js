@@ -13,11 +13,7 @@ $(document).ready(function() {
            });          
         });
         
-        $('#shares').slider().on('slideStop', function(ev){
-    var newVal = $('.span2').data('slider').getValue();
-        alert(newVal);
-    
-});
+  
         
 });
 
