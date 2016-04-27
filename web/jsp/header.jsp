@@ -62,9 +62,15 @@
             </div>
             <div id="user-portal">
                 <span id="welcome"> Welcome </span>
-                <a href="${userBean.firstName eq null ? "/login" : "#"}" id="user"> ${userBean.firstName ne null ? userBean.firstName : "Sign In"} </a>
-                
+                <c:choose>
+                    <c:when test = "${userBean.username == null}">
+                        <a href="/jsp/loginPage.jsp" id="user">Hello</a>
+                    </c:when>
+                    <c:when test="${userBean.username != null}">
+                        <a href="/jsp/loginPage.jsp" id="user">${userBean.username}</a>
 
+                    </c:when>
+                </c:choose> 
             </div>
                                 <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
                     <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
