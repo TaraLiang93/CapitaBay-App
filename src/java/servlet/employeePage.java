@@ -55,9 +55,7 @@ public class employeePage extends HttpServlet {
                 
         try {
             Integer ssn = userBean.getSocialSecurityNumber();
-            String query = "SELECT P.*,E.* FROM Employee E"
-                         + "Inner JOIN Person P"
-                         + "ON P.SocialSecurityNumber = E.SocialSecurityNumber;";
+            String query = "SELECT P.*, E.* FROM Employee E INNER JOIN Person P ON P.SocialSecurityNumber = E.SocialSecurityNumber;";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<Employee> result = new LinkedList<Employee>();
             while(res.next()){
@@ -65,7 +63,7 @@ public class employeePage extends HttpServlet {
                 current.set(res);
                 result.add(current);
             };
-            request.setAttribute("keywordResult", result);
+            request.setAttribute("employees", result);
             request.setAttribute("searchResultsName", userBean.getFirstName());
 
             
