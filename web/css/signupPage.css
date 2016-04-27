@@ -8,3 +8,24 @@ and open the template in the editor.
     Author     : root
 */
 
+#signup{
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 15px;
+    color: white;
+    padding: 1%;
+    width: 100%;
+    height: 80%;
+    margin-top: 15%;
+    margin-bottom: 5%;
+    overflow-y: scroll;
+}
+
+.half{
+    width: 45%;
+    margin: 0.5%;
+}
+
+.hasHalf{
+    display:inline-flex; 
+    width: 100%;
+}

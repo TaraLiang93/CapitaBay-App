@@ -40,7 +40,6 @@ public class loginValidation extends HttpServlet{
             String query = "call validUser('"+username+"','"+password+"');";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             if(res.next()){
-                System.out.println("booo    "+res.getInt("SocialSecurityNumber"));
                 int ssn = res.getInt("SocialSecurityNumber");
                 String userName= res.getString("Username");
                 UserBean userBean = new UserBean();
@@ -53,8 +52,6 @@ public class loginValidation extends HttpServlet{
                 dispatcher.forward(req, resp);
             }
             else{
-//                PrintWriter out = resp.getWriter();
-//                out.print("Incorrect Username and Password.");
                 req.setAttribute("error", "**Incorrect Username and Password**");
                 req.setAttribute("errorStatus", true);
                 System.out.println(req.getHeader("Referer"));

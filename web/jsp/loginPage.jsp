@@ -18,11 +18,15 @@
     <body>
     </div>
         <div class="container">
-            <div class="jumbotron" id="loginDiv" style="width: 100%;height: 80%;margin-top: 20%;">
+            <div class="jumbotron" id="loginDiv" 
+                 style="width: 100%;height: 80%;margin-top: 20%;
+                 background-color: rgba(0,0,0,0.7); border-radius: 15px;
+                 color: white;">
+                
                 <h1>Log In</h1>
                 <c:chose>
                     <c:when test="${errorStatus == 'true'}">
-                                        <p style="color:red;">${error}</p>
+                        <p style="color:red;">${error}</p>
                     </c:when>
                 </c:chose>
                 <form class="form-horizontal" id="loginForm" action="/loginValidation" method="post">
@@ -40,7 +44,7 @@
                     </div>
                     <div class="form-group pull-right">
                       <div class="col-sm-offset-2 col-sm-10">
-                        <a href="/jsp/signupPage.jsp" >New User, Sign up.</a>
+                        <a href="/jsp/signupPage.jsp" style="color: white;">New User, Sign up.</a>
                         <button type="submit" class="btn btn-default">Sign in</button>
                       </div>
                     </div>
