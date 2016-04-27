@@ -34,7 +34,7 @@ public class getStockPriceHistory extends HttpServlet{
             DateTime cal = new DateTime();
             cal = cal.minusMonths(Integer.parseInt(req.getParameter("time")));
             String ss = req.getParameter("StockSymbol");
-            String query = "call getStockHistory("+cal+","+ss+");";
+            String query = "call getStockHistory("+cal+",'"+ss+"');";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> result = new LinkedList<Stock>();
             int priceIndex   = res.findColumn("SharePrice");

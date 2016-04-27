@@ -197,6 +197,11 @@ transition: color .3s ease-in-out;
     padding:10px 0;
 }
 
+#chart-container .row{
+    width: 90%;
+    margin: 0 auto;
+}
+
 #chartContainer {
     width: 90%;
     height:400px;
@@ -216,8 +221,8 @@ transition: color .3s ease-in-out;
 }
 
 #specific-table {
-    width: 90%;
-    margin: 30px auto;
+   /* width: 90%;
+    margin: 30px auto;*/
     color: #00f417;
 }
 
@@ -227,12 +232,13 @@ transition: color .3s ease-in-out;
 }
 
 #buy-form {
-    width: 90%;
-    margin: 30px auto;
+ /*   width: 90%;
+    margin: 30px auto;*/
 }
 
 #buy-form label {
    color: #00f417; 
+   text-align: center;
 }
 
 #buy-form h2 {
@@ -242,7 +248,7 @@ transition: color .3s ease-in-out;
 }
 
 .buy-text {
-   width:15%;
+   width:100%;
 }
 
 .shares-bounds {
@@ -252,8 +258,13 @@ transition: color .3s ease-in-out;
 }
 
 #shares {
-    width:60%;  
+    width:80%;  
     float:left;
+}
+
+#buy-submit {
+    display: block;
+    margin:20px auto;
 }
 
 input[type=range] {

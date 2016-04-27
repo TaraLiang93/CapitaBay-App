@@ -6,14 +6,25 @@
 
 package servlet;
 
+import Bean.UserBean;
+import CustomerQueries.getStocksByKeyword;
+import DataBase.CapitaBay;
 import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -33,10 +44,72 @@ public class loadSpecificStockPage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
-        Stock stockBean = new Stock();
+        /*Stock stockBean = new Stock();
         stockBean.setStockSymbol(request.getParameter("val"));
         request.setAttribute("s", stockBean);
-        request.getRequestDispatcher("/jsp/specificStock.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/specificStock.jsp").forward(request, response);*/
+        
+        
+        HttpSession session = request.getSession();
+        
+        UserBean userBean = (UserBean) session.getAttribute("userBean");
+        if(userBean == null)
+        {
+            userBean = new UserBean();
+            session.setAttribute("userBean", userBean);
+        }
+                
+        try {
+            String ss = request.getParameter("val");
+            /*String query = "call getStockByKeyword('" +ss+"');";
+            ResultSet res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Stock> result = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
+                current = new Stock();
+                current.set(res);
+                result.add(current);
+            };*/
+            
+            String query = "SELECT * FROM StockTable s WHERE s.StockSymbol = '" +ss+"';";
+            ResultSet res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Stock> result = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
+                current = new Stock();
+                current.set(res);
+                result.add(current);
+            };
+            
+            request.setAttribute("s", result.get(0));
+            
+            DateTime cal = new DateTime();
+            cal = cal.minusMonths(600);
+            query = "call getStockHistory("+cal+",'"+ss+"');";
+            res = CapitaBay.ExecuteQuery(query);
+            result = new LinkedList<Stock>();
+            int priceIndex   = res.findColumn("SharePrice");
+            int dateIndex    = res.findColumn("StockDate");
+            
+            while(res.next()){
+                Stock current = new Stock();
+                current.setSharePrice(res.getDouble("SharePrice"));
+                current.setStockDate(res.getDate("SharePrice"));
+                result.add(current);                      
+            }          
+            request.setAttribute("h", result);
+            
+            
+            
+
+            
+        } catch (ClassNotFoundException |SQLException ex) {
+            Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println();
+        } 
+  
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/specificStock.jsp");
+        dispatcher.forward(request, response);
         
     }
 

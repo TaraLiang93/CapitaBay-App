@@ -3,7 +3,6 @@
     <jsp:param name="css" value="/css/style.css" />
     <jsp:param name="js" value="/js/specificStock.js" />
 </jsp:include>
-<jsp:useBean id="s" class="Tables.Stock" scope="request"/>
 <script>
     $(document).ready(function(){
 	var chart = new CanvasJS.Chart("chartContainer", {
@@ -44,7 +43,19 @@
         $("[type=range]").change(function(){
             var newval=$(this).val();
             $("#number-shares").val(newval);
-            $("#number-shares").val(newval * 100);
+            $("#price-shares").val(newval * ${s.sharePrice});
+        });
+        
+        $("#number-shares").change(function(){
+            var newval=$(this).val();
+            $("#shares").val(newval);
+            $("#price-shares").val(newval * ${s.sharePrice});
+        });
+        
+        $("#price-shares").change(function(){
+            var newval=$(this).val();
+            $("#shares").val(newval / ${s.sharePrice});
+            $("#number-shares").val(newval / ${s.sharePrice});
         });
         
         });
@@ -52,43 +63,73 @@
 
     <div class="container">
         <div id="chart-container" class="content">
+            
             <h2 id="specific-title">${s.stockSymbol}</h2>
-            <div id="chartContainer"></div>
-            <div >
+            <div class="row">
+            <div id="buy-form" class="col-md-8">            
+                <form method="post" >
+                    <h2> Buy this Stock </h2>                       
+                        <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                        <input id="shares" type="range" name="shares"
+                               value="0" min="0" max="${s.numberOfSharesAvaliable}" data-highlight="true" data-show-value="true" />  
+                        <h3 id="shares-upper" class="shares-bounds"> ${s.numberOfSharesAvaliable} </h3>
+                        <br><br><br>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <label for="number-shares">Number of Shares:</label>
+                        <input id="number-shares" class="form-control buy-text" type="text" value="0">
+                        </div>
+                        <div class="col-md-6">
+                        <label for="price-shares">Total Price:</label>
+                        <input id="price-shares" class="form-control buy-text" type="text" value="$0">
+                        </div>
+                        </div>
+                        <input id="buy-submit" name="submit" class="btn btn-success" value="Buy Shares" type="submit">
+                </form>
+            </div>
+            <div id="specific-table-container" class="col-md-4">
                 <table id="specific-table" class="table table-bordered cb-table">  
                     <tbody>
                       <tr>
                         <th scope="row">Stock Symbol</th>
                         <td>${s.stockSymbol}</td>
+                      </tr>
+                      <tr>
                         <th scope="row">Price</th>
-                        <td>$1200</td>
+                        <td>$${s.sharePrice}</td>
                       </tr>
                       <tr>
                         <th scope="row">Stock Type</th>
-                        <td>Automotive</td>
-                        <th scope="row">Shares Avaliable</th>
-                        <td>3100</td>
+                        <td>${s.stockType}</td>
                       </tr>
-                    </tbody>
+                      <tr>
+                        <th scope="row">Shares Avaliable</th>
+                        <td>${s.numberOfSharesAvaliable}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Stock Date</th>
+                        <td>${s.stockDate}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Stock Time</th>
+                        <td>${s.stockTime}</td>
+                      </tr>
+                    </tbody>                    
                 </table>
             </div>
-            <hr id="specific-separator">
-            <div id="buy-form">            
-                <form method="post" action="demoform.asp">
-                    <h2> Buy this Stock </h2>
-                    <fieldset class="form-group">                       
-                        <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
-                        <input id="shares" type="range" name="shares" onchange="sharesChange(this.value);"
-                               value="0" min="0" max="100" data-highlight="true" data-show-value="true" />  
-                        <h3 id="shares-upper" class="shares-bounds"> 100 </h3>
-                        <br><br><br>
-                        <label for="number-shares">Number of Shares:</label>
-                        <input id="number-shares" class="form-control buy-text" type="text" value="0">
-                        <label for="price-shares">Total Price:</label>
-                        <input id="price-shares" class="form-control buy-text" type="text" value="0">
-                    </fieldset>
-                </form>
             </div>
+                      <table>
+                        <c:forEach var="stock" items="${h}">
+        <tr class="stock"> 
+            <td>${stock.sharePrice}</td>
+        </tr>
+    </c:forEach>
+        </table>
+        
+        
+            <hr id="specific-separator">           
+            <div id="chartContainer"></div>
+                                  
         </div>
         
     </div>
