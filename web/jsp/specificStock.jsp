@@ -43,19 +43,21 @@
         $("[type=range]").change(function(){
             var newval=$(this).val();
             $("#number-shares").val(newval);
-            $("#price-shares").val(newval * ${s.sharePrice});
+            $("#price-shares").val(parseFloat(Math.round(newval * ${s.sharePrice} * 100) / 100).toFixed(2));
         });
         
         $("#number-shares").change(function(){
             var newval=$(this).val();
             $("#shares").val(newval);
-            $("#price-shares").val(newval * ${s.sharePrice});
+            $("#price-shares").val(parseFloat(Math.round(newval * ${s.sharePrice} * 100) / 100).toFixed(2));
         });
         
         $("#price-shares").change(function(){
-            var newval=$(this).val();
-            $("#shares").val(newval / ${s.sharePrice});
-            $("#number-shares").val(newval / ${s.sharePrice});
+            var price = $(this).val();
+            var newval = Math.ceil(price / ${s.sharePrice});
+            $("#shares").val(newval);
+            $("#number-shares").val(newval);
+            $("#price-shares").val(parseFloat(Math.round(newval * ${s.sharePrice} * 100) / 100).toFixed(2));
         });
         
         });
@@ -64,7 +66,7 @@
     <div class="container">
         <div id="chart-container" class="content">
             
-            <h2 id="specific-title">${s.stockSymbol}</h2>
+            <h2 id="specific-title">${s.stockName}</h2>
             <div class="row">
             <div id="buy-form" class="col-md-8">            
                 <form method="post" >
@@ -90,6 +92,10 @@
             <div id="specific-table-container" class="col-md-4">
                 <table id="specific-table" class="table table-bordered cb-table">  
                     <tbody>
+                      <tr>
+                        <th scope="row">Stock Name</th>
+                        <td>${s.stockName}</td>
+                      </tr>
                       <tr>
                         <th scope="row">Stock Symbol</th>
                         <td>${s.stockSymbol}</td>
