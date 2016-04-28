@@ -52,8 +52,8 @@ public class ManageEmployees extends HttpServlet {
         
         try {
             String editEmployee = req.getParameter("editEmployee");
-            Integer managerSSN = userBean.getSocialSecurityNumber();
-            Integer employeeSSN = Integer.parseInt(req.getParameter("employeeSSN"));
+            Long managerSSN = userBean.getSocialSecurityNumber();
+            Long employeeSSN = Long.parseLong(req.getParameter("employeeSSN"));
             String employeePos = req.getParameter("employeePos");
             Double hourRate = Double.parseDouble(req.getParameter("hourRate"));
             

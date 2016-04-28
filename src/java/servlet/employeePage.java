@@ -54,7 +54,7 @@ public class employeePage extends HttpServlet {
         }
                 
         try {
-            Integer ssn = userBean.getSocialSecurityNumber();
+            Long ssn = userBean.getSocialSecurityNumber();
             String query = "SELECT P.*,E.* FROM Employee E"
                          + "Inner JOIN Person P"
                          + "ON P.SocialSecurityNumber = E.SocialSecurityNumber;";

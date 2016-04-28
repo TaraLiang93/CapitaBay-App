@@ -37,7 +37,7 @@ public class orderHistory extends HttpServlet{
             session.setAttribute("userBean", userBean);
         }
         try{
-            int c_ssn = userBean.getSocialSecurityNumber();
+            Long c_ssn = userBean.getSocialSecurityNumber();
             String query = "call OrderHistory("+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<Orders> result = new LinkedList<Orders>();

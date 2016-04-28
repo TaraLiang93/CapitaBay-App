@@ -37,7 +37,7 @@ public class CustomerMailingList extends HttpServlet{
             session.setAttribute("userBean", userBean);
         }
         try{
-            int e_ssn = userBean.getSocialSecurityNumber();
+            Long e_ssn = userBean.getSocialSecurityNumber();
             String query = "call makeCustomerMailingList("+e_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<String> result = new LinkedList<String>();

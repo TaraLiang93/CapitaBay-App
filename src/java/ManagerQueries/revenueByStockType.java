@@ -39,7 +39,7 @@ public class revenueByStockType extends HttpServlet{
         }
                 
         try {
-            int e_ssn = userBean.getSocialSecurityNumber();
+            long e_ssn = userBean.getSocialSecurityNumber();
             String stockTyp = req.getParameter("StockType");
             
             String query = "call listRevenueByStockType("+e_ssn+","+stockTyp+");";

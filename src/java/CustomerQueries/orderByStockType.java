@@ -36,7 +36,7 @@ public class orderByStockType extends HttpServlet{
             session.setAttribute("userBean", userBean);
         }
         try{
-            int c_ssn = userBean.getSocialSecurityNumber();
+            Long c_ssn = userBean.getSocialSecurityNumber();
             String stockType = req.getParameter("stockType");
             String query = "call mostRecentStockAvailByType("+c_ssn+","+stockType+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);

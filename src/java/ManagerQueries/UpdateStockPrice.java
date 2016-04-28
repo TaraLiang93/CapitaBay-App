@@ -42,7 +42,7 @@ public class UpdateStockPrice extends HttpServlet {
         }
         
         try {
-            Integer ssn = userBean.getSocialSecurityNumber();
+            Long ssn = userBean.getSocialSecurityNumber();
             String stockSymbol = req.getParameter("StockSymbol");
             Double sharePrice = new Double(req.getParameter("SharePrice"));
             

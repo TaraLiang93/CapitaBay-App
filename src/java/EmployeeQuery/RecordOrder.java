@@ -40,9 +40,9 @@ public class RecordOrder extends HttpServlet {
         }
         
         try{
-            Integer e_ssn = userBean.getSocialSecurityNumber();
+            Long e_ssn = userBean.getSocialSecurityNumber();
             Integer nos = Integer.parseInt(req.getParameter("NumberOfShare"));
-            Integer c_ssn = Integer.parseInt(req.getParameter("customerSSN"));
+            Long c_ssn = Long.parseLong(req.getParameter("customerSSN"));
             calendar cal = new calendar();
             String dat = cal.getDate();
             String o_time = cal.getTime();

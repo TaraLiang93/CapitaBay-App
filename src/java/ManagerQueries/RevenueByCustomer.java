@@ -41,8 +41,8 @@ public class RevenueByCustomer extends HttpServlet{
         }
                 
         try {
-            int e_ssn = userBean.getSocialSecurityNumber();
-            String c_ssn = req.getParameter("customerSSN");
+            Long e_ssn = userBean.getSocialSecurityNumber();
+            Long c_ssn = Long.parseLong(req.getParameter("customerSSN"));
             
             String query = "call listRevenueCustomer("+e_ssn+","+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);

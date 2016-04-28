@@ -53,10 +53,10 @@ public class ListOrders extends HttpServlet {
             
             LinkedList<Orders> results = new LinkedList<>();
             
-            Integer ssn = userBean.getSocialSecurityNumber();
+            Long ssn = userBean.getSocialSecurityNumber();
             
             //should set the thingy
-            Integer customerSSN = Integer.parseInt(request.getParameter("customerSSN"));
+            Long customerSSN = Long.parseLong(request.getParameter("customerSSN"));
             //should set the thingy
             String stockSymbol = request.getParameter("stockSymbol");
             

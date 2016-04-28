@@ -38,7 +38,7 @@ public class richestCustomer extends HttpServlet{
         }
         
         try{
-            int e_ssn = userBean.getSocialSecurityNumber();
+            long e_ssn = userBean.getSocialSecurityNumber();
             
             String query = "call richestCustomer("+e_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);

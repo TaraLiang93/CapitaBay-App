@@ -53,7 +53,7 @@ public class GetSalesReportForMonth extends HttpServlet {
             LinkedList<SalesReportForMonth> results = new LinkedList<>();
             
             
-            Integer employeeSSN = userBean.getSocialSecurityNumber();
+            Long employeeSSN = userBean.getSocialSecurityNumber();
             Integer monthNumber = Integer.parseInt(request.getParameter("month"));
             
             String query = "call getSalesReportForMonth("+employeeSSN+","+monthNumber+")";

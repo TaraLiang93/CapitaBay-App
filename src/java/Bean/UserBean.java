@@ -15,7 +15,7 @@ import org.joda.time.DateTime;
  */
 public class UserBean implements Serializable{
     
-    private int socialSecurityNumber;
+    private long socialSecurityNumber;
     private String firstName;
     private String lastName;
     private String email;
@@ -38,11 +38,11 @@ public class UserBean implements Serializable{
         this.username = username;
     }
 
-    public int getSocialSecurityNumber() {
+    public long getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
 
-    public void setSocialSecurityNumber(int socialSecurityNumber) {
+    public void setSocialSecurityNumber(long socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 

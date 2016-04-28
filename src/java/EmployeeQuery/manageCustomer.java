@@ -40,9 +40,9 @@ public class manageCustomer extends HttpServlet{
         }
         
         try{
-            Integer e_ssn = userBean.getSocialSecurityNumber();
+            Long e_ssn = userBean.getSocialSecurityNumber();
             String request = req.getParameter("request");
-            Integer c_ssn = Integer.parseInt(req.getParameter("customerSSN"));
+            Long c_ssn = Long.parseLong(req.getParameter("customerSSN"));
             Double rate = Double.parseDouble(req.getParameter("customerRate"));
             String ccs = req.getParameter("creditCardNum");
             String email = req.getParameter("email");
