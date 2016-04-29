@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import Bean.AllStocks;
 import Bean.UserBean;
 import DataBase.CapitaBay;
 import Tables.Employee;
@@ -55,9 +56,7 @@ public class employeePage extends HttpServlet {
                 
         try {
             Long ssn = userBean.getSocialSecurityNumber();
-            String query = "SELECT P.*,E.* FROM Employee E"
-                         + "Inner JOIN Person P"
-                         + "ON P.SocialSecurityNumber = E.SocialSecurityNumber;";
+            String query = "SELECT P.*, E.* FROM Employee E INNER JOIN Person P ON P.SocialSecurityNumber = E.SocialSecurityNumber;";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             LinkedList<Employee> result = new LinkedList<Employee>();
             while(res.next()){
@@ -67,6 +66,19 @@ public class employeePage extends HttpServlet {
             };
             request.setAttribute("employees", result);
             request.setAttribute("searchResultsName", userBean.getFirstName());
+            
+            LinkedList<AllStocks> results = new LinkedList<>();
+            
+            query = "call listAllStocks("+123456789+")";
+            
+            res = CapitaBay.ExecuteQuery(query);
+            
+            while(res.next()){
+                AllStocks stocks = new AllStocks();
+                stocks.set(res);
+                results.add(stocks);
+            }
+            request.setAttribute("listAllStocks", results);
 
             
         } catch (SQLException ex) {

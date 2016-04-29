@@ -9,7 +9,7 @@
 
 <div class="display-content employeeTabs col-md-12">
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation" class=""><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
     <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Edit Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Edit Customers</a></li>
@@ -20,7 +20,7 @@
      <div role="tabpanel" class="tab-pane " id="home">
          Home page should display what it needs too
      </div>
-     <div role="tabpanel" class="tab-pane active" id="staff">
+     <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">
    <caption>Edit Employees</caption>
    <thead>
@@ -175,7 +175,33 @@
          Love
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
-         God
+   <table class = "table allStocksTable table-condensed ">
+   <caption>All Stocks</caption>
+   <thead>
+      <tr>
+          <td>Stock symbol</td>
+           <td>Stock type</td>
+           <td>Stock name</td>
+           <td>Share Price</td>
+           <td>Stock Date</td>
+           <td>Shares Avaliable</td>
+      </tr>
+   </thead>
+   
+   <tbody class="employeeData">
+    <c:forEach var="s" items="${listAllStocks}" >
+      <tr>
+          <td>${s.stockSymbol}</td>
+          <td>${s.stockType}</td>
+          <td>${s.stockName}</td>
+          <td>${s.sharePrice}</td>
+          <td>${s.stockDate}</td>
+          <td>${s.numberOfSharesAvaliable}</td>
+      </tr>
+    </c:forEach>
+   </tbody>
+	
+</table>     
      </div>
   </div>
 </div>
