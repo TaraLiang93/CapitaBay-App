@@ -21,7 +21,7 @@
          Home page should display what it needs too
      </div>
      <div role="tabpanel" class="tab-pane active" id="staff">
-         <table class = "table">
+         <table class = "table editEmployeeTable">
    <caption>Edit Employees</caption>
    <thead>
       <tr>
@@ -37,7 +37,7 @@
       </tr>
    </thead>
    
-   <tbody>
+   <tbody class="employeeData">
     <c:forEach var="e" items="${employees}" >
       <tr>
           <td><button class="btn btn-danger deleteEmployee">
@@ -53,7 +53,7 @@
              <select class="employeePos" value="${e.position}">
                  <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
                  <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
-             </select
+             </select>
          </td>
          <td>
              <div class="btn-inline">
@@ -86,7 +86,7 @@
       </div>
       <div class="modal-body">
           <div id="signup">
-            <form action="/newCustomer" method="post">
+            <form  id="newEmployee">
               <div class="form-group hasHalf">
                   <div class="half"> 
                     <label for="Username">Username</label>
@@ -125,10 +125,16 @@
                   <label for="SSN">Social Security Number</label>
                   <input type="number" class="form-control" name="ssn" id="SSN" placeholder="Social Security Number">
               </div>
-              <div class="form-group">
-                  <label for="creditCard">Credit Card Number</label>
-                  <input type="number" class="form-control" name="creditCard" id="creditCard" placeholder="Credit Card Number">
-              </div>
+             <div class="form-group">
+                 <select class="employeePos" name="posistion" id="newPosition">
+                 <option name="Manager" value="Manager">Manager</option>
+                 <option name="CustomerRep" value="CustomerRep">Customer Rep</option>
+             </select>
+                 <div class="form-group">
+                     <label for="newHourlyRate">New Salary</label>
+                     <input type="number" class="form-control" name="newHourlyRate" id="newHourlyRate" placeholder="25" />
+                 </div>
+             </div>
               <div class="form-group">
                   <div style="width: 90%;">
                     <label for="address">Address</label>
@@ -152,7 +158,7 @@
               </div>
                 <div class="btn-group">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary ">Hire</button>
+              <button  class="btn btn-primary hireEmployee">Hire</button>
                 </div>
             </form> 
           </div>
