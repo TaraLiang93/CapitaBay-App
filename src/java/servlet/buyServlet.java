@@ -35,6 +35,7 @@ public class buyServlet extends HttpServlet {
         String num = request.getParameter("number-shares");
         String price = request.getParameter("price-shares");
         
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

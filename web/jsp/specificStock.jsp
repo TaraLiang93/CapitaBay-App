@@ -57,8 +57,7 @@
         });
         
         $("#chart-control input").blur(function() {   
-        alert($(this).val())
-            $(location).attr("href","/loadSpecificStockPage?val=" + ${s.stockSymbol} + "&month=" + $(this).val());
+            $(location).attr("href","/loadSpecificStockPage?val=${s.stockSymbol}&month=" + $("#months").val());
         });
         
         });
