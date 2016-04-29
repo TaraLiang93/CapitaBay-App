@@ -129,12 +129,6 @@ public class newCustomer extends HttpServlet{
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/homepage.jsp");
                 dispatcher.forward(req, resp);      
             }
-            else{
-                req.setAttribute("error", "Cannot Create User");
-                req.setAttribute("errorStatus", true);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/signupPage.jsp");
-                dispatcher.forward(req, resp);
-            }
             
         }catch (Exception ex) {
             Logger.getLogger(newCustomer.class.getName()).log(Level.SEVERE, null, ex);

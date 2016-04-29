@@ -55,11 +55,7 @@ public class loginValidation extends HttpServlet {
                     if (isCustomer == false) {
                         req.setAttribute("error", "**Incorrect Username and Password**");
                         req.setAttribute("errorStatus", true);
-                        System.out.println(req.getHeader("Referer"));
-                        String ref = req.getHeader("Referer");
-                        ref = ref.substring(ref.indexOf("/jsp"), ref.length());
-                        System.out.println("ref = " + ref);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher(ref);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/signupPage.jsp");
                         dispatcher.forward(req, resp);
                     }
                     else{
@@ -76,11 +72,7 @@ public class loginValidation extends HttpServlet {
                     else{
                        req.setAttribute("error", "**Incorrect Username and Password**");
                         req.setAttribute("errorStatus", true);
-                        System.out.println(req.getHeader("Referer"));
-                        String ref = req.getHeader("Referer");
-                        ref = ref.substring(ref.indexOf("/jsp"), ref.length());
-                        System.out.println("ref = " + ref);
-                        RequestDispatcher dispatcher = req.getRequestDispatcher(ref);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/signupPage.jsp");
                         dispatcher.forward(req, resp); 
                     }
                 }
@@ -93,11 +85,7 @@ public class loginValidation extends HttpServlet {
             } else {
                 req.setAttribute("error", "**Incorrect Username and Password**");
                 req.setAttribute("errorStatus", true);
-                System.out.println(req.getHeader("Referer"));
-                String ref = req.getHeader("Referer");
-                ref = ref.substring(ref.indexOf("/jsp"), ref.length());
-                System.out.println("ref = " + ref);
-                RequestDispatcher dispatcher = req.getRequestDispatcher(ref);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/signupPage.jsp");
                 dispatcher.forward(req, resp);
             }
         } catch (SQLException ex) {
