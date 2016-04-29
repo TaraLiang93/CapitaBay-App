@@ -6,6 +6,7 @@
 
 package servlet;
 
+import Bean.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +36,15 @@ public class buyServlet extends HttpServlet {
             throws ServletException, IOException {
         String num = request.getParameter("number-shares");
         String price = request.getParameter("price-shares");
+        
+        HttpSession session = request.getSession();
+        
+        UserBean userBean = (UserBean) session.getAttribute("userBean");
+        if(userBean == null)
+        {
+            userBean = new UserBean();
+            session.setAttribute("userBean", userBean);
+        }
         
         
     }
