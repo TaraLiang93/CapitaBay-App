@@ -61,13 +61,16 @@ $(document).ready(function() {
         
         $(".updateStock").each(function() {
             $(this).click(function() {
-                $.post("/UpdateStockPrice",{"StockSymbol" : $(this).parent().parent().find(".stockSymbol").text(),
-                    "SharePrice" : $(this).parent().parent().find(".sharePrice").val()})
-            }).done(function() {
+                
+                var jsonObj = {"StockSymbol" : $(this).parent().parent().find(".stockSymbol").text(),
+                    "SharePrice" : $(this).parent().parent().find(".sharePrice").val()};
+                $.post("/UpdateStockPrice",jsonObj).done(function(){
                 console.log("updated the stock")
             }).fail(function() {
                 console.log("failed  to updated the song");
             });
+            })
+
         });
         
         

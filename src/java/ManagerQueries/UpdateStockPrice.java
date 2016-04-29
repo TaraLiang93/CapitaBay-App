@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -50,10 +52,10 @@ public class UpdateStockPrice extends HttpServlet {
             Double sharePrice = new Double(req.getParameter("SharePrice"));
             
             LocalDate date = new LocalDate();
-//            Date time = new Date();
+            Time time = new Time(new java.util.Date().getTime());
             
-            String query = "call updateStock('"+stockSymbol+"',"+sharePrice+",'"+date+"'"
-                    + ",'"+date+"')";
+            String query = "call updateStockTablePrice('"+stockSymbol+"',"+sharePrice+",'"+date+"'"
+                    + ",'"+time+"')";
             
             ResultSet results = CapitaBay.ExecuteQuery(query);
         } catch (ClassNotFoundException | SQLException ex) {
