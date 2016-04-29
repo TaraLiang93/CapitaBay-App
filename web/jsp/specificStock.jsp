@@ -86,7 +86,37 @@
                         <input id="price-shares" name="price-shares" class="form-control buy-text" type="text" value="$0">
                         </div>
                         </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <label for="stock-account">Stock Account:</label>
+                         <select id="stock-account" name="stock-account" class="form-control">
+                            <c:forEach var="act" items="${a}">
+                                    <option value="${act.intValue()}">${act.intValue()}</option>
+                             </c:forEach>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                        <label for="order-type">Order Type:</label>
+                         <select id="order-type" name="order-type" class="form-control">
+                            <option value="market">Market</option>
+                            <option value="marketOnClose">Market on Close</option>
+                          </select>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-12">
+                        <label for="employee">Employee:</label>
+                         <select id="employee" name="employee" class="form-control">
+                         
+                            <c:forEach var="emp" items="${p}">
+                                    <option value="${emp.socialSecurityNumber}">${emp.firstName} ${emp.lastName}</option>
+                             </c:forEach>
+                          </select>
+                        </div>
+                        </div>
+                        <input name="stocksymbol" value="${s.stockSymbol}" type="hidden">
                         <input id="buy-submit" name="submit" class="btn btn-success" value="Buy Shares" type="submit">
+                        
                 </form>
             </div>
             <div id="specific-table-container" class="col-md-4">

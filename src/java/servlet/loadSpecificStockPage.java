@@ -9,12 +9,14 @@ package servlet;
 import Bean.UserBean;
 import CustomerQueries.getStocksByKeyword;
 import DataBase.CapitaBay;
+import Tables.Person;
 import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -82,6 +84,7 @@ public class loadSpecificStockPage extends HttpServlet {
                 current.set(res);
                 result.add(current);
             };
+                       
             
             request.setAttribute("s", result.get(0));
             
@@ -115,8 +118,24 @@ public class loadSpecificStockPage extends HttpServlet {
             request.setAttribute("h", result);
             request.setAttribute("m", month);
             
+            query = "SELECT p.FirstName, p.LastName, p.SocialSecurityNumber FROM Person p, Employee e WHERE p.SocialSecurityNumber = e.SocialSecurityNumber;";
+            res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Person> pResult = new LinkedList<Person>();
             
-
+            while(res.next()){
+                Person current = new Person();
+                current.setFirstName(res.getString("FirstName"));
+                current.setLastName(res.getString("LastName"));
+                current.setSocialSecurityNumber(res.getInt("SocialSecurityNumber"));
+                pResult.add(current);                      
+            }
+            
+            request.setAttribute("p", pResult);
+            
+            request.setAttribute("a", userBean.getAccountNumbers());
+            
+          
+            
             
         } catch (ClassNotFoundException |SQLException ex) {
             Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
