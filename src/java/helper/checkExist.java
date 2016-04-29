@@ -108,27 +108,27 @@ public class checkExist {
       
     public static String checkEmployee(Long SSN) throws SQLException, ClassNotFoundException{
         int countM=-1;
-        String queryM = "select count(*) From Customer Where SocialSecurityNumber="+SSN+" AND Position='Manager';";
+        String queryM = "select count(*) From Employee Where SocialSecurityNumber="+SSN+" AND Position=\"Manager\";";
         ResultSet res = CapitaBay.ExecuteQuery(queryM);
         if(res.next()){
             countM = res.getInt("count(*)");
         }
         
         int countCR=-1;
-        String queryCR = "select count(*) From Customer Where SocialSecurityNumber="+SSN+" AND Position='CustomerRep';";
+        String queryCR = "select count(*) from Employee where SocialSecurityNumber="+SSN+" AND Position=\"CustomerRep\";";
         ResultSet resCR = CapitaBay.ExecuteQuery(queryCR);
-        if(res.next()){
-            countCR = res.getInt("count(*)");
+        if(resCR.next()){
+            countCR = resCR.getInt("count(*)");
         }
         
-        if((countCR>0) && (countM == 0)){
+        if((countCR>0)){
             return "CustomerRep";
         }
-        else if((countM>0)&&(countCR ==0)){
+        else if((countM>0)){
             return "Manager";
         }
         
-        return null;
+        return "";
     }
     
 }
