@@ -90,5 +90,23 @@ public class checkExist {
         return true;
     }
     
+    public static boolean checkIsCustomer(Long SSN) throws SQLException, ClassNotFoundException{
+        String query = "select count(*) From Customer Where SocialSecurityNumber="+SSN+";";
+        ResultSet res = CapitaBay.ExecuteQuery(query);
+        if(res.next()){
+            int count = res.getInt("count(*)");
+            if(count > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static String checkEmployee(Long SSN){
+        return null;
+    }
     
 }
