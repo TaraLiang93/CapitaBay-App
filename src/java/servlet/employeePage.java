@@ -65,7 +65,7 @@ public class employeePage extends HttpServlet {
                 current.set(res);
                 result.add(current);
             };
-            request.setAttribute("keywordResult", result);
+            request.setAttribute("employees", result);
             request.setAttribute("searchResultsName", userBean.getFirstName());
 
             
