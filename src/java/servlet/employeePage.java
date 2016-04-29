@@ -70,7 +70,7 @@ public class employeePage extends HttpServlet {
             
             LinkedList<AllStocks> results = new LinkedList<>();
             
-            query = "call listAllStocks("+123456789+")";
+            query = "call listAllStocks("+userBean.getSocialSecurityNumber()+")";
             
             res = CapitaBay.ExecuteQuery(query);
             
@@ -83,7 +83,7 @@ public class employeePage extends HttpServlet {
             
             long e_ssn = userBean.getSocialSecurityNumber();
             
-            query = "call mostPopularStocks("+123456789+");";
+            query = "call mostPopularStocks("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> popStocks = new LinkedList<Stock>();
             while(res.next()){
