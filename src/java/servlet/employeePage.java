@@ -81,8 +81,6 @@ public class employeePage extends HttpServlet {
             }
             request.setAttribute("listAllStocks", results);
             
-            long e_ssn = userBean.getSocialSecurityNumber();
-            
             query = "call mostPopularStocks("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> popStocks = new LinkedList<Stock>();
@@ -95,6 +93,7 @@ public class employeePage extends HttpServlet {
                 popStocks.add(current);
             } 
             request.setAttribute("popularStocks", popStocks);
+            
 
             
         } catch (SQLException ex) {

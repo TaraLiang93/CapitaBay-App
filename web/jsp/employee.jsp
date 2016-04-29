@@ -169,7 +169,10 @@
      
      
      <div role="tabpanel" class="tab-pane" id="orders">
-         Jesus
+         <h3>List Orders by Customer Name or Stock symbol</h3>
+         <div class="input-group col-md-6">
+             <input type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
+         </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
          Love
