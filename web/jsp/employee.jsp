@@ -203,7 +203,32 @@
     </c:forEach>
    </tbody>
 	
-</table>     
+</table>
+         
+   <table class = "table popStocksTable table-condensed table-bordered">
+   <caption>Most Traded Stocks</caption>
+   <thead>
+      <tr>
+          <td>Stock symbol</td>
+           <td>Stock name</td>
+           <td>Share Price</td>
+           <td>Shares Avaliable</td>
+      </tr>
+   </thead>
+   
+   <tbody class="popularStocks">
+    <c:forEach var="s" items="${popularStocks}" >
+      <tr>
+          <td class="stockSymbol">${s.stockSymbol}</td>
+          <td>${s.stockName}</td>
+          <td>${s.sharePrice}</td>
+          <td>${s.numberOfSharesAvaliable}</td>
+      </tr>
+    </c:forEach>
+   </tbody>
+	
+</table>
+         
      </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ import Bean.AllStocks;
 import Bean.UserBean;
 import DataBase.CapitaBay;
 import Tables.Employee;
+import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -79,6 +80,21 @@ public class employeePage extends HttpServlet {
                 results.add(stocks);
             }
             request.setAttribute("listAllStocks", results);
+            
+            long e_ssn = userBean.getSocialSecurityNumber();
+            
+            query = "call mostPopularStocks("+123456789+");";
+            res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Stock> popStocks = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
+                current.setStockName(res.getString("StockName"));
+                current.setStockSymbol(res.getString("StockSymbol"));
+                current.setNumberOfSharesAvaliable(res.getInt("NumberOfSharesAvaliable"));
+                current.setSharePrice(res.getDouble("SharePrice"));
+                popStocks.add(current);
+            } 
+            request.setAttribute("popularStocks", popStocks);
 
             
         } catch (SQLException ex) {

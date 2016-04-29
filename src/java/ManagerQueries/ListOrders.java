@@ -61,7 +61,7 @@ public class ListOrders extends HttpServlet {
             String stockSymbol = request.getParameter("stockSymbol");
             
             
-            String query = "call listOrders("+ssn+","+customerSSN+","+stockSymbol+")";
+            String query = "call listOrders("+ssn+","+customerSSN+",'"+stockSymbol+"')";
             
             ResultSet res = CapitaBay.ExecuteQuery(query);
             
