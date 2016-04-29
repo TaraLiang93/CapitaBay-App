@@ -12,8 +12,10 @@ import DataBase.CapitaBay;
 import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,8 +86,21 @@ public class loadSpecificStockPage extends HttpServlet {
             request.setAttribute("s", result.get(0));
             
             DateTime cal = new DateTime();
-            cal = cal.minusMonths(600);
-            query = "call getStockHistory("+cal+",'"+ss+"');";
+            
+            String month = request.getParameter("month");
+            if(month == null) {
+                month = "6";
+            }
+            int iMonth = 6;
+            try {
+                iMonth = Integer.parseInt(month);
+            }catch(NumberFormatException e) {
+                iMonth = 6;
+            }   
+            cal = cal.minusMonths(iMonth);
+           String date = cal.getYear() + "-" + cal.getMonthOfYear() + "-" + cal.getDayOfMonth();
+            
+            query = "call getStockHistory('"+ date +"','"+ss+"');";
             res = CapitaBay.ExecuteQuery(query);
             result = new LinkedList<Stock>();
             int priceIndex   = res.findColumn("SharePrice");
@@ -94,11 +109,11 @@ public class loadSpecificStockPage extends HttpServlet {
             while(res.next()){
                 Stock current = new Stock();
                 current.setSharePrice(res.getDouble("SharePrice"));
-                current.setStockDate(res.getDate("SharePrice"));
+                current.setStockDate(res.getDate("StockDate"));
                 result.add(current);                      
             }          
             request.setAttribute("h", result);
-            
+            request.setAttribute("m", month);
             
             
 

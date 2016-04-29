@@ -3,6 +3,7 @@
     <jsp:param name="css" value="/css/style.css" />
     <jsp:param name="js" value="/js/specificStock.js" />
 </jsp:include>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
     $(document).ready(function(){
 	var chart = new CanvasJS.Chart("chartContainer", {
@@ -25,15 +26,10 @@
                         color: "rgba(0,235,47,.7)",
                         showInLegend: true,        
 			dataPoints: [
-				{ label: "4/10", y: 51 },
-				{ label: "4/11", y: 45},
-				{ label: "4/12", y: 50 },
-				{ label: "4/13", y: 62 },
-				{ label: "4/14", y: 95 },
-				{ label: "4/15", y: 66 },
-				{ label: "4/16", y: 24 },
-				{ label: "4/17", y: 32 },
-				{ label: "4/18", y: 90 }
+                             <c:forEach var="his" items="${h}">
+                                    { label: "${his.stockDate}", y: ${his.sharePrice} },
+                             </c:forEach>
+                                    { label: "${s.stockDate}", y: ${s.sharePrice} }
 			]
 			}
                 ]
@@ -60,6 +56,11 @@
             $("#price-shares").val(parseFloat(Math.round(newval * ${s.sharePrice} * 100) / 100).toFixed(2));
         });
         
+        $("#chart-control input").blur(function() {   
+        alert($(this).val())
+            $(location).attr("href","/loadSpecificStockPage?val=" + ${s.stockSymbol} + "&month=" + $(this).val());
+        });
+        
         });
 </script>
 
@@ -79,11 +80,11 @@
                         <div class="row">
                         <div class="col-md-6">
                         <label for="number-shares">Number of Shares:</label>
-                        <input id="number-shares" class="form-control buy-text" type="text" value="0">
+                        <input id="number-shares" name="number-shares" class="form-control buy-text" type="text" value="0">
                         </div>
                         <div class="col-md-6">
                         <label for="price-shares">Total Price:</label>
-                        <input id="price-shares" class="form-control buy-text" type="text" value="$0">
+                        <input id="price-shares" name="price-shares" class="form-control buy-text" type="text" value="$0">
                         </div>
                         </div>
                         <input id="buy-submit" name="submit" class="btn btn-success" value="Buy Shares" type="submit">
@@ -123,18 +124,14 @@
                     </tbody>                    
                 </table>
             </div>
-            </div>
-                      <table>
-                        <c:forEach var="stock" items="${h}">
-        <tr class="stock"> 
-            <td>${stock.sharePrice}</td>
-        </tr>
-    </c:forEach>
-        </table>
-        
+            </div>      
                    
             <div id="chartContainer"></div>
-                                  
+            <div id="chart-control">
+                <h4> Currently Showing ${m} Months Back </h4>
+                <label for="months">Adjust Months:</label>
+                <input id="months" name="months" class="form-control buy-text" type="text" value="${m}">
+            </div>
         </div>
         
     </div>
