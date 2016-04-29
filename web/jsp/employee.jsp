@@ -185,18 +185,20 @@
            <td>Share Price</td>
            <td>Stock Date</td>
            <td>Shares Avaliable</td>
+           <td>Update</td>
       </tr>
    </thead>
    
    <tbody class="employeeData">
     <c:forEach var="s" items="${listAllStocks}" >
       <tr>
-          <td>${s.stockSymbol}</td>
+          <td class="stockSymbol">${s.stockSymbol}</td>
           <td>${s.stockType}</td>
           <td>${s.stockName}</td>
-          <td>${s.sharePrice}</td>
+          <td><input type="number" class="sharePrice" value="${s.sharePrice}"/></td>
           <td>${s.stockDate}</td>
           <td>${s.numberOfSharesAvaliable}</td>
+          <td><button class="btn btn-info updateStock">Update</button>
       </tr>
     </c:forEach>
    </tbody>

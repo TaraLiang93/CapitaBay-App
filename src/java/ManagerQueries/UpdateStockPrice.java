@@ -9,6 +9,7 @@ import Bean.UserBean;
 import DataBase.CapitaBay;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  *
@@ -46,7 +49,11 @@ public class UpdateStockPrice extends HttpServlet {
             String stockSymbol = req.getParameter("StockSymbol");
             Double sharePrice = new Double(req.getParameter("SharePrice"));
             
-            String query = "call updateStockPrice("+ssn+","+stockSymbol+","+sharePrice+")";
+            LocalDate date = new LocalDate();
+//            Date time = new Date();
+            
+            String query = "call updateStock('"+stockSymbol+"',"+sharePrice+",'"+date+"'"
+                    + ",'"+date+"')";
             
             ResultSet results = CapitaBay.ExecuteQuery(query);
         } catch (ClassNotFoundException | SQLException ex) {
