@@ -22,6 +22,7 @@ public class UserBean implements Serializable{
     private ArrayList<Integer> accountNumbers;
     private String creditCardNumber;
     private double rating;
+    private String status;
     
     private String position;
     private DateTime startDate;
@@ -30,6 +31,16 @@ public class UserBean implements Serializable{
     
     private String username;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
+    
     public String getUsername() {
         return username;
     }
