@@ -32,83 +32,84 @@
         <!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
     </head>
     <body>
-    <div id="background-img">
-           
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div id="top-header" class="container"> 
-            <a href="/ "><img src="/images/capitabay_logo.png" id="logo1"/></a>
-            <div id="header-carousel" class="carousel slide" data-ride="carousel">
-    
+        <div id="background-img">
 
-                <div class="carousel-inner" role="listbox">
-                  <div class="item active up">
-                      <h2>
-                        IBM +0.1%
-                      </h2>
-                  </div>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div id="top-header" class="container"> 
+                    <a href="/ "><img src="/images/capitabay_logo.png" id="logo1"/></a>
+                    <div id="header-carousel" class="carousel slide" data-ride="carousel">
 
-                  <div class="item down">
-                    <h2>
-                        Ford -0.25%
-                    </h2>
-                  </div>
 
-                  <div class="item up">
-                    <h2>
-                        GM +1.03%
-                    </h2>
-                  </div>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active up">
+                                <h2>
+                                    IBM +0.1%
+                                </h2>
+                            </div>
+
+                            <div class="item down">
+                                <h2>
+                                    Ford -0.25%
+                                </h2>
+                            </div>
+
+                            <div class="item up">
+                                <h2>
+                                    GM +1.03%
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user-portal">
+                        <span id="welcome"> Welcome </span>
+                        <c:choose>
+                            <c:when test = "${userBean.username == null}">
+                                <a href="/jsp/loginPage.jsp" id="user">Hello</a>
+                            </c:when>
+                            <c:when test="${userBean.username != null}">
+                                <a href="/jsp/loginPage.jsp" id="user">${userBean.username}</a>
+
+                            </c:when>
+                        </c:choose> 
+                    </div>
+                    <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
+                        <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
+                        <span class="input-group-btn">
+                            <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                        </span>
+                    </form>
                 </div>
-            </div>
-            <div id="user-portal">
-                <span id="welcome"> Welcome </span>
-                <c:choose>
-                    <c:when test = "${userBean.username == null}">
-                        <a href="/jsp/loginPage.jsp" id="user">Hello</a>
-                    </c:when>
-                    <c:when test="${userBean.username != null}">
-                        <a href="/jsp/loginPage.jsp" id="user">${userBean.username}</a>
-
-                    </c:when>
-                </c:choose> 
-            </div>
-                                <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
-                    <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
-                    <span class="input-group-btn">
-                        <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
-                    </span>
-                </form>
-        </div>
-        <div class="container">           
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#about" id="nav-home">Capita Bay</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="/loadStockListingsPage">Trading</a></li>
-                    <li><a href="#contact">Statistics</a></li>
-                    <li><a href="../navbar/">Help</a></li>
-                    <!--<li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock Market<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Stock Listings</a></li>
-                        <li><a href="#">Buy/Sell Stocks</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                      </ul>
-                    </li>-->
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
-<div class="container ">
+                <div class="container">           
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/jsp/homepage.jsp" id="nav-home">Capita Bay</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="/loadStockListingsPage">Trading</a></li>
+                            <li><a href="/jsp/bestSelling.jsp">Best Selling</a></li>
+                            <li><a href="#contact">Statistics</a></li>
+                            <li><a href="../navbar/">Help</a></li>
+                            <!--<li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock Market<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Stock Listings</a></li>
+                                <li><a href="#">Buy/Sell Stocks</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                              </ul>
+                            </li>-->
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <div class="container ">

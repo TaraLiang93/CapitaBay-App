@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LoginWebsite;
+package logInOutWeb;
 
 import Bean.UserBean;
 import Bean.customerRevenue;
@@ -60,14 +60,21 @@ public class loginValidation extends HttpServlet {
                     }
                     else{
                         userBean.setStatus("customer");
+                        session.setAttribute("userBean", userBean);
+                        System.out.println(userBean.toString());
+//                        resp.sendRedirect("/customer");
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("/customer");
+                        dispatcher.forward(req, resp);
                     }
                 } else {//employee
                     String employeeStatus = checkExist.checkEmployee(ssn);
                     if(employeeStatus.equalsIgnoreCase("Manager")){
                         userBean.setStatus("Manager");
+                        session.setAttribute("userBean", userBean);
                     }
                     else if (employeeStatus.equalsIgnoreCase("CustomerRep")){
                         userBean.setStatus("CustomerRep");
+                        session.setAttribute("userBean", userBean);
                     }
                     else{
                        req.setAttribute("error", "**Incorrect Username and Password**");
