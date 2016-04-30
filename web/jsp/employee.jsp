@@ -171,7 +171,33 @@
      <div role="tabpanel" class="tab-pane" id="orders">
          <h3>List Orders by Customer Name or Stock symbol</h3>
          <div class="input-group col-md-6">
-             <input type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
+             <div class="form-group">
+                <input type="text" class="form-control" id="orderSearch" placeholder="Search">
+                <select class="search">
+                   <option name="customerName" value="customerName">Customer</option>
+                   <option name="stockSymbol" value="stockSymbol">Stock Symbol</option>
+                </select>
+                <a class="btn btn-sm btn-default searchOrders">Search</a>
+             </div>
+             <table class="searchOrderTable">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Type</th>
+                        <th>Customer SSN</th>
+                        <th>Employee SSN</th>
+                        <th>Stock Symbol</th>
+                        <th>Account Number</th>
+                        <th>Order Date</th>
+                        <th>Order Time</th>
+                        <th>Shares Brought</th>
+                        <th>Share Price</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+             </table>
          </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">

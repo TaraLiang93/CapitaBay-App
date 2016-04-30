@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
@@ -123,6 +124,23 @@ public class Orders implements Serializable{
         } catch (SQLException ex) {
             Logger.getLogger(Orders.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public JSONObject getJson(){
+        JSONObject json = new JSONObject();
+        
+        json.put("c_ssn", this.customerSSN);
+        json.put("nos", this.numberOfShares);
+        json.put("o_time", this.orderTime);
+        json.put("oid", this.orderID);
+        json.put("e_ssn", this.employeeSSN);
+        json.put("an", this.accountNumber);
+        json.put("ss", this.stockSymbol);
+        json.put("o_date", this.orderDate);
+        json.put("sp", this.sharePrice);
+        json.put("ot", this.orderType);
+        
+        return json;
     }
     
 

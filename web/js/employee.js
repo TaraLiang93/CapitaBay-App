@@ -16,6 +16,9 @@ $(document).ready(function() {
                console.log("could not delete"); 
             });
         });
+    });
+        
+        
         
         $(".saveChanges").each(function() {
            $(this).click(function() {
@@ -69,11 +72,29 @@ $(document).ready(function() {
             }).fail(function() {
                 console.log("failed  to updated the song");
             });
-            })
+           
 
         });
         
-        
     });
+    
+    $(".searchOrders").click(function() {
+        
+       var jsonObj = {};
+       
+       jsonObj["customerName"] = $(".search").val() == "customerName" ? 
+                                 $("#orderSearch").val() : "";
+       jsonObj["stockSymbol"] =  $(".search").val() == "stockSymbol" ? 
+                                 $("#orderSearch").val() : "";
+        
+       $.get("/ListOrders",jsonObj,"json")
+               .done(function(data){
+                 console.log("I got the data back");
+                 console.log(data);
+       }).fail(function() {
+           console.log("it failed");
+       }); 
+    });
+
 });
 
