@@ -10,38 +10,63 @@
     <head>
         <jsp:include page="header.jsp">
             <jsp:param name="title" value="${name} home"/>
-            <jsp:param name="css" value="/css/employee.css" />
+            <jsp:param name="css" value="/css/customer.css" />
+            <jsp:param name="js" value="/js/customer.js"/>
         </jsp:include>
     </head>
     <body>
 
 
-        <div class="display-content employeeTabs col-md-12">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                <li role="presentation"><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Edit Staff</a></li>
-                <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
-                <li role="presentation"><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Edit Customers</a></li>
-                <li role="presentation"><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
-            </ul>
+        <div class="display-content customerTabs col-md-12" 
+             style="background-color: rgba(0,0,0,0.7); border-radius: 15px;
+             color: white; height:80vh;">
+            
+            <h1>${userBean.username }'s Profile</h1>       
+            
+<!--                 Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <li role="presentation"><a href="#stockHolding" aria-controls="stockHolding" role="tab" data-toggle="tab">Current Stock Holding</a></li>
+                    <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Order History</a></li>
+                    <li role="presentation"><a href="#sugesstions" aria-controls="sugesstions" role="tab" data-toggle="tab">Stock Sugesstion</a></li>
+                    <li role="presentation"><a href="#blah" aria-controls="blah" role="tab" data-toggle="tab">blah</a></li>
 
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">
-                    Home page should display what it needs too
+
+                </ul>
+
+<!--                 Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <form action="/logOutServlet" method="GET">
+                            <button class="btn btn-default" type="submit">Log Out</button>
+                        </form>
+                    </div>
+                  
+                    
+                    <div role="tabpanel" class="tab-pane" id="stockHolding">
+                        stock holding
+                    </div>
+                    
+                    
+                    <div role="tabpanel" class="tab-pane" id="orders">
+                        order History
+                    </div>
+                    
+                    
+                    <div role="tabpanel" class="tab-pane" id="sugesstions">
+                        order sugesstion
+                    </div>
+                    
+                    
+                    <div role="tabpanel" class="tab-pane" id="blah">
+                        blah
+                    </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="staff">
-                    is the start
-                </div>
-                <div role="tabpanel" class="tab-pane" id="orders">
-                    Jesus
-                </div>
-                <div role="tabpanel" class="tab-pane" id="customrs">
-                    Love
-                </div>
-                <div role="tabpanel" class="tab-pane" id="stock">
-                    God
-                </div>
-            </div>
+            
+            
+            
+            
+            
         </div>
         <jsp:include page="footer.jsp"/>
     </body>
