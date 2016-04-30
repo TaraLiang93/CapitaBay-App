@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -67,14 +68,16 @@ public class ListOrders extends HttpServlet {
             ResultSet res = CapitaBay.ExecuteQuery(query);
             
             JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
             
             while(res.next())
             {
                 Orders order = new Orders();
                 order.set(res);
-                json  = order.getJson();
+                jarr.put(order.getJson());
             }
             
+           json.put("orders", jarr);
             response.getWriter().print(json);
             response.getWriter().flush();
         } catch (ClassNotFoundException | SQLException ex) {

@@ -169,17 +169,19 @@
      
      
      <div role="tabpanel" class="tab-pane" id="orders">
-         <h3>List Orders by Customer Name or Stock symbol</h3>
-         <div class="input-group col-md-6">
-             <div class="form-group">
-                <input type="text" class="form-control" id="orderSearch" placeholder="Search">
-                <select class="search">
-                   <option name="customerName" value="customerName">Customer</option>
-                   <option name="stockSymbol" value="stockSymbol">Stock Symbol</option>
-                </select>
-                <a class="btn btn-sm btn-default searchOrders">Search</a>
+
+         <div class="input-group col-md-8" style="margin: 0 auto">
+            <h3>List Orders by Customer Name or Stock symbol</h3>
+             <div class="form-group col-md-8">
+                <input type="text" class="form-control " id="orderSearch" placeholder="Search">
              </div>
-             <table class="searchOrderTable">
+            <select class="search col-md-2">
+               <option name="customerName" value="customerName">Customer</option>
+               <option name="stockSymbol" value="stockSymbol">Stock Symbol</option>
+            </select>
+            <a class="btn btn-sm btn-default searchOrders col-md-2">Search</a>
+
+             <table class="table table-hover searchOrderTable col-md-12">
                 <thead>
                     <tr>
                         <th>Order ID</th>
@@ -194,7 +196,7 @@
                         <th>Share Price</th>  
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="orderSerchResults">
                     
                 </tbody>
              </table>

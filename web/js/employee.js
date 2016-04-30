@@ -91,6 +91,34 @@ $(document).ready(function() {
                .done(function(data){
                  console.log("I got the data back");
                  console.log(data);
+                 var code = "";
+                 $("#orderSerchResults").html("");
+                   $.each(data.orders, function(key,value){
+                       console.log("key: "+ key + " value: " + value);
+                       code = "";
+                       code = "<tr>"+
+                             "<td>"+value.oid+"</td>"+
+                             "<td>"+value.ot+"</td>"+
+                             "<td>"+value.c_ssn+"</td>"+
+                             "<td>"+value.e_ssn+"</td>"+
+                             "<td>"+value.ss+"</td>"+
+                             "<td>"+value.an+"</td>"+
+                             "<td>"+value.o_date+"</td>"+
+                             "<td>"+value.o_time+"</td>"+
+                             "<td>"+value.nos+"</td>"+
+                             "<td>"+value.sp+"</td>"+
+                             "</tr>";
+                     
+                        $("#orderSerchResults").append(code);
+                     
+//                     code
+                 });
+                 
+                 
+//                 console.log(code);
+                 
+
+                 
        }).fail(function() {
            console.log("it failed");
        }); 
