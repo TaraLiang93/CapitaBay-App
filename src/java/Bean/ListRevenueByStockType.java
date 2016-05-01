@@ -45,8 +45,8 @@ public class ListRevenueByStockType implements Serializable, DataRepo{
     public JSONObject getJson() {
         JSONObject json = new JSONObject();
         
-        json.put("stockType", this.stockType);
-        json.put("revenue", this.revenue);
+        json.put("st", this.stockType);
+        json.put("rev", this.revenue);
         
         return json;
     }

@@ -243,5 +243,20 @@ function buildStockRevTable(table){
 }
 function buildStockTypeRevTable(table){
     
+    $("#revStockTypeTable").html("").append(
+                $("<thead</thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Stock Type"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+                $("<tbody></tbody>").append(
+                        $("<tr></tr>").append(
+                            $("<td></td>").html(table.st),
+                            $("<td></td>").html(table.rev)
+                        )
+                    )
+            );
+    
 }
 
