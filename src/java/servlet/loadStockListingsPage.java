@@ -6,8 +6,16 @@
 
 package servlet;
 
+import CustomerQueries.getStocksByKeyword;
+import DataBase.CapitaBay;
+import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +42,25 @@ public class loadStockListingsPage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/jsp/stockListings.jsp").forward(request, response);
+            
+        try {    
+            String query = "SELECT DISTINCT S.StockSymbol, S.StockType, S.StockName, S.SharePrice,S.NumberOfSharesAvaliable FROM StockTable S;";
+            ResultSet res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Stock> result = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
+                current = new Stock();
+                current.set(res);
+                current.setSharePrice(res.getDouble("SharePrice"));
+                result.add(current);
+            };
+            request.setAttribute("s", result);
+        } catch (ClassNotFoundException |SQLException ex) {
+            Logger.getLogger(getStocksByKeyword.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println();
+        }
+            
+        request.getRequestDispatcher("/jsp/stockListings.jsp").forward(request, response);
         
     }
 

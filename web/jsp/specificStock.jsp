@@ -64,7 +64,7 @@
         <h2 id="specific-title">${s.stockName}</h2>
         <div class="row">
             <div id="buy-form" class="col-md-8">            
-                <form method="post" >
+                <form method="post" action="/buyServlet">
                     <h2> Buy this Stock </h2>                       
                     <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
                     <input id="shares" type="range" name="shares"

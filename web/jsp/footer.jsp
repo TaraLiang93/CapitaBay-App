@@ -2,8 +2,8 @@
 </div>
 <div class="footer">
     <div id="footer-content">
-            <p>&copy; 2016 Capita Bay </p>
-            <p> Created By: Tara, Jason and Pat </p>
+            <p style="float:left;">&copy; 2016 Capita Bay </p>
+            <p style="float:right;"> Created By: Tara, Jason and Pat </p>
     </div>
 </div>
 </body>
