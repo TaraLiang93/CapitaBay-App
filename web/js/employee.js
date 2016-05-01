@@ -169,6 +169,9 @@ $(document).ready(function() {
                 url = "/RevenueByCustomer";
                 break;
         }
+        
+        if($("#searchRevenue").val() == "")
+            return;
         $.get(url,{"val" : $("#searchRevenue").val()},"json").done(function(data){
                     $(".revTable").hide();
                     switch(data.table)
@@ -239,7 +242,7 @@ function buildStockRevTable(table){
                         $("<td></td>").html(value.ss),
                         $("<td></td").html(value.rev)
                     )
-                )
+                );
     });
     $("#revStockTable").show();
     
@@ -247,8 +250,9 @@ function buildStockRevTable(table){
 }
 function buildStockTypeRevTable(table){
     
-    $("#revStockTypeTable").html("").append(
-                $("<thead</thead>").append(
+    $("#revStockTypeTable").html("");
+    $("#revStockTypeTable").append(
+                $("<thead></thead>").append(
                     $("<tr></tr>").append(
                         $("<th></th>").html("Stock Type"),
                         $("<th></th>").html("Revenue")

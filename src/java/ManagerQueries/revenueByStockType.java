@@ -46,7 +46,7 @@ public class revenueByStockType extends HttpServlet{
             long e_ssn = userBean.getSocialSecurityNumber();
             String stockTyp = req.getParameter("val");
             
-            String query = "call listRevenueByStockType("+e_ssn+","+stockTyp+");";
+            String query = "call listRevenueByStockType("+e_ssn+",'"+stockTyp+"');";
             ResultSet res = CapitaBay.ExecuteQuery(query);
             JSONObject json = new JSONObject();
             JSONArray jarr = new JSONArray();
