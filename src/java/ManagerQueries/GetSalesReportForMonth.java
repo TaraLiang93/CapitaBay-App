@@ -68,8 +68,10 @@ public class GetSalesReportForMonth extends HttpServlet {
             {
                 SalesReportForMonth salesReportForMonth = new SalesReportForMonth();
                 salesReportForMonth.set(res);
-                results.add(salesReportForMonth);
+                jarr.put(salesReportForMonth.getJson());
+                
             }
+            json.put("salesReport",jarr);
         } catch (ClassNotFoundException| SQLException ex) {
             Logger.getLogger(GetSalesReportForMonth.class.getName()).log(Level.SEVERE, null, ex);
         }
