@@ -171,6 +171,19 @@ $(document).ready(function() {
         }
         $(".revTable").get(url,{"val" : $(".searchRevBtn").val()})
                 .done(function(data){
+                    $(".revTable").hide();
+                    switch(data.table)
+                    {
+                        case "revCustomerTable" :
+                            buildCustomerRevTable(data.customer);
+                            break;
+                        case "revStockTypeTable" :
+                            buildStockTypeRevTable(data.stocktype);
+                            break;
+                        case "revStockTable":
+                            buildStockRevTable(data.stock);
+                            break;
+                    }
                     
         })
                 .fail(function(){
@@ -180,4 +193,15 @@ $(document).ready(function() {
     });
 
 });
+
+function buildCustomerRevTable(table){
+    
+}
+
+function buildStockRevTable(table){
+    
+}
+function buildStockTypeRevTable(table){
+    
+}
 
