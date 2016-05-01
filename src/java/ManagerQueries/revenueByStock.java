@@ -6,6 +6,7 @@
 package ManagerQueries;
 
 import Bean.Revenue;
+import Bean.RevenueByStock;
 import Bean.UserBean;
 import DataBase.CapitaBay;
 import java.io.IOException;
@@ -52,10 +53,16 @@ public class revenueByStock extends HttpServlet {
             JSONArray jarr = new JSONArray();
             
             while(res.next()){
-                Revenue current = new Revenue();
-                current.set(res, "StockSymbol");
+                RevenueByStock current = new RevenueByStock();
+                current.set(res);
                 jarr.put(current.getJson());
             }
+            
+            json.put("table", "revStockTable");
+            json.put("stock", jarr);
+            
+            resp.getWriter().print(json);
+            resp.getWriter().flush();
             
         } catch (SQLException ex) {
             Logger.getLogger(revenueByStock.class.getName()).log(Level.SEVERE, null, ex);

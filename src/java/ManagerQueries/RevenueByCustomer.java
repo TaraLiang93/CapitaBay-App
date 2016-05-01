@@ -63,6 +63,8 @@ public class RevenueByCustomer extends HttpServlet{
             json.put("table", "revCustomerTable");
             json.put("customer", jarr);
 //            req.setAttribute("revenueByCustomer", result);
+            resp.getWriter().print(json);
+            resp.getWriter().flush();
         } catch (SQLException ex) {
             Logger.getLogger(RevenueByCustomer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
