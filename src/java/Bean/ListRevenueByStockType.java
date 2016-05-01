@@ -8,21 +8,16 @@ package Bean;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.json.JSONObject;
 
 /**
  *
  * @author Jason
  */
-public class ListRevenueByStockType implements Serializable{
+public class ListRevenueByStockType implements Serializable, DataRepo{
     
         private String stockType;
         private double revenue;
-
-    public void setListRevenueByStockType(ResultSet res) throws SQLException {
-     
-        this.stockType = res.getString("StockType");;
-        this.revenue = res.getFloat("Revenue");
-    }
 
     public String getStockType() {
         return stockType;
@@ -38,6 +33,22 @@ public class ListRevenueByStockType implements Serializable{
 
     public void setRevenue(double revenue) {
         this.revenue = revenue;
+    }
+
+    @Override
+    public void set(ResultSet res) throws SQLException {
+        this.stockType = res.getString("StockType");
+        this.revenue = res.getDouble("Revenue");
+    }
+
+    @Override
+    public JSONObject getJson() {
+        JSONObject json = new JSONObject();
+        
+        json.put("stockType", this.stockType);
+        json.put("revenue", this.revenue);
+        
+        return json;
     }
 
         

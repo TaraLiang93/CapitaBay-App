@@ -5,6 +5,7 @@
  */
 package ManagerQueries;
 
+import Bean.ListRevenueByStockType;
 import Bean.Revenue;
 import Bean.UserBean;
 import DataBase.CapitaBay;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -44,13 +47,18 @@ public class revenueByStockType extends HttpServlet{
             
             String query = "call listRevenueByStockType("+e_ssn+","+stockTyp+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<Revenue> result = new LinkedList<Revenue>();
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
             while(res.next()){
-                Revenue current = new Revenue();
-                current.set(res, "StockType");
-                result.add(current);
+                ListRevenueByStockType current = new ListRevenueByStockType();
+                current.set(res);
+                jarr.put(current.getJson());
             }
-            req.setAttribute("revenueByStockType", result);
+            json.put("table", "revStockTypeTable");
+            json.put("stocktype", jarr);
+            
+            resp.getWriter().print(json);
+            resp.getWriter().flush();
         } catch (SQLException ex) {
             Logger.getLogger(revenueByStockType.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
