@@ -223,6 +223,23 @@ function buildCustomerRevTable(table){
 
 function buildStockRevTable(table){
     
+    $("#revStockTable").html("");
+    $("#revStockTable").append(
+                $("<thead></thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Stock Symbol"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+                $("<tbody></tbody>").append(
+                    $("<tr></tr>").append(
+                            $("<td></td>").html(table.ss),
+                            $("<td></td>").html(table.rev)
+                        ) 
+                    )
+            );
+    
+    
 }
 function buildStockTypeRevTable(table){
     
