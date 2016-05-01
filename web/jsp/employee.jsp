@@ -34,6 +34,11 @@
          <table class="table table-condensed table-bordered revTable" id="revStockTable" style="display: none"></table>
          <table class="table table-condensed table-bordered revTable" id="revStockTypeTable" style="display: none"></table>
          <table class="table table-condensed table-bordered revTable" id="revCustomerTable" style="display: none"></table>
+     
+        <div class="col-md-12">
+            <h3>Monthly Sales Report</h3>
+            
+        </div>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">

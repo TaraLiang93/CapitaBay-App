@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -51,21 +53,23 @@ public class GetSalesReportForMonth extends HttpServlet {
         try {
             
             LinkedList<SalesReportForMonth> results = new LinkedList<>();
-            
-            
+                        
             Long employeeSSN = userBean.getSocialSecurityNumber();
             Integer monthNumber = Integer.parseInt(request.getParameter("month"));
             
             String query = "call getSalesReportForMonth("+employeeSSN+","+monthNumber+")";
             
             ResultSet res = CapitaBay.ExecuteQuery(query);
+            
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+            
             while(res.next())
             {
                 SalesReportForMonth salesReportForMonth = new SalesReportForMonth();
                 salesReportForMonth.set(res);
                 results.add(salesReportForMonth);
             }
-            request.setAttribute("salesReportForMonth", results);
         } catch (ClassNotFoundException| SQLException ex) {
             Logger.getLogger(GetSalesReportForMonth.class.getName()).log(Level.SEVERE, null, ex);
         }
