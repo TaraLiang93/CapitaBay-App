@@ -138,13 +138,13 @@ $(document).ready(function() {
                                     $('<th></th>').text("Revenue")
                                     )
                                 ),
-                                $('<tbody></tbody>').append(
-                                    $('<tr></tr>').append(
-                                        $('<td></td>').text(data.firstname),
-                                        $('<td></td>').text(data.lastName),
-                                        $('<td></td>').text(data.ssn),
-                                        $('<td></td>').text(data.revenue)
-                                        )
+                        $('<tbody></tbody>').append(
+                                $('<tr></tr>').append(
+                                    $('<td></td>').text(data.firstname),
+                                    $('<td></td>').text(data.lastName),
+                                    $('<td></td>').text(data.ssn),
+                                    $('<td></td>').text(data.revenue)
+                                    )
                                     )
                             )
                         );
@@ -152,6 +152,31 @@ $(document).ready(function() {
         }).fail(function(){
            console.log("all i do is skate and smoke and skate and fuck") ;
         });
+    });
+    
+    $(".searchRevBtn").click(function() {
+        
+        var url;
+        
+        switch($(".searchRev").val()){
+            case "Stock":
+                url = "/revenueByStock";
+                break;
+            case "StockType":
+                url = "/revenueByStockType";
+                break;
+            case "Customer":
+                url = "/RevenueByCustomer";
+                break;
+        }
+        $(".revTable").get(url,{"val" : $(".searchRevBtn").val()})
+                .done(function(data){
+                    
+        })
+                .fail(function(){
+                    console.log("it failed to get the revenue");
+        });
+        
     });
 
 });

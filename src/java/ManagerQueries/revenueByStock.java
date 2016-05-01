@@ -41,7 +41,7 @@ public class revenueByStock extends HttpServlet {
                 
         try {
             long e_ssn = userBean.getSocialSecurityNumber();
-            String stockSym = req.getParameter("stockSymbol");
+            String stockSym = req.getParameter("val");
             
             String query = "call listRevenueByStock("+e_ssn+","+stockSym+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);

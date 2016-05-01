@@ -10,6 +10,7 @@ import Bean.UserBean;
 import Bean.customerRevenue;
 import DataBase.CapitaBay;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -42,7 +43,7 @@ public class RevenueByCustomer extends HttpServlet{
                 
         try {
             Long e_ssn = userBean.getSocialSecurityNumber();
-            Long c_ssn = Long.parseLong(req.getParameter("customerSSN"));
+            Long c_ssn = Long.parseLong(req.getParameter("val"));
             
             String query = "call listRevenueCustomer("+e_ssn+","+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
@@ -52,7 +53,8 @@ public class RevenueByCustomer extends HttpServlet{
                 current.set(res);
                 result.add(current);
             }
-            req.setAttribute("revenueByCustomer", result);
+           
+//            req.setAttribute("revenueByCustomer", result);
         } catch (SQLException ex) {
             Logger.getLogger(RevenueByCustomer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

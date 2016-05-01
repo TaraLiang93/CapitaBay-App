@@ -9,16 +9,31 @@
 
 <div class="display-content employeeTabs col-md-12">
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class=""><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Edit Staff</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Main Page</a></li>
+    <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
-    <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Edit Customers</a></li>
+    <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
 </ul>
 
  <div class="tab-content">
-     <div role="tabpanel" class="tab-pane " id="home">
-         Home page should display what it needs too
+     <div role="tabpanel" class="tab-pane active" id="home">
+         <h3>Revenue of Stock, Stock type and Customer</h3>
+         <div class="form-group col-md-8">
+             <input type="text" class="form-control " id="searchRevenue" placeholder="Search">
+         </div>
+         <div class="form-group col-md-3">
+             <select class="searchRev form-control">
+                 <option name="Stock" value="Stock">Stock</option>
+                 <option name="StockType" value="StockType">Stock Type</option>
+                 <option name="Customer" value="Customer">Customer</option>
+             </select>
+         </div>
+         <a class="btn btn-sm btn-default searchRevBtn col-md-1">Search</a>
+         
+         <table class="table table-hover revTable" id="revStockTable" style="display: none"></table>
+         <table class="table table-hover revTable" id="revStockTypeTable" style="display: none"></table>
+         <table class="table table-hover revTable" id="revCustomerTable" style="display: none"></table>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">
@@ -50,7 +65,7 @@
          <td>${e.telephone}</td>
          <td>${e.zipCode}</td>
          <td>
-             <select class="employeePos" value="${e.position}">
+             <select class="employeePos form-control" value="${e.position}">
                  <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
                  <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
              </select>
@@ -177,16 +192,18 @@
      
      <div role="tabpanel" class="tab-pane" id="orders">
 
-         <div class="input-group col-md-8" style="margin: 0 auto">
+         <div class="input-group col-md-10" style="margin: 0 auto">
             <h3>List Orders by Customer Name or Stock symbol</h3>
              <div class="form-group col-md-8">
                 <input type="text" class="form-control " id="orderSearch" placeholder="Search">
              </div>
-            <select class="search col-md-2">
-               <option name="customerName" value="customerName">Customer</option>
-               <option name="stockSymbol" value="stockSymbol">Stock Symbol</option>
-            </select>
-            <a class="btn btn-sm btn-default searchOrders col-md-2">Search</a>
+            <div class="form-group col-md-3">
+                <select class="search form-control">
+                   <option name="customerName" value="customerName">Customer</option>
+                   <option name="stockSymbol" value="stockSymbol">Stock Symbol</option>
+                </select>
+            </div>
+            <a class="btn btn-sm btn-default searchOrders col-md-1">Search</a>
 
              <table class="table table-hover searchOrderTable col-md-12">
                 <thead>
