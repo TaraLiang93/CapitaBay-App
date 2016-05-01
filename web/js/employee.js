@@ -193,6 +193,19 @@ $(document).ready(function() {
         });
         
     });
+    
+    
+    $(".salesReportMonth").change(function(){
+        console.log($(this).val());
+        
+        $.get("/GetSalesReportForMonth",{"month": $(this).val()},"json")
+                .done(function(data){
+                    
+        })
+        .fail(function() {
+            console.log("it failed to come here");
+        })
+    });
 
 });
 
