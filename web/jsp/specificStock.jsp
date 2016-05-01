@@ -109,7 +109,7 @@
                             </select>
                         </div>
                     </div>
-                    <input name="stocksymbol" value="${s.stockSymbol}" type="hidden">
+                    <input name="stockSymbol" id="stockSymbol" value="${s.stockSymbol}" style="display: none">
                     <input id="buy-submit" name="submit" class="btn btn-success" value="Buy Shares" type="submit">
 
                 </form>
