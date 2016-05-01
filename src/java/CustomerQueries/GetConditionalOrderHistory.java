@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package CustomerQueries;
 
 import Bean.ConditionalOrderHistory;
@@ -21,13 +20,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
  * @author Patrick
  */
 @WebServlet(name = "GetConditionalOrderHistory", urlPatterns = {"/GetConditionalOrderHistory"})
-public class GetConditionalOrderHistory extends HttpServlet {  
+public class GetConditionalOrderHistory extends HttpServlet {
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -42,29 +44,40 @@ public class GetConditionalOrderHistory extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("userBean");
-        if(userBean == null) {
+        if (userBean == null) {
             userBean = new UserBean();
             session.setAttribute("userBean", userBean);
         }
         try {
+            long ssn = userBean.getSocialSecurityNumber();
             LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
-            String query = "call getConditionalOrderHistory(" + session.getAttribute("orderID") + ");";              
-            ResultSet res = CapitaBay.ExecuteQuery(query);            
-            while(res.next()) {
-                ConditionalOrderHistory conditionalOrderHistory = new ConditionalOrderHistory();
-                conditionalOrderHistory.set(res);
-                results.add(conditionalOrderHistory);               
+            String check = "select count(*) from Orders where Orders.OrderID=" + session.getAttribute("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ");";
+            ResultSet res = CapitaBay.ExecuteQuery(check);
+            int checkSSN = -1;
+            if (res.next()) {
+                checkSSN = res.getInt("count(*)");
+            }
+            if (checkSSN > 0) {
+                String query = "call getConditionalOrderHistory(" + session.getAttribute("orderID") + ");";
+                res = CapitaBay.ExecuteQuery(query);
+                
+                JSONObject json = new JSONObject();
+                JSONArray jarr = new JSONArray();
+                
+                while (res.next()) {
+                    ConditionalOrderHistory conditionalOrderHistory = new ConditionalOrderHistory();
+                    conditionalOrderHistory.set(res);
+                    jarr.put(conditionalOrderHistory.getJson());
+                }
+                
+                json.put("history", jarr);
+                response.getWriter().print(json);
+                response.getWriter().flush();
             }
             session.setAttribute("currentStockHoldings", results);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GetConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
-        
-    } 
+
+    }
 }

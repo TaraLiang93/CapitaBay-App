@@ -135,19 +135,21 @@
 
                 <div role="tabpanel" class="tab-pane" id="conditionalOrder" style="margin-top: 2.5vh;">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <p class="col-sm-2">Order ID:</p>
-                            <input type="text" value="Order ID" class="col-sm-10" id="orderID"/>
-                        </div>
-                        <div class="form-group col-sm-3">
-                            <select class="form-control" id="conditionalType">
-                                <option>Trailing Stop</option>
-                                <option>Hidden Stop</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-1">
-                            <button type="submit" class="btn btn-default form-control">Submit</button>
-                        </div>
+                        <form id="orderID">
+                            <div class="col-sm-8">
+                                <p class="col-sm-2">Order ID:</p>
+                                <input type="text" value="Order ID" class="col-sm-10" id="orderID"/>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <select class="form-control" id="conditionalType">
+                                    <option>Trailing Stop</option>
+                                    <option>Hidden Stop</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
                     </div>
                     <table class = "table">
                         <thead>
@@ -156,18 +158,10 @@
                                 <th>Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <c:forEach var="e" items="${stockSuggestion}" varStatus="test">
-                                <tr>
-                                    <td>${e.stockSymbol}</td>
-                                    <td>${e.stockName}</td>
-                                    <td>${e.sharePrice}</td>
-                                    <td>${e.numberOfSharesAvaliable}</td>
-                                </tr>
-                            </c:forEach>
+                        <tbody id="condHistory">
+                           
                         </tbody>
                     </table>
-                    getConditionalOrderHistory
                 </div>
             </div>
 
