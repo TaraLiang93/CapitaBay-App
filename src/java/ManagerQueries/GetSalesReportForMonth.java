@@ -50,10 +50,7 @@ public class GetSalesReportForMonth extends HttpServlet {
                 userBean = new UserBean();
                 session.setAttribute("userBean", userBean);
             }
-        try {
-            
-            LinkedList<SalesReportForMonth> results = new LinkedList<>();
-                        
+        try {                 
             Long employeeSSN = userBean.getSocialSecurityNumber();
             Integer monthNumber = Integer.parseInt(request.getParameter("month"));
             
@@ -71,7 +68,11 @@ public class GetSalesReportForMonth extends HttpServlet {
                 jarr.put(salesReportForMonth.getJson());
                 
             }
+            
             json.put("salesReport",jarr);
+            
+            response.getWriter().print(json);
+            response.getWriter().flush();
         } catch (ClassNotFoundException| SQLException ex) {
             Logger.getLogger(GetSalesReportForMonth.class.getName()).log(Level.SEVERE, null, ex);
         }
