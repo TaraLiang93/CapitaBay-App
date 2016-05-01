@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -47,13 +49,19 @@ public class RevenueByCustomer extends HttpServlet{
             
             String query = "call listRevenueCustomer("+e_ssn+","+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<customerRevenue> result = new LinkedList<customerRevenue>();
+//            LinkedList<customerRevenue> result = new LinkedList<customerRevenue>();
+            
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+            
             while(res.next()){
                 customerRevenue current = new customerRevenue();
                 current.set(res);
-                result.add(current);
+                jarr.put(current.getJson());
             }
-           
+            
+            json.put("table", "revCustomerTable");
+            json.put("customer", jarr);
 //            req.setAttribute("revenueByCustomer", result);
         } catch (SQLException ex) {
             Logger.getLogger(RevenueByCustomer.class.getName()).log(Level.SEVERE, null, ex);
