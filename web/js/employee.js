@@ -123,6 +123,36 @@ $(document).ready(function() {
            console.log("it failed");
        }); 
     });
+    
+    $(".richestRep").click(function() {
+        $.get("/RichestRep").done(function(data) {
+            console.log("it passed");
+            $(".richestRepInput").append(
+               $('<h3></h3>').text("And the most richest Customer rep is"),
+               $('<table></table>').addClass("table table-hover").append(
+                       $('<thead></thead>').append(
+                                $('<tr></tr>').append(
+                                    $('<th></th>').text("First Name"),
+                                    $('<th></th>').text("Last Name"),
+                                    $('<th></th>').text("SSN"),
+                                    $('<th></th>').text("Revenue")
+                                    )
+                                ),
+                                $('<tbody></tbody>').append(
+                                    $('<tr></tr>').append(
+                                        $('<td></td>').text(data.firstname),
+                                        $('<td></td>').text(data.lastName),
+                                        $('<td></td>').text(data.ssn),
+                                        $('<td></td>').text(data.revenue)
+                                        )
+                                    )
+                            )
+                        );
+                    
+        }).fail(function(){
+           console.log("all i do is skate and smoke and skate and fuck") ;
+        });
+    });
 
 });
 

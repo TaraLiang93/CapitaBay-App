@@ -74,8 +74,15 @@
          <div class="employeeButtons pull-right">
             <a class="btn btn-info" id="addEmployee" data-toggle="modal" data-target="#addEmployeeModal">Add Employees</a>
          </div>
+    
+         
+    <a class="btn btn-info richestRep">Rep of the Month</a>
+     <div class="richestRepInput">
+
+     </div>
      </div>
      
+
      
      <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">

@@ -8,6 +8,7 @@ package servlet;
 import Bean.AllStocks;
 import Bean.UserBean;
 import DataBase.CapitaBay;
+import ManagerQueries.RichestRep;
 import Tables.Employee;
 import Tables.Stock;
 import java.io.IOException;
@@ -93,6 +94,9 @@ public class employeePage extends HttpServlet {
                 popStocks.add(current);
             } 
             request.setAttribute("popularStocks", popStocks);
+            
+            
+            
             
 
             

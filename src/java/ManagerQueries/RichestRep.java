@@ -55,23 +55,30 @@ public class RichestRep extends HttpServlet {
             Long ssn = userBean.getSocialSecurityNumber();
             
             //should set the thingy
-            Long customerSSN = Long.parseLong(request.getParameter("customerSSN"));
-            //should set the thingy
-            String stockSymbol = request.getParameter("stockSymbol");
+//            Long customerSSN = Long.parseLong(request.getParameter("customerSSN"));
+//            //should set the thingy
+//            String stockSymbol = request.getParameter("stockSymbol");
+//            
             
-            
-            String query = "call richestRep("+123456789+")";
+            String query = "call richestRep("+ssn+")";
             
             ResultSet res = CapitaBay.ExecuteQuery(query);
             
-            String firstName = res.getString("Firstname");
-            String lastName = res.getString("Lastname");
-            Integer repSsn = res.getInt("SocialSecurityNumber");
-            Double revenue =res.getDouble("Revenue");
+            String firstName = "";
+            String lastName = "";
+            Integer repSsn = 0;
+            Double revenue = 0.0;
+            
+            while(res.next()){
+            firstName = res.getString("FirstName");
+            lastName = res.getString("LastName");
+            repSsn = res.getInt("SocialSecurityNumber");
+            revenue =res.getDouble("Revenue");
+            }
             
                     System.out.println("");
             JSONObject richestRep =  new JSONObject();
-                    richestRep.put("firstName",firstName);
+                    richestRep.put("firstname",firstName);
                     richestRep.put("lastName",lastName);
                     richestRep.put("ssn",repSsn);
                     richestRep.put("revenue",revenue);
