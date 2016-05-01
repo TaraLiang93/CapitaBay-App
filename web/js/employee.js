@@ -169,9 +169,9 @@ $(document).ready(function() {
                 url = "/RevenueByCustomer";
                 break;
         }
-        $(".revTable").get(url,{"val" : $(".searchRevBtn").val()})
-                .done(function(data){
+        $.get(url,{"val" : $("#searchRevenue").val()}).done(function(data){
                     $(".revTable").hide();
+                    data = JSON.parse(data);
                     switch(data.table)
                     {
                         case "revCustomerTable" :
@@ -195,6 +195,30 @@ $(document).ready(function() {
 });
 
 function buildCustomerRevTable(table){
+    $("#revCustomerTable").html("");
+    $("#revCustomerTable").append(
+            $("<thead></thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Customer ID"),
+                        $("<th></th>").html("First Name"),
+                        $("<th></th>").html("Last Name"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+            $("<tbody></tbody>")
+                
+            );
+    $.each(table, function(key, value){
+        $("#revCustomerTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.ssn),
+                        $("<td></td>").html(value.firstname),
+                        $("<td></td>").html(value.lastname),
+                        $("<td></td>").html(value.revenue)
+                    )
+                );
+    });
+    $("#revCustomerTable").show();
     
 }
 

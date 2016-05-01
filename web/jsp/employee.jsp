@@ -31,9 +31,9 @@
          </div>
          <a class="btn btn-sm btn-default searchRevBtn col-md-1">Search</a>
          
-         <table class="table table-hover revTable" id="revStockTable" style="display: none"></table>
-         <table class="table table-hover revTable" id="revStockTypeTable" style="display: none"></table>
-         <table class="table table-hover revTable" id="revCustomerTable" style="display: none"></table>
+         <table class="table table-condensed table-bordered revTable" id="revStockTable" style="display: none"></table>
+         <table class="table table-condensed table-bordered revTable" id="revStockTypeTable" style="display: none"></table>
+         <table class="table table-condensed table-bordered revTable" id="revCustomerTable" style="display: none"></table>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">
