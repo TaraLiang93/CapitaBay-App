@@ -4,9 +4,17 @@
         <servlet-name>logOutServlet</servlet-name>
         <servlet-class>logInOutWeb.logOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>bestSelling</servlet-name>
+        <servlet-class>servlet.bestSelling</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logOutServlet</servlet-name>
         <url-pattern>/logOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bestSelling</servlet-name>
+        <url-pattern>/bestSelling</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

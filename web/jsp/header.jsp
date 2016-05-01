@@ -93,7 +93,7 @@
                             <li><a href="/jsp/homepage.jsp" id="nav-home">Capita Bay</a></li>
                             <li><a href="#about">About</a></li>
                             <li><a href="/loadStockListingsPage">Trading</a></li>
-                            <li><a href="/jsp/bestSelling.jsp">Best Selling</a></li>
+                            <li><a href="/bestSelling">Best Selling</a></li>
                             <li><a href="#contact">Statistics</a></li>
                             <li><a href="../navbar/">Help</a></li>
                             <!--<li class="dropdown">

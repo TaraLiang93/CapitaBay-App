@@ -62,7 +62,6 @@ public class loginValidation extends HttpServlet {
                         userBean.setStatus("customer");
                         session.setAttribute("userBean", userBean);
                         System.out.println(userBean.toString());
-//                        resp.sendRedirect("/customer");
                         RequestDispatcher dispatcher = req.getRequestDispatcher("/customer");
                         dispatcher.forward(req, resp);
                     }
