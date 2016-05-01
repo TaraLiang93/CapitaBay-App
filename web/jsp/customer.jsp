@@ -149,6 +149,24 @@
                             <button type="submit" class="btn btn-default form-control">Submit</button>
                         </div>
                     </div>
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th>Share Price</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="e" items="${stockSuggestion}" varStatus="test">
+                                <tr>
+                                    <td>${e.stockSymbol}</td>
+                                    <td>${e.stockName}</td>
+                                    <td>${e.sharePrice}</td>
+                                    <td>${e.numberOfSharesAvaliable}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                     getConditionalOrderHistory
                 </div>
             </div>

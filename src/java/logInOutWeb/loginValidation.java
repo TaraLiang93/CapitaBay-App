@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,6 +61,14 @@ public class loginValidation extends HttpServlet {
                     }
                     else{
                         userBean.setStatus("customer");
+                        query = "select StockAccount.AccountNumber from StockAccount where StockAccount.SocialSecurityNumber="+ssn+";";
+                        res = CapitaBay.ExecuteQuery(query);
+                        ArrayList<Integer> result = new ArrayList<Integer>();
+                        while(res.next()){
+                            int accountNum = res.getInt("AccountNumber");
+                            result.add(accountNum);                            
+                        }
+                        userBean.setAccountNumbers(result);
                         session.setAttribute("userBean", userBean);
                         System.out.println(userBean.toString());
                         RequestDispatcher dispatcher = req.getRequestDispatcher("/customer");

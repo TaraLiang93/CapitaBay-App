@@ -39,7 +39,7 @@ public class getStockSuggestionList extends HttpServlet{
         try{
             String query = "call getStockSuggestionList("+ 
                     Long.parseLong(req.getParameter("customerSSN"))+");";
-           ResultSet res= CapitaBay.ExecuteQuery(query);
+            ResultSet res= CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> result = new LinkedList<Stock>();
             while(res.next()){
                 Stock currentStock = new Stock();
