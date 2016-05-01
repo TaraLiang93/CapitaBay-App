@@ -231,13 +231,17 @@ function buildStockRevTable(table){
                         $("<th></th>").html("Revenue")
                     )
                 ),
-                $("<tbody></tbody>").append(
-                    $("<tr></tr>").append(
-                            $("<td></td>").html(table.ss),
-                            $("<td></td>").html(table.rev)
-                        ) 
-                    )
+                $("<tbody></tbody>")
             );
+    $.each(table, function(key, value){
+        $("#revStockTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.ss),
+                        $("<td></td").html(value.rev)
+                    )
+                )
+    });
+    $("#revStockTable").show();
     
     
 }
@@ -250,13 +254,16 @@ function buildStockTypeRevTable(table){
                         $("<th></th>").html("Revenue")
                     )
                 ),
-                $("<tbody></tbody>").append(
-                        $("<tr></tr>").append(
-                            $("<td></td>").html(table.st),
-                            $("<td></td>").html(table.rev)
-                        )
-                    )
+                $("<tbody></tbody>")
             );
-    
+    $.each(table, function(key,value) {
+       $("#revStockTypeTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.st),
+                        $("<td></td>").html(value.rev)
+                    )
+               ) 
+    });
+       $("#revStockTypeTable").show();
 }
 
