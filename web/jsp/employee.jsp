@@ -40,8 +40,8 @@
         <div class="col-xs-12 salesReport">
             <h3>Monthly Sales Report</h3>
             <div class="col-xs-3">
-                <span>For the Month of</span>
                 <select name="salesReportMonth" value="Select Month" class="salesReportMonth form-control">
+                    <option>Select A Month</option>
                     <option name="January" value="1">January</option>
                     <option name="February" value="2">February</option>
                     <option name="March" value="3">March</option>

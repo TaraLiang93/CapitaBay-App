@@ -200,6 +200,7 @@ $(document).ready(function() {
         
         $.get("/GetSalesReportForMonth",{"month": $(this).val()},"json")
                 .done(function(data){
+                    console.log(data);
                     
         })
         .fail(function() {
