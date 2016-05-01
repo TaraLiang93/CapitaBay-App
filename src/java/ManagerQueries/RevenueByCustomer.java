@@ -10,6 +10,7 @@ import Bean.UserBean;
 import Bean.customerRevenue;
 import DataBase.CapitaBay;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -31,6 +34,7 @@ public class RevenueByCustomer extends HttpServlet{
     
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException{
+        resp.setContentType("application/json");
         HttpSession session = req.getSession();
         
         UserBean userBean = (UserBean) session.getAttribute("userBean");
@@ -42,17 +46,26 @@ public class RevenueByCustomer extends HttpServlet{
                 
         try {
             Long e_ssn = userBean.getSocialSecurityNumber();
-            Long c_ssn = Long.parseLong(req.getParameter("customerSSN"));
+            Long c_ssn = Long.parseLong(req.getParameter("val"));
             
             String query = "call listRevenueCustomer("+e_ssn+","+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<customerRevenue> result = new LinkedList<customerRevenue>();
+//            LinkedList<customerRevenue> result = new LinkedList<customerRevenue>();
+            
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+            
             while(res.next()){
                 customerRevenue current = new customerRevenue();
                 current.set(res);
-                result.add(current);
+                jarr.put(current.getJson());
             }
-            req.setAttribute("revenueByCustomer", result);
+            
+            json.put("table", "revCustomerTable");
+            json.put("customer", jarr);
+//            req.setAttribute("revenueByCustomer", result);
+            resp.getWriter().print(json);
+            resp.getWriter().flush();
         } catch (SQLException ex) {
             Logger.getLogger(RevenueByCustomer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

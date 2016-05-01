@@ -8,7 +8,9 @@ package servlet;
 import Bean.AllStocks;
 import Bean.UserBean;
 import DataBase.CapitaBay;
+import ManagerQueries.RichestRep;
 import Tables.Employee;
+import Tables.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -69,7 +71,7 @@ public class employeePage extends HttpServlet {
             
             LinkedList<AllStocks> results = new LinkedList<>();
             
-            query = "call listAllStocks("+123456789+")";
+            query = "call listAllStocks("+userBean.getSocialSecurityNumber()+")";
             
             res = CapitaBay.ExecuteQuery(query);
             
@@ -79,6 +81,23 @@ public class employeePage extends HttpServlet {
                 results.add(stocks);
             }
             request.setAttribute("listAllStocks", results);
+            
+            query = "call mostPopularStocks("+userBean.getSocialSecurityNumber()+");";
+            res = CapitaBay.ExecuteQuery(query);
+            LinkedList<Stock> popStocks = new LinkedList<Stock>();
+            while(res.next()){
+                Stock current = new Stock();
+                current.setStockName(res.getString("StockName"));
+                current.setStockSymbol(res.getString("StockSymbol"));
+                current.setNumberOfSharesAvaliable(res.getInt("NumberOfSharesAvaliable"));
+                current.setSharePrice(res.getDouble("SharePrice"));
+                popStocks.add(current);
+            } 
+            request.setAttribute("popularStocks", popStocks);
+            
+            
+            
+            
 
             
         } catch (SQLException ex) {

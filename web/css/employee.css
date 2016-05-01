@@ -10,7 +10,8 @@ and open the template in the editor.
 
 .employeeTabs {
     background-color: white;
-    height: 65%
+    height: 65%;
+    overflow-y: scroll;
 }
 
 .employeeButtons {

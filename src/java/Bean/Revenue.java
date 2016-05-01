@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
@@ -44,6 +45,14 @@ public class Revenue implements Serializable {
             Logger.getLogger(Revenue.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+
+    public JSONObject getJson() {
+        JSONObject json = new JSONObject();
+        
+        
+        
+        return json;
+    }
     
 }
 //

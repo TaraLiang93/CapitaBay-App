@@ -16,6 +16,9 @@ $(document).ready(function() {
                console.log("could not delete"); 
             });
         });
+    });
+        
+        
         
         $(".saveChanges").each(function() {
            $(this).click(function() {
@@ -61,16 +64,210 @@ $(document).ready(function() {
         
         $(".updateStock").each(function() {
             $(this).click(function() {
-                $.post("/UpdateStockPrice",{"StockSymbol" : $(this).parent().parent().find(".stockSymbol").text(),
-                    "SharePrice" : $(this).parent().parent().find(".sharePrice").val()})
-            }).done(function() {
+                
+                var jsonObj = {"StockSymbol" : $(this).parent().parent().find(".stockSymbol").text(),
+                    "SharePrice" : $(this).parent().parent().find(".sharePrice").val()};
+                $.post("/UpdateStockPrice",jsonObj).done(function(){
                 console.log("updated the stock")
             }).fail(function() {
                 console.log("failed  to updated the song");
             });
+           
+
         });
         
+    });
+    
+    $(".searchOrders").click(function() {
+        
+       var jsonObj = {};
+       
+       jsonObj["customerName"] = $(".search").val() == "customerName" ? 
+                                 $("#orderSearch").val() : "";
+       jsonObj["stockSymbol"] =  $(".search").val() == "stockSymbol" ? 
+                                 $("#orderSearch").val() : "";
+        
+       $.get("/ListOrders",jsonObj,"json")
+               .done(function(data){
+                 console.log("I got the data back");
+                 console.log(data);
+                 var code = "";
+                 $("#orderSerchResults").html("");
+                   $.each(data.orders, function(key,value){
+                       console.log("key: "+ key + " value: " + value);
+                       code = "";
+                       code = "<tr>"+
+                             "<td>"+value.oid+"</td>"+
+                             "<td>"+value.ot+"</td>"+
+                             "<td>"+value.c_ssn+"</td>"+
+                             "<td>"+value.e_ssn+"</td>"+
+                             "<td>"+value.ss+"</td>"+
+                             "<td>"+value.an+"</td>"+
+                             "<td>"+value.o_date+"</td>"+
+                             "<td>"+value.o_time+"</td>"+
+                             "<td>"+value.nos+"</td>"+
+                             "<td>"+value.sp+"</td>"+
+                             "</tr>";
+                     
+                        $("#orderSerchResults").append(code);
+                     
+//                     code
+                 });
+                 
+                 
+//                 console.log(code);
+                 
+
+                 
+       }).fail(function() {
+           console.log("it failed");
+       }); 
+    });
+    
+    $(".richestRep").click(function() {
+        $.get("/RichestRep").done(function(data) {
+            console.log("it passed");
+            $(".richestRepInput").append(
+               $('<h3></h3>').text("And the most richest Customer rep is"),
+               $('<table></table>').addClass("table table-hover").append(
+                       $('<thead></thead>').append(
+                                $('<tr></tr>').append(
+                                    $('<th></th>').text("First Name"),
+                                    $('<th></th>').text("Last Name"),
+                                    $('<th></th>').text("SSN"),
+                                    $('<th></th>').text("Revenue")
+                                    )
+                                ),
+                        $('<tbody></tbody>').append(
+                                $('<tr></tr>').append(
+                                    $('<td></td>').text(data.firstname),
+                                    $('<td></td>').text(data.lastName),
+                                    $('<td></td>').text(data.ssn),
+                                    $('<td></td>').text(data.revenue)
+                                    )
+                                    )
+                            )
+                        );
+                    
+        }).fail(function(){
+           console.log("all i do is skate and smoke and skate and fuck") ;
+        });
+    });
+    
+    $(".searchRevBtn").click(function() {
+        
+        var url;
+        
+        switch($(".searchRev").val()){
+            case "Stock":
+                url = "/revenueByStock";
+                break;
+            case "StockType":
+                url = "/revenueByStockType";
+                break;
+            case "Customer":
+                url = "/RevenueByCustomer";
+                break;
+        }
+        
+        if($("#searchRevenue").val() == "")
+            return;
+        $.get(url,{"val" : $("#searchRevenue").val()},"json").done(function(data){
+                    $(".revTable").hide();
+                    switch(data.table)
+                    {
+                        case "revCustomerTable" :
+                            buildCustomerRevTable(data.customer);
+                            break;
+                        case "revStockTypeTable" :
+                            buildStockTypeRevTable(data.stocktype);
+                            break;
+                        case "revStockTable":
+                            buildStockRevTable(data.stock);
+                            break;
+                    }
+                    
+        })
+                .fail(function(){
+                    console.log("it failed to get the revenue");
+        });
         
     });
+
 });
+
+function buildCustomerRevTable(table){
+    $("#revCustomerTable").html("");
+    $("#revCustomerTable").append(
+            $("<thead></thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Customer ID"),
+                        $("<th></th>").html("First Name"),
+                        $("<th></th>").html("Last Name"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+            $("<tbody></tbody>")
+                
+            );
+    $.each(table, function(key, value){
+        $("#revCustomerTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.ssn),
+                        $("<td></td>").html(value.firstname),
+                        $("<td></td>").html(value.lastname),
+                        $("<td></td>").html(value.revenue)
+                    )
+                );
+    });
+    $("#revCustomerTable").show();
+    
+}
+
+function buildStockRevTable(table){
+    
+    $("#revStockTable").html("");
+    $("#revStockTable").append(
+                $("<thead></thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Stock Symbol"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+                $("<tbody></tbody>")
+            );
+    $.each(table, function(key, value){
+        $("#revStockTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.ss),
+                        $("<td></td").html(value.rev)
+                    )
+                );
+    });
+    $("#revStockTable").show();
+    
+    
+}
+function buildStockTypeRevTable(table){
+    
+    $("#revStockTypeTable").html("");
+    $("#revStockTypeTable").append(
+                $("<thead></thead>").append(
+                    $("<tr></tr>").append(
+                        $("<th></th>").html("Stock Type"),
+                        $("<th></th>").html("Revenue")
+                    )
+                ),
+                $("<tbody></tbody>")
+            );
+    $.each(table, function(key,value) {
+       $("#revStockTypeTable").find("tbody").append(
+                    $("<tr></tr>").append(
+                        $("<td></td>").html(value.st),
+                        $("<td></td>").html(value.rev)
+                    )
+               ) 
+    });
+       $("#revStockTypeTable").show();
+}
 

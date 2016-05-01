@@ -14,17 +14,17 @@ import org.json.JSONObject;
  *
  * @author Jason
  */
-public class ListRevenueByStockType implements Serializable, DataRepo{
-    
-        private String stockType;
-        private double revenue;
+public class RevenueByStock implements Serializable, DataRepo{
 
-    public String getStockType() {
-        return stockType;
+    private String stockSymbol;
+    private double revenue;
+
+    public String getStockSymbol() {
+        return stockSymbol;
     }
 
-    public void setStockType(String stockType) {
-        this.stockType = stockType;
+    public void setStockSymbol(String stockSymbol) {
+        this.stockSymbol = stockSymbol;
     }
 
     public double getRevenue() {
@@ -37,19 +37,20 @@ public class ListRevenueByStockType implements Serializable, DataRepo{
 
     @Override
     public void set(ResultSet res) throws SQLException {
-        this.stockType = res.getString("StockType");
+        this.stockSymbol = res.getString("StockSymbol");
         this.revenue = res.getDouble("Revenue");
+        
     }
 
     @Override
     public JSONObject getJson() {
         JSONObject json = new JSONObject();
         
-        json.put("st", this.stockType);
+        json.put("ss", this.stockSymbol);
         json.put("rev", this.revenue);
         
         return json;
     }
-
-        
+    
+    
 }
