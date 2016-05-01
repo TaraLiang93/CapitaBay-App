@@ -169,9 +169,8 @@ $(document).ready(function() {
                 url = "/RevenueByCustomer";
                 break;
         }
-        $.get(url,{"val" : $("#searchRevenue").val()}).done(function(data){
+        $.get(url,{"val" : $("#searchRevenue").val()},"json").done(function(data){
                     $(".revTable").hide();
-                    data = JSON.parse(data);
                     switch(data.table)
                     {
                         case "revCustomerTable" :

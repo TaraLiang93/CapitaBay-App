@@ -32,6 +32,7 @@ import org.json.JSONObject;
 public class revenueByStockType extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException{
+        resp.setContentType("application/json");
         HttpSession session = req.getSession();
         
         UserBean userBean = (UserBean) session.getAttribute("userBean");
