@@ -72,8 +72,12 @@
                             </c:when>
                         </c:choose> 
                     </div>
-                    <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">
+                    <form action="/getStockByKeyword" id="search" method="get" class="input-group col-md-2 " role="form">                       
                         <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for Stocks">
+                        <select id="search-type" name="search-type" class="form-control">
+                                <option value="name">Name</option>
+                                <option value="type">Type</option>
+                        </select>
                         <span class="input-group-btn">
                             <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
                         </span>
