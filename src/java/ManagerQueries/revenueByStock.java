@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -45,13 +47,16 @@ public class revenueByStock extends HttpServlet {
             
             String query = "call listRevenueByStock("+e_ssn+","+stockSym+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<Revenue> result = new LinkedList<Revenue>();
+            
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+            
             while(res.next()){
                 Revenue current = new Revenue();
                 current.set(res, "StockSymbol");
-                result.add(current);
+                jarr.put(current.getJson());
             }
-            req.setAttribute("revenueByStock", result);
+            
         } catch (SQLException ex) {
             Logger.getLogger(revenueByStock.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
