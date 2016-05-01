@@ -13,7 +13,7 @@
             <jsp:param name="css" value="/css/customer.css" />
             <jsp:param name="js" value="/js/customer.js"/>
         </jsp:include>
-        
+
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     </head>
@@ -32,7 +32,7 @@
                 <li role="presentation"><a href="#stockHolding" aria-controls="stockHolding" role="tab" data-toggle="tab">Current Stock Holding</a></li>
                 <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Order History</a></li>
                 <li role="presentation"><a href="#sugesstions" aria-controls="sugesstions" role="tab" data-toggle="tab">Stock Suggestion</a></li>
-                <li role="presentation"><a href="#blah" aria-controls="blah" role="tab" data-toggle="tab">blah</a></li>
+                <li role="presentation"><a href="#conditionalOrder" aria-controls="conditionalOrder" role="tab" data-toggle="tab">Conditional Order History</a></li>
 
 
             </ul>
@@ -59,16 +59,16 @@
                         </thead>
 
                         <tbody class="employeeData">
-                        <c:forEach var="e" items="${currentStockHoldings}" >
-                            <tr>
-                                <td>${e.accountNumber}</td>
-                                <td>${e.stockSymbol}</td>
-                                <td>${e.totalShares}</td>
-                                <td>
-                                    <a class="saveChanges btn btn-error">Sell</a> 
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach var="e" items="${currentStockHoldings}" >
+                                <tr>
+                                    <td>${e.accountNumber}</td>
+                                    <td>${e.stockSymbol}</td>
+                                    <td>${e.totalShares}</td>
+                                    <td>
+                                        <a class="saveChanges btn btn-error">Sell</a> 
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -90,18 +90,18 @@
                             </tr>
                         </thead>
                         <tbody class="employeeData">
-                        <c:forEach var="e" items="${orderHistory}" varStatus="test">
-                            <tr>
-                                <td>${e.accountNumber}</td>
-                                <td>${e.orderID}</td>
-                                <td>${e.orderType}</td>
-                                <td>${e.stockSymbol}</td>
-                                <td>${e.orderDate}/${e.orderTime}</td>
-                                <td>${e.numberOfShares}</td>
-                                <td>${e.sharePrice}</td>
-                                <td>${e.employeeSSN}</td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach var="e" items="${orderHistory}" varStatus="test">
+                                <tr>
+                                    <td>${e.accountNumber}</td>
+                                    <td>${e.orderID}</td>
+                                    <td>${e.orderType}</td>
+                                    <td>${e.stockSymbol}</td>
+                                    <td>${e.orderDate}/${e.orderTime}</td>
+                                    <td>${e.numberOfShares}</td>
+                                    <td>${e.sharePrice}</td>
+                                    <td>${e.employeeSSN}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>                    
                 </div>
@@ -119,22 +119,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="e" items="${stockSuggestion}" varStatus="test">
-                            <tr>
-                                <td>${e.stockSymbol}</td>
-                                <td>${e.stockName}</td>
-                                <td>${e.sharePrice}</td>
-                                <td>${e.numberOfSharesAvaliable}</td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach var="e" items="${stockSuggestion}" varStatus="test">
+                                <tr>
+                                    <td>${e.stockSymbol}</td>
+                                    <td>${e.stockName}</td>
+                                    <td>${e.sharePrice}</td>
+                                    <td>${e.numberOfSharesAvaliable}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
-                
-                
 
-                <div role="tabpanel" class="tab-pane" id="blah">
-                    blah
+
+
+                <div role="tabpanel" class="tab-pane" id="conditionalOrder" style="margin-top: 2.5vh;">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p class="col-sm-2">Order ID:</p>
+                            <input type="text" value="Order ID" class="col-sm-10" id="orderID"/>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <select class="form-control" id="conditionalType">
+                                <option>Trailing Stop</option>
+                                <option>Hidden Stop</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-default form-control">Submit</button>
+                        </div>
+                    </div>
+                    getConditionalOrderHistory
                 </div>
             </div>
 
