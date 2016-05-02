@@ -279,7 +279,7 @@
                 <caption>All Customers</caption>
                 <thead>
                     <tr>
-                        <th>GET OUT</th>
+                        <th>revoke member</th>
                         <th>Customer ID</th>
                         <th>Rating</th>
                         <th>User Name</th>
@@ -294,7 +294,12 @@
                 <tbody>
                 <c:forEach var="c" items="${customers}">
                     <tr>
-                        <td>${c.socialSecurityNumber}</td>
+                        <td>
+                            <a class="btn btn-danger removeCustomer">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                        <td class="customerID">${c.socialSecurityNumber}</td>
                         <td>${c.rating}</td>
                         <td>${c.userName}</td>
                         <td>${c.firstName}</td>
