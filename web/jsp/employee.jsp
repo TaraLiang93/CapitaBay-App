@@ -276,11 +276,36 @@
          </div>
             
             <table class="table table-bordered">
+                <caption>All Customers</caption>
                 <thead>
-                    <tr></tr>
-                    
+                    <tr>
+                        <th>GET OUT</th>
+                        <th>Customer ID</th>
+                        <th>Rating</th>
+                        <th>User Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Zip Code</th>
+                        <th>Telephone #</th>
+                    </tr>
                 </thead>
-                
+                <tbody>
+                <c:forEach var="c" items="${customers}">
+                    <tr>
+                        <td>${c.socialSecurityNumber}</td>
+                        <td>${c.rating}</td>
+                        <td>${c.userName}</td>
+                        <td>${c.firstName}</td>
+                        <td>${c.lastName}</td>
+                        <td>${c.email}</td>
+                        <td>${c.address}</td>
+                        <td>${c.zipCode}</td>
+                        <td>${c.telephone}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
