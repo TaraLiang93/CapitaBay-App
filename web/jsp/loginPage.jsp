@@ -83,7 +83,6 @@
                             </div>
                             <div class="form-group pull-right">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <a href="/jsp/signupPage.jsp" style="color: white;">New User, Sign up.</a>
                                     <button type="submit" class="btn btn-default">Sign in</button>
                                 </div>
                             </div>

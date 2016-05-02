@@ -137,7 +137,12 @@ public class employeePage extends HttpServlet {
     }
 
 
-    /**
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+//        doGet(req,resp);
+    }   
+            /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description

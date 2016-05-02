@@ -255,6 +255,20 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
             console.log("it failed to come here");
         })
     });
+    
+    $(".removeCustomer").each(function() {
+        $(this).click(function() {
+            var parent  = $(this).parent().parent()
+            $.post("/DeleteCustomer",{"customerID" : parent.find(".customerID").text()})
+                    .done(function() {
+                        console.log("Customer deleted");
+                        parent.remove();
+            })
+                    .fail(function() {
+                        console.log("failed to delete");
+            });
+        });
+    });
 
 });
 
