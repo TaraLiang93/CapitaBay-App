@@ -134,11 +134,11 @@
 
 
                 <div role="tabpanel" class="tab-pane" id="conditionalOrder" style="margin-top: 2.5vh;">
+                    <p class="failMessage"></p>
                     <div class="row">
-                        <form id="orderID">
                             <div class="col-sm-8">
                                 <p class="col-sm-2">Order ID:</p>
-                                <input type="text" value="Order ID" class="col-sm-10" id="orderID"/>
+                                <input type="text" class="col-sm-10" id="orderID" style="color:black;"/>
                             </div>
                             <div class="form-group col-sm-3">
                                 <select class="form-control" id="conditionalType">
@@ -147,9 +147,8 @@
                                 </select>
                             </div>
                             <div class="col-sm-1">
-                                <input type="submit" value="Submit"/>
+                                <button class="btn btn-default coSubmit" type="button" style="color:black;" id-="coSubmit">Submit</button>
                             </div>
-                        </form>
                     </div>
                     <table class = "table">
                         <thead>

@@ -42,6 +42,7 @@ public class GetConditionalOrderHistory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //response.setContentType("application/json"); /* TOOK THIS OUT */
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("userBean");
         if (userBean == null) {
@@ -51,14 +52,15 @@ public class GetConditionalOrderHistory extends HttpServlet {
         try {
             long ssn = userBean.getSocialSecurityNumber();
             LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
-            String check = "select count(*) from Orders where Orders.OrderID=" + session.getAttribute("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ");";
+            String check = "select count(*) from Orders where Orders.OrderID=" + request.getParameter("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ";";
+            System.out.println(check);
             ResultSet res = CapitaBay.ExecuteQuery(check);
             int checkSSN = -1;
             if (res.next()) {
                 checkSSN = res.getInt("count(*)");
             }
             if (checkSSN > 0) {
-                String query = "call getConditionalOrderHistory(" + session.getAttribute("orderID") + ");";
+                String query = "call getConditionalOrderHistory(" + request.getParameter("orderID") + ");";
                 res = CapitaBay.ExecuteQuery(query);
                 
                 JSONObject json = new JSONObject();
@@ -74,7 +76,6 @@ public class GetConditionalOrderHistory extends HttpServlet {
                 response.getWriter().print(json);
                 response.getWriter().flush();
             }
-            session.setAttribute("currentStockHoldings", results);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GetConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
         }

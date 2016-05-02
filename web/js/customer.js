@@ -5,10 +5,14 @@
  */
 
 $(document).ready(function () {
-    $("#orderID").submit(function () {
-        $.get("/GetConditionalOrderHistory", {"orderID": $("#orderID").val()}, "json")
-                .done(function (e) {
-                    var code = "";
+    
+    $(".coSubmit").click(function() {
+         $.get( "/GetConditionalOrderHistory",{"orderID": $("#orderID").val()}, function() {
+    
+            })
+        .done(function(data) {
+
+         var code = "";
                     $.each(data.history, function (key, value) {
                         console.log("key: " + key + " value: " + value);
                         code = "";
@@ -21,9 +25,35 @@ $(document).ready(function () {
 
 //                     code
                     });
-                })
-                .fail(function () {
-                    console.log("sumbiting and getting order history failed");
-                });
+        })
+    .fail(function() {
+         $(".failMessage").val("Cannot get information on this order.");
+         console.log("sumbiting and getting order history failed");
     });
+  
+    });
+   
+   /* ORIGINAL CODE */
+//    $(".coSubmit").click(function () {
+//        $.get("/GetConditionalOrderHistory", {"orderID": $("#orderID").val()}, "json")
+//                .done(function (data) {
+//                    var code = "";
+//                    $.each(data.history, function (key, value) {
+//                        console.log("key: " + key + " value: " + value);
+//                        code = "";
+//                        code = "<tr>" +
+//                                "<td>" + value.sharePrice + "</td>" +
+//                                "<td>" + value.stockDate + "</td>" +
+//                                "</tr>";
+//
+//                        $("#condHistory").append(code);
+//
+////                     code
+//                    });
+//                })
+//                .fail(function () {
+//                    $(".failMessage").val("Cannot get information on this order.");
+//                    console.log("sumbiting and getting order history failed");
+//                });
+//    });
 });
