@@ -189,6 +189,24 @@ transition: color .3s ease-in-out;
     color: #0daa1c;
 }
 
+#about-container {
+    width: 100%;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    height:auto;
+    padding:10px 5px;
+    color:#00f417;
+}
+
+#about-container h1 {
+    text-align: center;
+}
+
+#about-container p {
+    text-align: justify;
+    font-size: 20px;
+}
+
 #chart-control {
     width:90%;
     margin:auto;
@@ -382,8 +400,11 @@ height:50px;
 }
 
 #footer-content p{
-    vertical-align: center;
+    vertical-align: middle;
     margin: auto 0;
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
 }
 
 form#search {

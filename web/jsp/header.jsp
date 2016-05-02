@@ -95,7 +95,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/jsp/homepage.jsp" id="nav-home">Capita Bay</a></li>
-                            <li><a href="#about">About</a></li>
+                            <li><a href="/jsp/about.jsp">About</a></li>
                             <li><a href="/loadStockListingsPage">Trading</a></li>
                             <li><a href="/bestSelling">Best Selling</a></li>
                             <li><a href="#contact">Statistics</a></li>
