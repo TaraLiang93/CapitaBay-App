@@ -10,6 +10,7 @@ import Bean.UserBean;
 import Bean.customerRevenue;
 import DataBase.CapitaBay;
 import ManagerQueries.RichestRep;
+import Tables.Customer;
 import Tables.Employee;
 import Tables.Stock;
 import java.io.IOException;
@@ -106,6 +107,22 @@ public class employeePage extends HttpServlet {
                 current.set(res);
             
             request.setAttribute("richestCustomer", current);
+            
+            
+            query = "SELECT P.*, C.* FROM Customer C INNER JOIN Person P ON P.SocialSecurityNumber = C.SocialSecurityNumber;";
+            
+            LinkedList<Customer> customers = new LinkedList<>();
+           
+            res = CapitaBay.ExecuteQuery(query);
+            
+            while(res.next()){
+                Customer customer = new Customer();
+                customer.set(res);
+                customers.add(customer);
+            }
+            
+            request.setAttribute("customers", customers);
+            
             
 
             
