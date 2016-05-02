@@ -18,22 +18,45 @@
 
  <div class="tab-content">
      <div role="tabpanel" class="tab-pane active" id="home">
-         <h3>Revenue of Stock, Stock type and Customer</h3>
-         <div class="form-group col-md-8">
-             <input type="text" class="form-control " id="searchRevenue" placeholder="Search">
+         <div class="revenueTables col-xs-12">
+             <h3>Revenue of Stock, Stock type and Customer</h3>
+            <div class="form-group col-xs-8">
+                <input type="text" class="form-control " id="searchRevenue" placeholder="Search">
+            </div>
+            <div class="form-group col-xs-3">
+                <select class="searchRev form-control">
+                    <option name="Stock" value="Stock">Stock</option>
+                    <option name="StockType" value="StockType">Stock Type</option>
+                    <option name="Customer" value="Customer">Customer</option>
+                </select>
+            </div>
+            <a class="btn btn-sm btn-default searchRevBtn col-xs-1">Search</a>
          </div>
-         <div class="form-group col-md-3">
-             <select class="searchRev form-control">
-                 <option name="Stock" value="Stock">Stock</option>
-                 <option name="StockType" value="StockType">Stock Type</option>
-                 <option name="Customer" value="Customer">Customer</option>
-             </select>
-         </div>
-         <a class="btn btn-sm btn-default searchRevBtn col-md-1">Search</a>
          
          <table class="table table-condensed table-bordered revTable" id="revStockTable" style="display: none"></table>
          <table class="table table-condensed table-bordered revTable" id="revStockTypeTable" style="display: none"></table>
          <table class="table table-condensed table-bordered revTable" id="revCustomerTable" style="display: none"></table>
+     
+        <div class="col-xs-12 salesReport">
+            <h3>Monthly Sales Report</h3>
+            <div class="col-xs-3">
+                <select name="salesReportMonth" value="Select Month" class="salesReportMonth form-control">
+                    <option>Select A Month</option>
+                    <option name="January" value="1">January</option>
+                    <option name="February" value="2">February</option>
+                    <option name="March" value="3">March</option>
+                    <option name="April" value="4">April</option>
+                    <option name="May" value="5">May</option>
+                    <option name="June" value="6">June</option>
+                    <option name="July" value="7">July</option>
+                    <option name="August" value="8">August</option>
+                    <option name="September" value="9">September</option>
+                    <option name="October" value="10">October</option>
+                    <option name="November" value="11">November</option>
+                    <option name="December" value="12">December</option>
+                </select>
+            </div>
+        </div>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">
@@ -227,7 +250,32 @@
          </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
-         Love
+         <h3 class="text-center">Richest Customer</h3>
+         
+         <table class="table table-bordered">
+             <thead>
+                 <tr>
+                     <th>Customer ID</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     <th>Revenue</th>
+                 </tr>
+             </thead>
+             <tbody>
+                <tr>
+                    <td>${richestCustomer.ssn}</td>
+                    <td>${richestCustomer.FName}</td>
+                    <td>${richestCustomer.LName}</td>
+                    <td>${richestCustomer.revenue}</td>
+                    
+                </tr>
+             </tbody>
+         </table>
+         <div class="jumbotron">
+            <h3>${richestCustomer.FName} has amass a wealth of ${richestCustomer.revenue} and they will be ruler of the galaxy and the new
+            world is there's.
+            </h3>
+         </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">

@@ -193,6 +193,58 @@ $(document).ready(function() {
         });
         
     });
+    
+    
+    $(".salesReportMonth").change(function(){
+        console.log($(this).val());
+        
+        $.get("/GetSalesReportForMonth",{"month": $(this).val()},"json")
+                .done(function(data){
+                    console.log(data);
+            $(".salesReport").find("table").remove();
+            
+            $(".salesReport").append(
+                        $('<table></table>').addClass("table table-condensed table-hover col-xs-12").append(
+                            $("<thead></thead>").append(
+                                $("<tr></tr>").append(
+                                    $("<th></th>").html("Order ID"),
+                                    $("<th></th>").html("Employee ID"),
+                                    $("<th></th>").html("Customer ID"),
+                                    $("<th></th>").html("Account Number"),
+                                    $("<th></th>").html("Stock Symbol"),
+                                    $("<th></th>").html("Order Type"),
+                                    $("<th></th>").html("Order Date"),
+                                    $("<th></th>").html("Order Time"),
+                                    $("<th></th>").html("Share Price"),
+                                    $("<th></th>").html("Shares Bought")
+                                )
+                            ),
+                            $("<tbody></tbody>")
+                        )
+                    );
+            $.each(data.salesReport, function(k, v){
+                $(".salesReport").find("tbody").append(
+                            $("<tr></tr>").append(
+                                $("<td></td>").html(v.oid),
+                                $("<td></td>").html(v.e_ssn),
+                                $("<td></td>").html(v.c_ssn),
+                                $("<td></td>").html(v.an),
+                                $("<td></td>").html(v.ss),
+                                $("<td></td>").html(v.ot),
+                                $("<td></td>").html(v.o_date),
+                                $("<td></td>").html(v.o_time),
+                                $("<td></td>").html(v.sp),
+                                $("<td></td>").html(v.nos)
+                            )
+                        );
+            });
+            
+                    
+        })
+        .fail(function() {
+            console.log("it failed to come here");
+        })
+    });
 
 });
 

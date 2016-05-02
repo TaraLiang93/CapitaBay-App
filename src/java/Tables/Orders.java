@@ -5,6 +5,7 @@
  */
 package Tables;
 
+import Bean.DataRepo;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import org.json.JSONObject;
  *
  * @author Jason
  */
-public class Orders implements Serializable{
+public class Orders implements Serializable, DataRepo{
     
     private int customerSSN;
     private int numberOfShares;

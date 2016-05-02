@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -41,6 +43,7 @@ public class GetSalesReportForMonth extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            response.setContentType("application/json");
             HttpSession session = request.getSession();
             UserBean userBean = (UserBean) session.getAttribute("userBean");
             if(userBean == null)
@@ -48,24 +51,29 @@ public class GetSalesReportForMonth extends HttpServlet {
                 userBean = new UserBean();
                 session.setAttribute("userBean", userBean);
             }
-        try {
-            
-            LinkedList<SalesReportForMonth> results = new LinkedList<>();
-            
-            
+        try {                 
             Long employeeSSN = userBean.getSocialSecurityNumber();
             Integer monthNumber = Integer.parseInt(request.getParameter("month"));
             
             String query = "call getSalesReportForMonth("+employeeSSN+","+monthNumber+")";
             
             ResultSet res = CapitaBay.ExecuteQuery(query);
+            
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+            
             while(res.next())
             {
                 SalesReportForMonth salesReportForMonth = new SalesReportForMonth();
                 salesReportForMonth.set(res);
-                results.add(salesReportForMonth);
+                jarr.put(salesReportForMonth.getJson());
+                
             }
-            request.setAttribute("salesReportForMonth", results);
+            
+            json.put("salesReport",jarr);
+            
+            response.getWriter().print(json);
+            response.getWriter().flush();
         } catch (ClassNotFoundException| SQLException ex) {
             Logger.getLogger(GetSalesReportForMonth.class.getName()).log(Level.SEVERE, null, ex);
         }
