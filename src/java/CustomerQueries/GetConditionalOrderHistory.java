@@ -53,7 +53,7 @@ public class GetConditionalOrderHistory extends HttpServlet {
             long ssn = userBean.getSocialSecurityNumber();
             LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
             String check = "select count(*) from Orders where Orders.OrderID=" + request.getParameter("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ";";
-            System.out.println(check);
+//            System.out.println(check);
             ResultSet res = CapitaBay.ExecuteQuery(check);
             int checkSSN = -1;
             if (res.next()) {
