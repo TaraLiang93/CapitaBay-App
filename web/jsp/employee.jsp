@@ -250,7 +250,32 @@
          </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
-         Love
+         <h3 class="text-center">Richest Customer</h3>
+         
+         <table class="table table-bordered">
+             <thead>
+                 <tr>
+                     <th>Customer ID</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     <th>Revenue</th>
+                 </tr>
+             </thead>
+             <tbody>
+                <tr>
+                    <td>${richestCustomer.ssn}</td>
+                    <td>${richestCustomer.FName}</td>
+                    <td>${richestCustomer.LName}</td>
+                    <td>${richestCustomer.revenue}</td>
+                    
+                </tr>
+             </tbody>
+         </table>
+         <div class="jumbotron">
+            <h3>${richestCustomer.FName} has amass a wealth of ${richestCustomer.revenue} and they will be ruler of the galaxy and the new
+            world is there's.
+            </h3>
+         </div>
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">

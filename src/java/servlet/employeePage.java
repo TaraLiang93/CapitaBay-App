@@ -7,6 +7,7 @@ package servlet;
 
 import Bean.AllStocks;
 import Bean.UserBean;
+import Bean.customerRevenue;
 import DataBase.CapitaBay;
 import ManagerQueries.RichestRep;
 import Tables.Employee;
@@ -97,6 +98,14 @@ public class employeePage extends HttpServlet {
             
             
             
+            query = "call richestCustomer("+userBean.getSocialSecurityNumber()+");";
+            res = CapitaBay.ExecuteQuery(query);
+            
+                res.next();
+                customerRevenue current = new customerRevenue();
+                current.set(res);
+            
+            request.setAttribute("richestCustomer", current);
             
 
             
