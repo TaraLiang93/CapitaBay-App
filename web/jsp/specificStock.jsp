@@ -63,7 +63,8 @@
 
         <h2 id="specific-title">${s.stockName}</h2>
         <div class="row">
-            <div id="buy-form" class="col-md-8">            
+            <div id="buy-form" class="col-md-8">
+                <c:if test="${userBean.status == 'customer'}">
                 <form method="post" action="/buyServlet">
                     <h2> Buy this Stock </h2>                       
                     <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
@@ -113,6 +114,7 @@
                     <input id="buy-submit" name="submit" class="btn btn-success" value="Buy Shares" type="submit">
 
                 </form>
+                    </c:if>
             </div>
             <div id="specific-table-container" class="col-md-4">
                 <table id="specific-table" class="table table-bordered cb-table">  

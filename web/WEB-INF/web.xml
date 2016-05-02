@@ -16,12 +16,16 @@
         <servlet-name>bestSelling</servlet-name>
         <url-pattern>/bestSelling</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadHomePage</servlet-name>
+        <url-pattern>/loadHomePage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>jsp/homepage.jsp</welcome-file>
+        <welcome-file>loadHomePage</welcome-file>
     </welcome-file-list>
 </web-app>

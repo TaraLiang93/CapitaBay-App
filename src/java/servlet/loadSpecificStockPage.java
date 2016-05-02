@@ -133,7 +133,7 @@ public class loadSpecificStockPage extends HttpServlet {
             request.setAttribute("p", pResult);
             
             request.setAttribute("a", userBean.getAccountNumbers());
-            
+            request.setAttribute("pos", userBean.getPosition());
           
             
             

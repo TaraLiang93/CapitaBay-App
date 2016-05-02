@@ -36,28 +36,23 @@
 
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div id="top-header" class="container"> 
-                    <a href="/ "><img src="/images/capitabay_logo.png" id="logo1"/></a>
+                    <a href="/loadHomePage"><img src="/images/capitabay_logo.png" id="logo1"/></a>
                     <div id="header-carousel" class="carousel slide" data-ride="carousel">
 
 
                         <div class="carousel-inner" role="listbox">
                             <div class="item active up">
-                                <h2>
-                                    IBM +0.1%
-                                </h2>
-                            </div>
-
-                            <div class="item down">
-                                <h2>
-                                    Ford -0.25%
-                                </h2>
-                            </div>
-
-                            <div class="item up">
-                                <h2>
-                                    GM +1.03%
-                                </h2>
-                            </div>
+                                    <h2>
+                                        Welcome to Capita Bay
+                                    </h2>
+                                </div>
+                            <c:forEach var="s" items="${stocks}">                       
+                                <div class="item up">
+                                    <h2>
+                                        ${s.stockSymbol} : $${s.sharePrice}
+                                    </h2>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div id="user-portal">
@@ -94,7 +89,7 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="/jsp/homepage.jsp" id="nav-home">Capita Bay</a></li>
+                            <li><a href="/loadHomePage" id="nav-home">Capita Bay</a></li>
                             <li><a href="/jsp/about.jsp">About</a></li>
                             <li><a href="/loadStockListingsPage">Trading</a></li>
                             <li><a href="/bestSelling">Best Selling</a></li>
