@@ -131,7 +131,6 @@
       </div>
       <div class="modal-body">
           <div id="signup">
-            <form  id="newEmployee">
               <div class="form-group hasHalf">
                   <div class="half"> 
                     <label for="Username">Username</label>
@@ -171,7 +170,7 @@
                   <input type="number" class="form-control" name="ssn" id="SSN" placeholder="Social Security Number">
               </div>
              <div class="form-group">
-                 <select class="employeePos" name="posistion" id="newPosition">
+                 <select class="employeePos" name="position" id="newPosition">
                  <option name="Manager" value="Manager">Manager</option>
                  <option name="CustomerRep" value="CustomerRep">Customer Rep</option>
              </select>
@@ -203,9 +202,8 @@
               </div>
                 <div class="btn-group">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button  class="btn btn-primary hireEmployee">Hire</button>
+              <button  class="btn btn-primary hireEmployee" id="newEmployee">Hire</button>
                 </div>
-            </form> 
           </div>
       </div>
     </div><!-- /.modal-content -->
@@ -276,6 +274,14 @@
             world is there's.
             </h3>
          </div>
+            
+            <table class="table table-bordered">
+                <thead>
+                    <tr></tr>
+                    
+                </thead>
+                
+            </table>
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">

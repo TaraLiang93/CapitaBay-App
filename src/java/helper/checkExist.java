@@ -128,7 +128,7 @@ public class checkExist {
             return "Manager";
         }
         
-        return "";
+        return null;
     }
     
 }
