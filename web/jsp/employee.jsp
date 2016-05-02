@@ -130,7 +130,7 @@
         <h4 class="modal-title">Give Jobs</h4>
       </div>
       <div class="modal-body">
-          <div id="signup">
+          <form id="signup">
               <div class="form-group hasHalf">
                   <div class="half"> 
                     <label for="Username">Username</label>
@@ -204,7 +204,7 @@
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button  class="btn btn-primary hireEmployee" id="newEmployee">Hire</button>
                 </div>
-          </div>
+          </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

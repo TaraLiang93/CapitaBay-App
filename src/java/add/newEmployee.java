@@ -99,16 +99,15 @@ public class newEmployee extends HttpServlet {
                 System.out.println(addCustomer);
                 ResultSet res = CapitaBay.ExecuteQuery(addCustomer);
     
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException  ex) {
             Logger.getLogger(newEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(newEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(newEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (Exception ex){
+             Logger.getLogger(newEmployee.class.getName()).log(Level.SEVERE, null, ex);
+             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } 
         
-        response.getWriter().print("fun");
     }
 
     /**
