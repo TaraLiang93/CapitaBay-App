@@ -34,30 +34,39 @@ $(document).ready(function () {
         });
     });
 
+
+    $("#signup").submit(function(e){
+       e.preventDefault(); 
+    });
+    
 $("#addEmployeeModal").on('shown.bs.modal', function () {
             
         $("#newEmployee").click(function () {
-            $.post("/newEmployee", $("#newEmployee").serialize())
+                $.post("/newEmployee", $("#signup").serialize())
                     .done(function (e) {
 //                       e.preventDefault();
-                        alert("It finished");
+
                         var code = "<tr>" +
-                                "<th><button class='tbn btn-danger deleteEmployee'> <i class='glyphicon glyphicon-remove'></i></button> <div class='EmployeeId' style='display:none'>" + $("#SSN").val() + "</div></th>" +
-                                "<th>" + $("#firstName").val() + "</th>" +
-                                "<th>" + $("#LastName").val() + "</th>" +
-                                "<th>" + $("#address").val() + "</th>" +
-                                "<th>" + $("#phoneNum").val() + "</th>" +
-                                "<th>" + $("#zip").val() + "</th>" +
-                                "<th><select class='employeePos'><option name='Manager' value='Manager'>Manager</option><option name='CustomerRep' value='CustomerRep'>Customer Rep</option></select></th>"
-                        "<th>" + $("#newHourlyRate").val() + "</th>" +
-                                "<th><a class='saveChanges btn btn-primary'>Save</a></th>" +
+                                "<td><button class='btn btn-danger deleteEmployee'> <i class='glyphicon glyphicon-remove'></i></button> <div class='EmployeeId' style='display:none'>" + $("#SSN").val() + "</div></td>" +
+                                "<td>" + $("#firstName").val() + "</td>" +
+                                "<td>" + $("#LastName").val() + "</td>" +
+                                "<td>" + $("#address").val() + "</td>" +
+                                "<td>" + $("#phoneNum").val() + "</td>" +
+                                "<td>" + $("#zip").val() + "</th>" +
+                                "<td><select class='employeePos form-control new'><option name='Manager' value='Manager'>Manager</option><option name='CustomerRep' value='CustomerRep'>Customer Rep</option></select></td>"+
+                                "<td><div class='btn-inline'>$<div class='btn-group'> <input class='col-md-8 input' type='text' name='hourRate' value='"+ $("#newHourlyRate").val() + "' /></div></div></td>" +
+                                "<td><a class='saveChanges btn btn-primary'>Save</a></td>" +
                                 "</tr>";
                         $(".employeeData").append(code);
+                        $(".employeePos.new").attr("value",$("#newPosition").val());
+                        $(".employeePos.new").removeClass("new");
+                        $("#addEmployeeModal").modal('toggle');
 
                     }).fail(function () {
                         alert("Cannot add Employee");
                 console.log("didn't make a new employee");
             });
+
         });
 
 
