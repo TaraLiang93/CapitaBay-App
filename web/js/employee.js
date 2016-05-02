@@ -34,9 +34,9 @@ $(document).ready(function () {
         });
     });
 
-    $(".hireEmployee").click(function () {
-
-        $("#newEmployee").submit(function () {
+$("#addEmployeeModal").on('shown.bs.modal', function () {
+            
+        $("#newEmployee").click(function () {
             $.post("/newEmployee", $("#newEmployee").serialize())
                     .done(function (e) {
 //                       e.preventDefault();
@@ -55,6 +55,7 @@ $(document).ready(function () {
                         $(".employeeData").append(code);
 
                     }).fail(function () {
+                        alert("Cannot add Employee");
                 console.log("didn't make a new employee");
             });
         });
