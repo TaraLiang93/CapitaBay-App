@@ -307,8 +307,7 @@
                         <th>revoke</th>
                         <th>ID</th>
                         <th>Rating</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Name</th>
                         <th>Credit #</th>
                         <th>Email</th>
                         <th>Address</th>
@@ -327,10 +326,9 @@
                         </td>
                         <td class="customerID">${c.socialSecurityNumber}</td>
                         <td><input type="text" class="customerRating form-control" value="${c.rating}" /></td>
-                        <td>${c.firstName}</td>
-                        <td>${c.lastName}</td>
-                        <td class="customerCredit"><input type="text" class="form-control" value="${c.creditCardNumber}"</td>
-                        <td class="customerEmail"><input type="text" class="form-control" value="${c.email}" /></td>
+                        <td>${c.firstName} ${c.lastName}</td>
+                        <td><input type="text" class="form-control customerCredit" value="${c.creditCardNumber}"/></td>
+                        <td><input type="text" class="form-control customerEmail" value="${c.email}" /></td>
                         <td>${c.address}</td>
                         <td>${c.zipCode}</td>
                         <td>${c.telephone}</td>
