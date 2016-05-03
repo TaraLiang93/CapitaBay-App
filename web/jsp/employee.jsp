@@ -70,7 +70,6 @@
         </c:if>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
-       <c:if test="${userBean.status == 'Manager'}">
          <table class = "table editEmployeeTable">
    <caption>Edit Employees</caption>
    <thead>
@@ -82,8 +81,8 @@
          <th>Telephone</th>
          <th>Zip Code</th>
          <th>Position</th>
-         <th>Hour Rate</th>
-         <th>Save</th>
+         <c:if test="${userBean.status == 'Manager'}"><th>Hour Rate</th>
+             <th>Save</th></c:if>
       </tr>
    </thead>
    
@@ -100,12 +99,22 @@
          <td>${e.telephone}</td>
          <td>${e.zipCode}</td>
          <td>
-             <select class="employeePos form-control" value="${e.position}">
-                 <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
-                 <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
-             </select>
+             <c:choose>
+                 <c:when test="${userBean.status == 'Manager'}">
+                    <select class="employeePos form-control" value="${e.position}">
+                    <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
+                    <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
+                   </select>
+                 </c:when>
+                 <c:when test="${userBean.status == 'CustomerRep'}">
+                     ${e.position}
+                 </c:when>
+                 <c:otherwise>
+                     this should never print
+                 </c:otherwise>
+             </c:choose>
          </td>
-         <td>
+         <c:if test="${userBean.status == 'Manager'}"><td>
              <div class="btn-inline">
                 $
                 <div class="btn-group">
@@ -115,7 +124,7 @@
          </td>
          <td>
              <a class="saveChanges btn btn-primary">Save</a> 
-         </td>
+         </td></c:if>
       </tr>
     </c:forEach>
    </tbody>
@@ -129,7 +138,6 @@
     <a class="btn btn-info richestRep">Rep of the Month</a>
      <div class="richestRepInput"></div>
      
-       </c:if>
      </div>
      
 
