@@ -296,6 +296,23 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
             });
         });
     });
+    
+    $(".updateCustomers").each(function() {
+        $(this).click(function() {
+            var row = $(this).parent().parent();
+            
+            $.post("/editCustomer",{"customerID" : row.find(".customerID").text(), 
+                                    "rating" : row.find(".customerRating").val(),
+                                    "creditNum" : row.find(".customerCredit").val(),
+                                    "email" :  row.find(".customerEmail").val()
+                                    }).done(function(e) {
+                                        console.log(e);
+                                        console.log("updated successfully");
+                                    }).fail(function() {
+                                        console.log("failed to update");
+                                    });
+        });
+    });
 
 });
 

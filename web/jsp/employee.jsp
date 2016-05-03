@@ -332,7 +332,7 @@
                         <td>${c.address}</td>
                         <td>${c.zipCode}</td>
                         <td>${c.telephone}</td>
-                        <td><a class="btn btn-primary saveCustomers"><i class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></i></a></td>
+                        <td><a class="btn btn-primary updateCustomers"><i class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></i></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
