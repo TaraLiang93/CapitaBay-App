@@ -1,11 +1,12 @@
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="${name} home"/>
+    <jsp:param name="title" value="${userBean.firstName} home"/>
     <jsp:param name="css" value="/css/employee.css" />
     <jsp:param name="css" value="/css/signupPage.css"/>
     <jsp:param name="js" value="/js/employee.js"/>
 </jsp:include>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <div class="display-content employeeTabs col-md-12">
 <ul class="nav nav-tabs" role="tablist">
@@ -13,11 +14,21 @@
     <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
+<c:if test="${userBean.status == 'Manager'}">
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
+</c:if>
 </ul>
 
+    
+    <c:if test="${userBean.status == 'Manager'}">
+        <!--<script>alert("${userBean.status}");</script>-->
+    </c:if>
+    
+    
  <div class="tab-content">
      <div role="tabpanel" class="tab-pane active" id="home">
+         
+        <c:if test="${userBean.status == 'Manager'}">
          <div class="revenueTables col-xs-12">
              <h3>Revenue of Stock, Stock type and Customer</h3>
             <div class="form-group col-xs-8">
@@ -57,6 +68,7 @@
                 </select>
             </div>
         </div>
+        </c:if>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
          <table class = "table editEmployeeTable">
@@ -70,8 +82,8 @@
          <th>Telephone</th>
          <th>Zip Code</th>
          <th>Position</th>
-         <th>Hour Rate</th>
-         <th>Save</th>
+         <c:if test="${userBean.status == 'Manager'}"><th>Hour Rate</th>
+             <th>Save</th></c:if>
       </tr>
    </thead>
    
@@ -88,12 +100,22 @@
          <td>${e.telephone}</td>
          <td>${e.zipCode}</td>
          <td>
-             <select class="employeePos form-control" value="${e.position}">
-                 <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
-                 <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
-             </select>
+             <c:choose>
+                 <c:when test="${userBean.status == 'Manager'}">
+                    <select class="employeePos form-control" value="${e.position}">
+                    <option name="Manager" value="Manager" ${e.position eq "Manager" ? "selected" : ""} >Manager</option>
+                    <option name="CustomerRep" value="CustomerRep" ${e.position eq "CustomerRep" ? "selected" : ""}>Customer Rep</option>
+                   </select>
+                 </c:when>
+                 <c:when test="${userBean.status == 'CustomerRep'}">
+                     ${e.position}
+                 </c:when>
+                 <c:otherwise>
+                     this should never print
+                 </c:otherwise>
+             </c:choose>
          </td>
-         <td>
+         <c:if test="${userBean.status == 'Manager'}"><td>
              <div class="btn-inline">
                 $
                 <div class="btn-group">
@@ -103,7 +125,7 @@
          </td>
          <td>
              <a class="saveChanges btn btn-primary">Save</a> 
-         </td>
+         </td></c:if>
       </tr>
     </c:forEach>
    </tbody>
@@ -115,14 +137,13 @@
     
          
     <a class="btn btn-info richestRep">Rep of the Month</a>
-     <div class="richestRepInput">
-
-     </div>
+     <div class="richestRepInput"></div>
+     
      </div>
      
 
      
-     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -130,8 +151,7 @@
         <h4 class="modal-title">Give Jobs</h4>
       </div>
       <div class="modal-body">
-          <div id="signup">
-            <form  id="newEmployee">
+          <form class="asyncForm" id="signup">
               <div class="form-group hasHalf">
                   <div class="half"> 
                     <label for="Username">Username</label>
@@ -171,7 +191,7 @@
                   <input type="number" class="form-control" name="ssn" id="SSN" placeholder="Social Security Number">
               </div>
              <div class="form-group">
-                 <select class="employeePos" name="posistion" id="newPosition">
+                 <select class="employeePos" name="position" id="newPosition">
                  <option name="Manager" value="Manager">Manager</option>
                  <option name="CustomerRep" value="CustomerRep">Customer Rep</option>
              </select>
@@ -203,10 +223,9 @@
               </div>
                 <div class="btn-group">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button  class="btn btn-primary hireEmployee">Hire</button>
+              <button  class="btn btn-primary hireEmployee" id="newEmployee">Hire</button>
                 </div>
-            </form> 
-          </div>
+          </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -215,6 +234,7 @@
      
      <div role="tabpanel" class="tab-pane" id="orders">
 
+        <c:if test="${userBean.status == 'Manager'}">
          <div class="input-group col-md-10" style="margin: 0 auto">
             <h3>List Orders by Customer Name or Stock symbol</h3>
              <div class="form-group col-md-8">
@@ -248,8 +268,10 @@
                 </tbody>
              </table>
          </div>
+        </c:if>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
+    <c:if test="${userBean.status == 'Manager'}">
          <h3 class="text-center">Richest Customer</h3>
          
          <table class="table table-bordered">
@@ -271,12 +293,166 @@
                 </tr>
              </tbody>
          </table>
+    
          <div class="jumbotron">
             <h3>${richestCustomer.FName} has amass a wealth of ${richestCustomer.revenue} and they will be ruler of the galaxy and the new
             world is there's.
             </h3>
          </div>
+    </c:if>
+            
+            <table class="table table-bordered customerTable">
+                <caption>All Customers</caption>
+                <thead>
+                    <tr>
+                        <th>revoke</th>
+                        <th>ID</th>
+                        <th>Rating</th>
+                        <th>Name</th>
+                        <th>Credit #</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Zip</th>
+                        <th>Phone #</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="c" items="${customers}">
+                    <tr>
+                        <td>
+                            <a class="btn btn-danger removeCustomer">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                        <td class="customerID">${c.socialSecurityNumber}</td>
+                        <td><input type="text" class="customerRating form-control" value="${c.rating}" /></td>
+                        <td>${c.firstName} ${c.lastName}</td>
+                        <td><input type="text" class="form-control customerCredit" value="${c.creditCardNumber}"/></td>
+                        <td><input type="text" class="form-control customerEmail" value="${c.email}" /></td>
+                        <td>${c.address}</td>
+                        <td>${c.zipCode}</td>
+                        <td>${c.telephone}</td>
+                        <td><a class="btn btn-primary updateCustomers"><i class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></i></a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <a class="btn btn-info" class="addCustomer" data-toggle="modal" data-target="#addCustomerModal">Add Customer</a>
+
+            <c:if test="${userBean.status != 'Customer'}">
+                
+            <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
+            
+            <sql:query dataSource="${snapshot}" var="mailingList" sql="SELECT P.SocialSecurityNumber, P.Username, P.FirstName, P.LastName, C.Email FROM Person P INNER JOIN Customer C ON P.SocialSecurityNumber = C.SocialSecurityNumber ORDER BY SocialSecurityNumber ASC;" />
+            
+            <div class="col-sm-12">
+                <table class="table table-bordered mailingList">
+                    <caption>Customer Mailing List</caption>
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>UserName</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="ex" items="${mailingList.rows}">
+                            <tr>
+                                <td>${ex.SocialSecurityNumber}</td>
+                                <td>${ex.Username}</td>
+                                <td>${ex.FirstName}</td>
+                                <td>${ex.LastName}</td>
+                                <td>${ex.Email}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            </c:if>
+            
+<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create Account</h4>
+      </div>
+      <div class="modal-body">
+          <form class="asyncForm" id="addCustomerForm">
+              <div class="form-group hasHalf">
+                  <div class="half"> 
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" id="cUsername" name="username" placeholder="Username">
+                  </div>
+                  <div class="half">
+                        <label for="Email">Email</label>
+                        <input type="Email" class="form-control" name="email" id="cEmail" placeholder="Email">
+                  </div>
+              </div>
+              <div class="form-group hasHalf">
+                  <div class="half">
+                       <label for="Password">Password</label>
+                       <input type="password" class="form-control" id="cPassword" name="password" placeholder="Password">
+                  </div>
+                  <div class="half">
+                        <label for="Password2">Re-enter Password</label>
+                        <input type="password" class="form-control" name="password2" id="cPassword2" placeholder="Password">
+                  </div>
+              </div>
+              <div class="form-group hasHalf">
+                  <div class="half">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="cfirstName" placeholder="First Name">
+                  </div>
+                  <div class="half">
+                    <label for="LastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="cLastName" placeholder="Last Name">
+                  </div>
+              </div>
+              <div class="form-group" style="width: 33%;">
+                    <label for="phoneNum">Telephone</label>
+                    <input type="number" class="form-control" name="phoneNum" id="cphoneNum" placeholder="Telephone Number">
+              </div>
+              <div class="form-group">
+                  <label for="SSN">Social Security Number</label>
+                  <input type="number" class="form-control" name="ssn" id="cSSN" placeholder="Social Security Number">
+              </div>
+              <div class="form-group">
+                  <label for="creditCard">Credit Card Number</label>
+                  <input type="number" class="form-control" name="creditCard" id="ccreditCard" placeholder="Credit Card Number">
+              </div>
+              <div class="form-group">
+                  <div style="width: 90%;">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="caddress" class="form-control" placeholder="Address">
+                  </div>
+                  <br>
+                  <div style="display: inline-flex; width: 100%;" >
+                      <div class="form-group" style="width: 30%;margin: 0.5%;" >
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" name="city" id="ccity" placeholder="City">
+                      </div>
+                      <div class="form-group" style="width: 30%;margin: 0.5%;"> 
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" name="state" id="cstate" placeholder="State">
+                      </div>
+                      <div class="form-group" style="width: 30%;margin: 0.5%;">
+                        <label for="zip">Zip Code</label>
+                        <input type="number" class="form-control" name="zip" id="czip" placeholder="Zip Code">
+                      </div>
+                  </div>
+              </div>
+              <button class="btn btn-primary addUserButton">Add Account</button>
+            </form> 
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+            
      </div>
+<c:if test="${userBean.status == 'Manager'}">
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">
    <caption>All Stocks</caption>
@@ -333,6 +509,7 @@
 </table>
          
      </div>
+</c:if>
   </div>
 </div>
 <jsp:include page="footer.jsp"/>

@@ -10,6 +10,7 @@ import Bean.UserBean;
 import Bean.customerRevenue;
 import DataBase.CapitaBay;
 import ManagerQueries.RichestRep;
+import Tables.Customer;
 import Tables.Employee;
 import Tables.Stock;
 import java.io.IOException;
@@ -73,8 +74,8 @@ public class employeePage extends HttpServlet {
             LinkedList<AllStocks> results = new LinkedList<>();
             
             query = "call listAllStocks("+userBean.getSocialSecurityNumber()+")";
-            
-            res = CapitaBay.ExecuteQuery(query);
+            if(userBean.getStatus() == "Manager"){
+                res = CapitaBay.ExecuteQuery(query);
             
             while(res.next()){
                 AllStocks stocks = new AllStocks();
@@ -82,7 +83,9 @@ public class employeePage extends HttpServlet {
                 results.add(stocks);
             }
             request.setAttribute("listAllStocks", results);
+            }
             
+            if(userBean.getStatus() == "Manager"){
             query = "call mostPopularStocks("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> popStocks = new LinkedList<Stock>();
@@ -95,9 +98,10 @@ public class employeePage extends HttpServlet {
                 popStocks.add(current);
             } 
             request.setAttribute("popularStocks", popStocks);
+            }
             
             
-            
+            if(userBean.getStatus() == "Manager"){
             query = "call richestCustomer("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             
@@ -106,6 +110,25 @@ public class employeePage extends HttpServlet {
                 current.set(res);
             
             request.setAttribute("richestCustomer", current);
+            }
+            
+            
+            query = "SELECT P.*, C.* FROM Customer C INNER JOIN Person P ON P.SocialSecurityNumber = C.SocialSecurityNumber;";
+            
+            LinkedList<Customer> customers = new LinkedList<>();
+           
+            res = CapitaBay.ExecuteQuery(query);
+            
+            while(res.next()){
+                Customer customer = new Customer();
+                customer.set(res);
+                customers.add(customer);
+            }
+            
+            request.setAttribute("customers", customers);
+            
+            request.setAttribute("PASSWD", CapitaBay.getPASSWD());
+            
             
 
             
@@ -120,7 +143,12 @@ public class employeePage extends HttpServlet {
     }
 
 
-    /**
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+//        doGet(req,resp);
+    }   
+            /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description

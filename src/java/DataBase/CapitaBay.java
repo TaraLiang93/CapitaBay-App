@@ -20,7 +20,7 @@ public class CapitaBay {
     
     private static final String USER = "root";
     
-    private static final String PASSWD = "272900Tl!1730";
+    private static final String PASSWD = "Password1*";
 
     
     private static Connection conn = null;
@@ -40,5 +40,11 @@ public class CapitaBay {
         
         return res;
     }
+
+    public static String getPASSWD() {
+        return PASSWD;
+    }
+    
+    
     
 }

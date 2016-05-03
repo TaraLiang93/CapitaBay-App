@@ -79,10 +79,19 @@ public class loginValidation extends HttpServlet {
                     if(employeeStatus.equalsIgnoreCase("Manager")){
                         userBean.setStatus("Manager");
                         session.setAttribute("userBean", userBean);
+                    
+//                        RequestDispatcher dispatcher = req.getRequestDispatcher("/employeePage");
+//                        dispatcher.forward(req, resp);
+                          resp.sendRedirect("/employeePage");
+                        
                     }
                     else if (employeeStatus.equalsIgnoreCase("CustomerRep")){
                         userBean.setStatus("CustomerRep");
                         session.setAttribute("userBean", userBean);
+//                        RequestDispatcher dispatcher = req.getRequestDispatcher("/employeePage");
+//                        dispatcher.forward(req, resp);
+                          resp.sendRedirect("/employeePage");
+                        
                     }
                     else{
                        req.setAttribute("error", "**Incorrect Username and Password**");
@@ -95,8 +104,9 @@ public class loginValidation extends HttpServlet {
                 session.setAttribute("userBean", userBean);
                 req.setAttribute("errorStatus", false);
              
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/homepage.jsp");
-                dispatcher.forward(req, resp);
+//                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/homepage.jsp");
+//                dispatcher.forward(req, resp);
+//                resp.sendRedirect("/jsp/homepage.jsp");
             } else {
                 req.setAttribute("error", "**Incorrect Username and Password**");
                 req.setAttribute("errorStatus", true);

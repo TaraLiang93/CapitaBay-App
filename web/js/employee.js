@@ -34,29 +34,66 @@ $(document).ready(function () {
         });
     });
 
-    $(".hireEmployee").click(function () {
 
-        $("#newEmployee").submit(function () {
-            $.post("/newEmployee", $("#newEmployee").serialize())
+    $(".asyncForm").submit(function(e){
+       e.preventDefault(); 
+    });
+    
+    $(".addUserButton").click(function() {
+        
+        $.post("/newCustomer", $("#addCustomerForm").serialize())
+                .done(function() {
+                    $("#addCustomerModal").modal('toggle');
+                    console.log("Love");
+                    
+                    $(".customerTable").find('tbody').append(
+                            $("<tr></tr>").append(
+                                $("<td></td>").html( "<a class='btn btn-danger removeCustomer'> <i class='glyphicon glyphicon-remove'></i> </a>" ),
+                                $("<td></td>").html( $("#cSSN").val() ),
+                                $("<td></td>").html("<input type='text' class='form-control customerRating' value='1.0'/>"),
+                                $("<td></td>").html( $("#cfirstName").val() + " " + $("#cLastName").val() ),
+                                $("<td></td>").html("<input type='text' class='form-control customerCredit' value='"+ $("#ccreditCard").val() +"'/>"),
+                                $("<td></td>").html( "<input type='text' class='form-control customerEmail' value='"+$("#cEmail").val() + "' />"), 
+                                $("<td></td>").html( $("#caddress").val() ),
+                                $("<td></td>").html( $("#czip").val() ),
+                                $("<td></td>").html( $("#cphoneNum").val() ),
+                                $("<td></td>").html( "<a class='btn btn-primary saveCustomers'><i class='glyphicon glyphicon-floppy-saved' aria-hidden='true'></i></a>" )
+                            )
+                    );
+                    $("#addCustomerModal").modal("close");
+        }).fail(function() {
+           console.log("Fun loving"); 
+        });
+    });
+    
+$("#addEmployeeModal").on('shown.bs.modal', function () {
+            
+        $("#newEmployee").click(function () {
+                $.post("/newEmployee", $("#signup").serialize())
                     .done(function (e) {
 //                       e.preventDefault();
-                        alert("It finished");
+
                         var code = "<tr>" +
-                                "<th><button class='tbn btn-danger deleteEmployee'> <i class='glyphicon glyphicon-remove'></i></button> <div class='EmployeeId' style='display:none'>" + $("#SSN").val() + "</div></th>" +
-                                "<th>" + $("#firstName").val() + "</th>" +
-                                "<th>" + $("#LastName").val() + "</th>" +
-                                "<th>" + $("#address").val() + "</th>" +
-                                "<th>" + $("#phoneNum").val() + "</th>" +
-                                "<th>" + $("#zip").val() + "</th>" +
-                                "<th><select class='employeePos'><option name='Manager' value='Manager'>Manager</option><option name='CustomerRep' value='CustomerRep'>Customer Rep</option></select></th>"
-                        "<th>" + $("#newHourlyRate").val() + "</th>" +
-                                "<th><a class='saveChanges btn btn-primary'>Save</a></th>" +
+                                "<td><button class='btn btn-danger deleteEmployee'> <i class='glyphicon glyphicon-remove'></i></button> <div class='EmployeeId' style='display:none'>" + $("#SSN").val() + "</div></td>" +
+                                "<td>" + $("#firstName").val() + "</td>" +
+                                "<td>" + $("#LastName").val() + "</td>" +
+                                "<td>" + $("#address").val() + "</td>" +
+                                "<td>" + $("#phoneNum").val() + "</td>" +
+                                "<td>" + $("#zip").val() + "</th>" +
+                                "<td><select class='employeePos form-control new'><option name='Manager' value='Manager'>Manager</option><option name='CustomerRep' value='CustomerRep'>Customer Rep</option></select></td>"+
+                                "<td><div class='btn-inline'>$<div class='btn-group'> <input class='col-md-8 input' type='text' name='hourRate' value='"+ $("#newHourlyRate").val() + "' /></div></div></td>" +
+                                "<td><a class='saveChanges btn btn-primary'>Save</a></td>" +
                                 "</tr>";
                         $(".employeeData").append(code);
+                        $(".employeePos.new").attr("value",$("#newPosition").val());
+                        $(".employeePos.new").removeClass("new");
+                        $("#addEmployeeModal").modal('toggle');
 
                     }).fail(function () {
+                        alert("Cannot add Employee");
                 console.log("didn't make a new employee");
             });
+
         });
 
 
@@ -244,6 +281,37 @@ $(document).ready(function () {
         .fail(function() {
             console.log("it failed to come here");
         })
+    });
+    
+    $(".removeCustomer").each(function() {
+        $(this).click(function() {
+            var parent  = $(this).parent().parent()
+            $.post("/DeleteCustomer",{"customerID" : parent.find(".customerID").text()})
+                    .done(function() {
+                        console.log("Customer deleted");
+                        parent.remove();
+            })
+                    .fail(function() {
+                        console.log("failed to delete");
+            });
+        });
+    });
+    
+    $(".updateCustomers").each(function() {
+        $(this).click(function() {
+            var row = $(this).parent().parent();
+            
+            $.post("/editCustomer",{"customerID" : row.find(".customerID").text(), 
+                                    "rating" : row.find(".customerRating").val(),
+                                    "creditNum" : row.find(".customerCredit").val(),
+                                    "email" :  row.find(".customerEmail").val()
+                                    }).done(function(e) {
+                                        console.log(e);
+                                        console.log("updated successfully");
+                                    }).fail(function() {
+                                        console.log("failed to update");
+                                    });
+        });
     });
 
 });

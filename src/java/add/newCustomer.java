@@ -119,10 +119,14 @@ public class newCustomer extends HttpServlet{
                 res = CapitaBay.ExecuteQuery(addCustomerAccount);
 
                 //set the username and ssn into the bean
-                UserBean userBean = new UserBean();
-                userBean.setSocialSecurityNumber(SSN);
-                userBean.setUsername(username);
-                session.setAttribute("userBean", userBean);
+                
+                UserBean userBean = (UserBean) session.getAttribute("userBean");
+                if(userBean == null){
+                    userBean = new UserBean();
+                    userBean.setSocialSecurityNumber(SSN);
+                    userBean.setUsername(username);
+                    session.setAttribute("userBean", userBean);
+                }
                 req.setAttribute("errorStatus", false);
 
                 //return to homepage TEMPORARY!!!, it should redirect to user's profile page
