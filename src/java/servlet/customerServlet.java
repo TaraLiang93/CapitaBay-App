@@ -6,6 +6,7 @@
 package servlet;
 
 import Bean.CurrentStockHoldings;
+import Bean.Transaction;
 import Bean.UserBean;
 import CustomerQueries.GetCurrentStockHoldings;
 import DataBase.CapitaBay;
@@ -53,6 +54,13 @@ public class customerServlet extends HttpServlet{
             while(res.next()) {
                 CurrentStockHoldings currentStockHoldings = new CurrentStockHoldings();
                 currentStockHoldings.set(res);
+                String ss = res.getString("stockSymbol");
+                String price = "select StockTable.SharePrice from StockTable where StockTable.StockSymbol=\""+ss+"\";";
+                System.out.println(price);
+                ResultSet resu = CapitaBay.ExecuteQuery(price);
+                if(resu.next()){
+                    currentStockHoldings.setCurrentPrice(resu.getDouble("SharePrice"));
+                }
                 results.add(currentStockHoldings);               
             }
             request.setAttribute("currentStockHoldings", results);
@@ -62,10 +70,15 @@ public class customerServlet extends HttpServlet{
             Long c_ssn = userBean.getSocialSecurityNumber();
             query = "call OrderHistory("+c_ssn+");";
             res = CapitaBay.ExecuteQuery(query);
-            LinkedList<Orders> result = new LinkedList<Orders>();
+            LinkedList<Transaction> result = new LinkedList<Transaction>();
             while(res.next()){
-                Orders current = new Orders();
+                Transaction current = new Transaction();
                 current.set(res);
+                query = "select Orders.NumberOfShares from Orders where OrderID ="+current.getTransId()+";";
+                ResultSet res1 = CapitaBay.ExecuteQuery(query);
+                if(res1.next()){
+                    current.setNos(res1.getInt("NumberOfShares"));
+                }
                 String name = getNameWithSSN.getName(c_ssn);
                 result.add(current);
             }

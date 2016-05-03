@@ -7,16 +7,16 @@
 $(document).ready(function () {
 
     $("#gcoSubmit").click(function () {
-        
+
         $.get("/ListConditionalOrderHistory", {"orderID": $("#orderID").val()})
                 .done(function (data) {
-                    
+
                     var code = "";
 //                    var index = 0;
 //                    for(; index<data.history.length; index++){
 //                        console.log("yaya")
 //                    }
-                    data = $.parseJSON(''+data+'');
+                    data = $.parseJSON('' + data + '');
                     var test = data;
                     console.log(data);
                     $.each(data, function (key, value) {
@@ -39,12 +39,36 @@ $(document).ready(function () {
 
     });
 
+    $(".stockSymbol").each(function () {
+        $(this).click(function () {
+            var stockSymbol = $(this).text();
+            $(location).attr("href", "/loadSpecificStockPage?val=" + stockSymbol);
+        });
+    });
 
 
-    $(".saveChanges").each(function(){
-        $(this).click(function(){
+
+    $("[type=range]").change(function () {
+        var newval = $(this).val();
+        $("#number-shares").val(newval);
+        $("#shares-upper").text(newval);
+        var price = $("#currentPrice").text();
+        price = price * newval;
+        $("#sellPrices").val(price);
+
+    });
+    
+
+    $(".saveChanges").each(function () {
+        $(this).click(function () {
             var parent = $(this).parent().parent();
-            alert("You have click edif for: "+parent.find(".stockSymbol").text());
+            $(".stockSymbol").text(parent.find(".stockSymbol").text());
+            $("#numShares").text(parent.find(".totalShares").text());
+            $("#currentPrice").text(parent.find(".price").text());
+            $(".acctNum").text(parent.find(".accountNumber").text());
+            $("#shares-upper").attr({max: parent.find(".totalShares").text()});
+            $("#shares-upper").text(parent.find(".totalShares").text());
+            $("#shares").attr({max: parent.find(".totalShares").text()});
             $("#stockModal").modal("show");
         });
     });

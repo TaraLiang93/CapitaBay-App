@@ -44,11 +44,11 @@ public class calendar {
     }
     
     public static void main (String args[]){
-        DateTime test = new DateTime();
+        LocalTime test = new LocalTime();
         LocalDate b = new LocalDate();
 //        test = test.minusMonths(3);
 //        cal.minusMonths(3).toDate();
-        System.out.println(b.toString());
+        System.out.println(test.toString());
     }
     
     
