@@ -6,6 +6,7 @@
 </jsp:include>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <div class="display-content employeeTabs col-md-12">
 <ul class="nav nav-tabs" role="tablist">
@@ -338,7 +339,7 @@
                 </tbody>
             </table>
             <a class="btn btn-info" class="addCustomer" data-toggle="modal" data-target="#addCustomerModal">Add Customer</a>
-            <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
             <c:if test="${userBean.status != 'Customer'}">
                 
             <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
