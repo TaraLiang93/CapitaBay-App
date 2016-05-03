@@ -127,6 +127,8 @@ public class employeePage extends HttpServlet {
             
             request.setAttribute("customers", customers);
             
+            request.setAttribute("PASSWD", CapitaBay.getPASSWD());
+            
             
 
             

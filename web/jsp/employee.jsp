@@ -338,6 +338,39 @@
                 </tbody>
             </table>
             <a class="btn btn-info" class="addCustomer" data-toggle="modal" data-target="#addCustomerModal">Add Customer</a>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+           
+            <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"
+     user="root"  password="${PASSWD}"/>
+            
+            <sql:query dataSource="${snapshot}" var="mailingList" sql="SELECT P.SocialSecurityNumber, P.Username, P.FirstName, P.LastName, C.Email FROM Person P INNER JOIN Customer C ON P.SocialSecurityNumber = C.SocialSecurityNumber ORDER BY SocialSecurityNumber ASC;" />
+            
+            <div class="col-sm-12">
+                <table class="table table-bordered">
+                    <caption>Customer Mailing List</caption>
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>UserName</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="ex" items="${mailingList.rows}">
+                            <tr>
+                                <td>${ex.SocialSecurityNumber}</td>
+                                <td>${ex.Username}</td>
+                                <td>${ex.FirstName}</td>
+                                <td>${ex.LastName}</td>
+                                <td>${ex.Email}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
             
 <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">

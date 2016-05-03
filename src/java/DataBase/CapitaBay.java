@@ -40,5 +40,11 @@ public class CapitaBay {
         
         return res;
     }
+
+    public static String getPASSWD() {
+        return PASSWD;
+    }
+    
+    
     
 }
