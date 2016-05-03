@@ -50,14 +50,14 @@ $(document).ready(function () {
                             $("<tr></tr>").append(
                                 $("<td></td>").html( "<a class='btn btn-danger removeCustomer'> <i class='glyphicon glyphicon-remove'></i> </a>" ),
                                 $("<td></td>").html( $("#cSSN").val() ),
-                                $("<td></td>").html("<input type='text' value='1.0'/>"),
-                                $("<td></td>").html( $("#cUsername").val() ),
-                                $("<td></td>").html( $("#cfirstName").val() ),
-                                $("<td></td>").html( $("#cLastName").val() ),
-                                $("<td></td>").html( $("#cEmail").val() ),
+                                $("<td></td>").html("<input type='text' class='form-control customerRating' value='1.0'/>"),
+                                $("<td></td>").html( $("#cfirstName").val() + " " + $("#cLastName").val() ),
+                                $("<td></td>").html("<input type='text' class='form-control customerCredit' value='"+ $("#ccreditCard").val() +"'/>"),
+                                $("<td></td>").html( "<input type='text' class='form-control customerEmail' value='"+$("#cEmail").val() + "' />"), 
                                 $("<td></td>").html( $("#caddress").val() ),
                                 $("<td></td>").html( $("#czip").val() ),
-                                $("<td></td>").html( $("#cphoneNum").val() )                            
+                                $("<td></td>").html( $("#cphoneNum").val() ),
+                                $("<td></td>").html( "<a class='btn btn-primary saveCustomers'><i class='glyphicon glyphicon-floppy-saved' aria-hidden='true'></i></a>" )
                             )
                     );
                     $("#addCustomerModal").modal("close");
