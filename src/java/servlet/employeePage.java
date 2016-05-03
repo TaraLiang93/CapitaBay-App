@@ -74,8 +74,8 @@ public class employeePage extends HttpServlet {
             LinkedList<AllStocks> results = new LinkedList<>();
             
             query = "call listAllStocks("+userBean.getSocialSecurityNumber()+")";
-            
-            res = CapitaBay.ExecuteQuery(query);
+            if(userBean.getStatus() == "Manager"){
+                res = CapitaBay.ExecuteQuery(query);
             
             while(res.next()){
                 AllStocks stocks = new AllStocks();
@@ -83,7 +83,9 @@ public class employeePage extends HttpServlet {
                 results.add(stocks);
             }
             request.setAttribute("listAllStocks", results);
+            }
             
+            if(userBean.getStatus() == "Manager"){
             query = "call mostPopularStocks("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             LinkedList<Stock> popStocks = new LinkedList<Stock>();
@@ -96,9 +98,10 @@ public class employeePage extends HttpServlet {
                 popStocks.add(current);
             } 
             request.setAttribute("popularStocks", popStocks);
+            }
             
             
-            
+            if(userBean.getStatus() == "Manager"){
             query = "call richestCustomer("+userBean.getSocialSecurityNumber()+");";
             res = CapitaBay.ExecuteQuery(query);
             
@@ -107,6 +110,7 @@ public class employeePage extends HttpServlet {
                 current.set(res);
             
             request.setAttribute("richestCustomer", current);
+            }
             
             
             query = "SELECT P.*, C.* FROM Customer C INNER JOIN Person P ON P.SocialSecurityNumber = C.SocialSecurityNumber;";

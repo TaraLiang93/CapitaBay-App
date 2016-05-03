@@ -1,5 +1,5 @@
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="${name} home"/>
+    <jsp:param name="title" value="${userBean.firstName} home"/>
     <jsp:param name="css" value="/css/employee.css" />
     <jsp:param name="css" value="/css/signupPage.css"/>
     <jsp:param name="js" value="/js/employee.js"/>
@@ -13,11 +13,21 @@
     <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
+<c:if test="${userBean.status == 'Manager'}">
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
+</c:if>
 </ul>
 
+    
+    <c:if test="${userBean.status == 'Manager'}">
+        <!--<script>alert("${userBean.status}");</script>-->
+    </c:if>
+    
+    
  <div class="tab-content">
      <div role="tabpanel" class="tab-pane active" id="home">
+         
+        <c:if test="${userBean.status == 'Manager'}">
          <div class="revenueTables col-xs-12">
              <h3>Revenue of Stock, Stock type and Customer</h3>
             <div class="form-group col-xs-8">
@@ -57,8 +67,10 @@
                 </select>
             </div>
         </div>
+        </c:if>
      </div>
      <div role="tabpanel" class="tab-pane " id="staff">
+       <c:if test="${userBean.status == 'Manager'}">
          <table class = "table editEmployeeTable">
    <caption>Edit Employees</caption>
    <thead>
@@ -115,9 +127,9 @@
     
          
     <a class="btn btn-info richestRep">Rep of the Month</a>
-     <div class="richestRepInput">
-
-     </div>
+     <div class="richestRepInput"></div>
+     
+       </c:if>
      </div>
      
 
@@ -213,6 +225,7 @@
      
      <div role="tabpanel" class="tab-pane" id="orders">
 
+        <c:if test="${userBean.status == 'Manager'}">
          <div class="input-group col-md-10" style="margin: 0 auto">
             <h3>List Orders by Customer Name or Stock symbol</h3>
              <div class="form-group col-md-8">
@@ -246,8 +259,10 @@
                 </tbody>
              </table>
          </div>
+        </c:if>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
+    <c:if test="${userBean.status == 'Manager'}">
          <h3 class="text-center">Richest Customer</h3>
          
          <table class="table table-bordered">
@@ -269,11 +284,13 @@
                 </tr>
              </tbody>
          </table>
+    
          <div class="jumbotron">
             <h3>${richestCustomer.FName} has amass a wealth of ${richestCustomer.revenue} and they will be ruler of the galaxy and the new
             world is there's.
             </h3>
          </div>
+    </c:if>
             
             <table class="table table-bordered customerTable">
                 <caption>All Customers</caption>
@@ -393,6 +410,7 @@
 </div><!-- /.modal -->
             
      </div>
+<c:if test="${userBean.status == 'Manager'}">
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">
    <caption>All Stocks</caption>
@@ -449,6 +467,7 @@
 </table>
          
      </div>
+</c:if>
   </div>
 </div>
 <jsp:include page="footer.jsp"/>
