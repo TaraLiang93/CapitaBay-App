@@ -122,7 +122,7 @@
      
 
      
-     <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -130,7 +130,7 @@
         <h4 class="modal-title">Give Jobs</h4>
       </div>
       <div class="modal-body">
-          <form id="signup">
+          <form class="asyncForm" id="signup">
               <div class="form-group hasHalf">
                   <div class="half"> 
                     <label for="Username">Username</label>
@@ -275,7 +275,7 @@
             </h3>
          </div>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered customerTable">
                 <caption>All Customers</caption>
                 <thead>
                     <tr>
@@ -312,6 +312,86 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <a class="btn btn-info" class="addCustomer" data-toggle="modal" data-target="#addCustomerModal">Add Customer</a>
+            
+<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create Account</h4>
+      </div>
+      <div class="modal-body">
+          <form class="asyncForm" id="addCustomerForm">
+              <div class="form-group hasHalf">
+                  <div class="half"> 
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" id="cUsername" name="username" placeholder="Username">
+                  </div>
+                  <div class="half">
+                        <label for="Email">Email</label>
+                        <input type="Email" class="form-control" name="email" id="cEmail" placeholder="Email">
+                  </div>
+              </div>
+              <div class="form-group hasHalf">
+                  <div class="half">
+                       <label for="Password">Password</label>
+                       <input type="password" class="form-control" id="cPassword" name="password" placeholder="Password">
+                  </div>
+                  <div class="half">
+                        <label for="Password2">Re-enter Password</label>
+                        <input type="password" class="form-control" name="password2" id="cPassword2" placeholder="Password">
+                  </div>
+              </div>
+              <div class="form-group hasHalf">
+                  <div class="half">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="cfirstName" placeholder="First Name">
+                  </div>
+                  <div class="half">
+                    <label for="LastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="cLastName" placeholder="Last Name">
+                  </div>
+              </div>
+              <div class="form-group" style="width: 33%;">
+                    <label for="phoneNum">Telephone</label>
+                    <input type="number" class="form-control" name="phoneNum" id="cphoneNum" placeholder="Telephone Number">
+              </div>
+              <div class="form-group">
+                  <label for="SSN">Social Security Number</label>
+                  <input type="number" class="form-control" name="ssn" id="cSSN" placeholder="Social Security Number">
+              </div>
+              <div class="form-group">
+                  <label for="creditCard">Credit Card Number</label>
+                  <input type="number" class="form-control" name="creditCard" id="ccreditCard" placeholder="Credit Card Number">
+              </div>
+              <div class="form-group">
+                  <div style="width: 90%;">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="caddress" class="form-control" placeholder="Address">
+                  </div>
+                  <br>
+                  <div style="display: inline-flex; width: 100%;" >
+                      <div class="form-group" style="width: 30%;margin: 0.5%;" >
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" name="city" id="ccity" placeholder="City">
+                      </div>
+                      <div class="form-group" style="width: 30%;margin: 0.5%;"> 
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" name="state" id="cstate" placeholder="State">
+                      </div>
+                      <div class="form-group" style="width: 30%;margin: 0.5%;">
+                        <label for="zip">Zip Code</label>
+                        <input type="number" class="form-control" name="zip" id="czip" placeholder="Zip Code">
+                      </div>
+                  </div>
+              </div>
+              <button class="btn btn-primary addUserButton">Add Account</button>
+            </form> 
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+            
      </div>
      <div role="tabpanel" class="tab-pane" id="stock">
    <table class = "table allStocksTable table-condensed ">
