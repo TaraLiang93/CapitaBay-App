@@ -35,8 +35,35 @@ $(document).ready(function () {
     });
 
 
-    $("#signup").submit(function(e){
+    $(".asyncForm").submit(function(e){
        e.preventDefault(); 
+    });
+    
+    $(".addUserButton").click(function() {
+        
+        $.post("/newCustomer", $("#addCustomerForm").serialize())
+                .done(function() {
+                    $("#addCustomerModal").modal('toggle');
+                    console.log("Love");
+                    
+                    $(".customerTable").find('tbody').append(
+                            $("<tr></tr>").append(
+                                $("<td></td>").html( "<a class='btn btn-danger removeCustomer'> <i class='glyphicon glyphicon-remove'></i> </a>" ),
+                                $("<td></td>").html( $("#cSSN").val() ),
+                                $("<td></td>").html("1.0"),
+                                $("<td></td>").html( $("#cUsername").val() ),
+                                $("<td></td>").html( $("#cfirstName").val() ),
+                                $("<td></td>").html( $("#cLastName").val() ),
+                                $("<td></td>").html( $("#cEmail").val() ),
+                                $("<td></td>").html( $("#caddress").val() ),
+                                $("<td></td>").html( $("#czip").val() ),
+                                $("<td></td>").html( $("#cphoneNum").val() )                            
+                            )
+                    );
+                    $("#addCustomerModal").modal("close");
+        }).fail(function() {
+           console.log("Fun loving"); 
+        });
     });
     
 $("#addEmployeeModal").on('shown.bs.modal', function () {
