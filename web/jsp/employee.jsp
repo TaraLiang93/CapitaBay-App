@@ -304,16 +304,17 @@
                 <caption>All Customers</caption>
                 <thead>
                     <tr>
-                        <th>revoke member</th>
-                        <th>Customer ID</th>
+                        <th>revoke</th>
+                        <th>ID</th>
                         <th>Rating</th>
-                        <th>User Name</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Credit #</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>Zip Code</th>
-                        <th>Telephone #</th>
+                        <th>Zip</th>
+                        <th>Phone #</th>
+                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -325,29 +326,29 @@
                             </a>
                         </td>
                         <td class="customerID">${c.socialSecurityNumber}</td>
-                        <td>${c.rating}</td>
-                        <td>${c.userName}</td>
+                        <td><input type="text" class="customerRating form-control" value="${c.rating}" /></td>
                         <td>${c.firstName}</td>
                         <td>${c.lastName}</td>
-                        <td>${c.email}</td>
+                        <td class="customerCredit"><input type="text" class="form-control" value="${c.creditCardNumber}"</td>
+                        <td class="customerEmail"><input type="text" class="form-control" value="${c.email}" /></td>
                         <td>${c.address}</td>
                         <td>${c.zipCode}</td>
                         <td>${c.telephone}</td>
+                        <td><a class="btn btn-primary saveCustomers"><i class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></i></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
             <a class="btn btn-info" class="addCustomer" data-toggle="modal" data-target="#addCustomerModal">Add Customer</a>
             <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-           
-            <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"
-     user="root"  password="${PASSWD}"/>
+            <c:if test="${userBean.status != 'Customer'}">
+                
+            <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
             
             <sql:query dataSource="${snapshot}" var="mailingList" sql="SELECT P.SocialSecurityNumber, P.Username, P.FirstName, P.LastName, C.Email FROM Person P INNER JOIN Customer C ON P.SocialSecurityNumber = C.SocialSecurityNumber ORDER BY SocialSecurityNumber ASC;" />
             
             <div class="col-sm-12">
-                <table class="table table-bordered">
+                <table class="table table-bordered mailingList">
                     <caption>Customer Mailing List</caption>
                     <thead>
                         <tr>
@@ -371,6 +372,7 @@
                     </tbody>
                 </table>
             </div>
+            </c:if>
             
 <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
