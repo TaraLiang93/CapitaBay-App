@@ -9,6 +9,7 @@ import Bean.ConditionalOrderHistory;
 import Bean.UserBean;
 import DataBase.CapitaBay;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -25,10 +26,10 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Patrick
+ * @author root
  */
-@WebServlet(name = "GetConditionalOrderHistory", urlPatterns = {"/GetConditionalOrderHistory"})
-public class GetConditionalOrderHistory extends HttpServlet {
+@WebServlet(name = "ListConditionalOrderHistory", urlPatterns = {"/ListConditionalOrderHistory"})
+public class ListConditionalOrderHistory extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -39,12 +40,10 @@ public class GetConditionalOrderHistory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-//    /    response.setContentType("application/json");   /* TOOK THIS OUT */
+        response.setContentType("application/json");
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("userBean");
         if (userBean == null) {
@@ -53,7 +52,7 @@ public class GetConditionalOrderHistory extends HttpServlet {
         }
         try {
             long ssn = userBean.getSocialSecurityNumber();
-            LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
+//            LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
             String check = "select count(*) from Orders where Orders.OrderID=" + request.getParameter("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ";";
 //            System.out.println(check);
             ResultSet res = CapitaBay.ExecuteQuery(check);
@@ -73,14 +72,28 @@ public class GetConditionalOrderHistory extends HttpServlet {
                     conditionalOrderHistory.set(res);
                     jarr.put(conditionalOrderHistory.getJson());
                 }
-                
+                response.setContentType("application/json");
+//                response.setCharacterEncoding("UTF-8");
                 json.put("history", jarr);
-                response.getWriter().print(json);
+                response.getWriter().print(jarr.toString());
                 response.getWriter().flush();
             }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(GetConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

@@ -20,9 +20,11 @@
     <body>
 
 
+
+
         <div class="display-content customerTabs col-md-12" 
              style="background-color: rgba(0,0,0,0.7); border-radius: 15px;
-             color: white; height:80vh;">
+             color: white; height:60vh;">
 
             <h1>${userBean.username }'s Profile</h1>       
 
@@ -54,18 +56,20 @@
                                 <th>Account Number</th>
                                 <th>Stock Symbol</th>
                                 <th>Number of Share Owned</th>
-                                <th>Sell</th>
+                                <th>Current Price Per Share</th>
+                                <th></th>
                             </tr>
                         </thead>
 
                         <tbody class="employeeData">
                             <c:forEach var="e" items="${currentStockHoldings}" >
                                 <tr>
-                                    <td>${e.accountNumber}</td>
-                                    <td>${e.stockSymbol}</td>
-                                    <td>${e.totalShares}</td>
+                                    <td class="accountNumber">${e.accountNumber}</td>
+                                    <td class="stockSymbol">${e.stockSymbol}</td>
+                                    <td class="totalShares">${e.totalShares}</td>
+                                    <td class="price">${e.currentPrice}</td>
                                     <td>
-                                        <a class="saveChanges btn btn-error">Sell</a> 
+                                        <button class="saveChanges btn btn-error" style="color:black" >Edit</button> 
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -81,7 +85,6 @@
                             <tr>
                                 <th>Account Number</th>
                                 <th>Order ID</th>
-                                <th>Order Type</th>
                                 <th>Stock Brought</th>
                                 <th>Order Date/Time</th>
                                 <th>Number of Share Brought</th>
@@ -92,13 +95,12 @@
                         <tbody class="employeeData">
                             <c:forEach var="e" items="${orderHistory}" varStatus="test">
                                 <tr>
-                                    <td>${e.accountNumber}</td>
-                                    <td>${e.orderID}</td>
-                                    <td>${e.orderType}</td>
+                                    <td>${e.accountNum}</td>
+                                    <td>${e.transId}</td>
                                     <td>${e.stockSymbol}</td>
-                                    <td>${e.orderDate}/${e.orderTime}</td>
-                                    <td>${e.numberOfShares}</td>
-                                    <td>${e.sharePrice}</td>
+                                    <td>${e.dat}</td>
+                                    <td>${e.nos}</td>
+                                    <td>${e.price}</td>
                                     <td>${e.employeeSSN}</td>
                                 </tr>
                             </c:forEach>
@@ -136,19 +138,19 @@
                 <div role="tabpanel" class="tab-pane" id="conditionalOrder" style="margin-top: 2.5vh;">
                     <p class="failMessage"></p>
                     <div class="row">
-                            <div class="col-sm-8">
-                                <p class="col-sm-2">Order ID:</p>
-                                <input type="text" class="col-sm-10" id="orderID" style="color:black;"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <select class="form-control" id="conditionalType">
-                                    <option>Trailing Stop</option>
-                                    <option>Hidden Stop</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-1">
-                                <button class="btn btn-default coSubmit" type="button" style="color:black;" id-="coSubmit">Submit</button>
-                            </div>
+                        <div class="col-sm-8">
+                            <p class="col-sm-2">Order ID:</p>
+                            <input type="text" class="col-sm-10" id="orderID" style="color:black;"/>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <select class="form-control" id="conditionalType">
+                                <option>Trailing Stop</option>
+                                <option>Hidden Stop</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-default " type="button" style="color:black;" id="gcoSubmit">Submit</button>
+                        </div>
                     </div>
                     <table class = "table">
                         <thead>
@@ -158,7 +160,7 @@
                             </tr>
                         </thead>
                         <tbody id="condHistory">
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -169,6 +171,110 @@
 
 
         </div>
+
+        <!-- Modal FOR Editing stock-->
+        <div id="stockModal" class="modal fade" role="dialog">
+            <div  class="modal-dialog">
+
+                <!--Modal content-->
+                <div class="modal-content" >
+                    <div  class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Stock: </h4>
+                    </div>
+                    <div  class="modal-body" style="height: 80%; overflow-y: scroll;">
+                        <div >
+                            <div  class="row">
+                                <div class="col-sm-6">
+                                    <label for="stockSymbol">Stock Symbol</label>
+                                    <p class="stockSymbol"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="currentPrice">Current Price Per Share</label> 
+                                    <p id="currentPrice"></p>
+                                </div>
+                            </div>
+                            <div  class="row">
+                                <div class="col-sm-6">
+                                    <label for="acctNum">Account Number</label>
+                                    <p class="acctNum"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="numShares">Number Shares Owned</label>
+                                    <p id="numShares"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+                            <li class="active"><a href="#sell" data-toggle="tab">Sell Stock</a></li>
+                            <li><a href="#trailing" data-toggle="tab">Add Trailing Stop</a></li>
+                            <li><a href="#hidden" data-toggle="tab">Add Hidden Stop</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="sell">
+                                <h2>Sell Stock</h2>                       
+                                <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                                <input id="shares" type="range" name="shares"
+                                       value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
+                                <h3 id="shares-upper" class="shares-bounds">  </h3>
+                                <br><br><br>
+                                <form action="/addSellOrder">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="number-shares">Number of Shares:</label>
+                                            <input id="number-shares" name="number-shares" class="form-control buy-text" type="text" value="0" disabled>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="sellPrices">Total Sell Price:</label>
+                                            <input id="sellPrices" name="sellPrice" class="form-control buy-text" type="text" value="0" disabled>
+                                        </div>
+                                        <div class="col-sm-4 btn-group">
+                                            <label for="sellType">Sell Type:</label>
+                                            <select id="sellType" name="sellType" class="form-control">
+                                                <option value="Market">Market</option>
+                                                <option value="Market-On-Close">Market-On-Close</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input name="an" class="hidden acctNum"/>
+                                    <input name="ss" class="hidden stockSymbol"/>
+                                    <input id="sell-submit" name="submit" class="btn btn-default pull-right" value="Sell Shares" type="submit">
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="trailing">
+                                <h2>Add Trailing Stop</h2>                       
+
+                                <label for="trailingStop">Trailing Amount:</label>
+                                <input id="trailingStop" name="number-shares" class="form-control" type="number" value="" min="0">
+                                <input id="trailing-submit" name="submit" class="btn btn-default pull-right" value="Add Trailing" type="submit">
+                            </div>
+                            <div class="tab-pane" id="hidden">                                
+                                <h2>Add Hidden Stop</h2>                       
+
+                                <label for="hiddenStop">Hidden Stop Percentage:</label>
+                                <input id="hiddenStop" name="number-shares" class="form-control" type="number" value="" min="0">
+                                <input id="hidden-submit" name="submit" class="btn btn-default pull-right" value="Add Hidden" type="submit">
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div  class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

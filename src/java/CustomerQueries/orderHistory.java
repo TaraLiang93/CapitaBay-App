@@ -5,6 +5,7 @@
  */
 package CustomerQueries;
 
+import Bean.Transaction;
 import Bean.UserBean;
 import DataBase.CapitaBay;
 import EmployeeQuery.CustomerMailingList;
@@ -40,9 +41,9 @@ public class orderHistory extends HttpServlet{
             Long c_ssn = userBean.getSocialSecurityNumber();
             String query = "call OrderHistory("+c_ssn+");";
             ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<Orders> result = new LinkedList<Orders>();
+            LinkedList<Transaction> result = new LinkedList<Transaction>();
             while(res.next()){
-                Orders current = new Orders();
+                Transaction current = new Transaction();
                 current.set(res);
                 result.add(current);
             }
