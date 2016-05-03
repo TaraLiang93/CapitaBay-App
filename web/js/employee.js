@@ -50,7 +50,7 @@ $(document).ready(function () {
                             $("<tr></tr>").append(
                                 $("<td></td>").html( "<a class='btn btn-danger removeCustomer'> <i class='glyphicon glyphicon-remove'></i> </a>" ),
                                 $("<td></td>").html( $("#cSSN").val() ),
-                                $("<td></td>").html("1.0"),
+                                $("<td></td>").html("<input type='text' value='1.0'/>"),
                                 $("<td></td>").html( $("#cUsername").val() ),
                                 $("<td></td>").html( $("#cfirstName").val() ),
                                 $("<td></td>").html( $("#cLastName").val() ),
