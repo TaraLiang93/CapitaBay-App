@@ -18,6 +18,15 @@ public class CurrentStockHoldings implements Serializable{
     private String stockSymbol;
     private int totalShares;
     private int accountNumber;
+    private double currentPrice;
+
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
 
     
     

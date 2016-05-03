@@ -56,6 +56,7 @@
                                 <th>Account Number</th>
                                 <th>Stock Symbol</th>
                                 <th>Number of Share Owned</th>
+                                <th>Current Price Per Share</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -66,6 +67,7 @@
                                     <td class="accountNumber">${e.accountNumber}</td>
                                     <td class="stockSymbol">${e.stockSymbol}</td>
                                     <td class="totalShares">${e.totalShares}</td>
+                                    <td class="price">${e.currentPrice}</td>
                                     <td>
                                         <button class="saveChanges btn btn-error" style="color:black" >Edit</button> 
                                     </td>
@@ -83,7 +85,6 @@
                             <tr>
                                 <th>Account Number</th>
                                 <th>Order ID</th>
-                                <th>Order Type</th>
                                 <th>Stock Brought</th>
                                 <th>Order Date/Time</th>
                                 <th>Number of Share Brought</th>
@@ -94,13 +95,12 @@
                         <tbody class="employeeData">
                             <c:forEach var="e" items="${orderHistory}" varStatus="test">
                                 <tr>
-                                    <td>${e.accountNumber}</td>
-                                    <td>${e.orderID}</td>
-                                    <td>${e.orderType}</td>
+                                    <td>${e.accountNum}</td>
+                                    <td>${e.transId}</td>
                                     <td>${e.stockSymbol}</td>
-                                    <td>${e.orderDate}/${e.orderTime}</td>
-                                    <td>${e.numberOfShares}</td>
-                                    <td>${e.sharePrice}</td>
+                                    <td>${e.dat}</td>
+                                    <td>${e.nos}</td>
+                                    <td>${e.price}</td>
                                     <td>${e.employeeSSN}</td>
                                 </tr>
                             </c:forEach>
@@ -172,71 +172,100 @@
 
         </div>
 
-
         <!-- Modal FOR Editing stock-->
         <div id="stockModal" class="modal fade" role="dialog">
-            <div style="height: 70%; margin: 15vh auto; width: 70%;" class="modal-dialog">
+            <div  class="modal-dialog">
 
                 <!--Modal content-->
-                <div class="modal-content" style="height: 100%; width: 100%">
-                    <div stlye="width:100%; height:5%;" class="modal-header">
+                <div class="modal-content" >
+                    <div  class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Edit Stock: </h4>
                     </div>
-                    <div stlye="width:100%; height:90%;" class="modal-body" style="height: 80%;">
+                    <div  class="modal-body" style="height: 80%; overflow-y: scroll;">
                         <div >
-                            <label for="stockSymbol">Stock Symbol:</label>
-                            <h1 id="stockSymbol"></h1>
-                            <label for="number-shares">Number of Shares Owned</label>
-                            <p id="number-shares"></p>
-                            <label for="accNum">Account Number</label>
-                            <p id="acctNum"></p>
+                            <div  class="row">
+                                <div class="col-sm-6">
+                                    <label for="stockSymbol">Stock Symbol</label>
+                                    <p class="stockSymbol"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="currentPrice">Current Price Per Share</label> 
+                                    <p id="currentPrice"></p>
+                                </div>
+                            </div>
+                            <div  class="row">
+                                <div class="col-sm-6">
+                                    <label for="acctNum">Account Number</label>
+                                    <p class="acctNum"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="numShares">Number Shares Owned</label>
+                                    <p id="numShares"></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Sell Stock
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        Stuff goes here to sell stocks
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+                            <li class="active"><a href="#sell" data-toggle="tab">Sell Stock</a></li>
+                            <li><a href="#trailing" data-toggle="tab">Add Trailing Stop</a></li>
+                            <li><a href="#hidden" data-toggle="tab">Add Hidden Stop</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="sell">
+                                <h2>Sell Stock</h2>                       
+                                <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                                <input id="shares" type="range" name="shares"
+                                       value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
+                                <h3 id="shares-upper" class="shares-bounds">  </h3>
+                                <br><br><br>
+                                <form action="/addSellOrder">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="number-shares">Number of Shares:</label>
+                                            <input id="number-shares" name="number-shares" class="form-control buy-text" type="text" value="0" disabled>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="sellPrices">Total Sell Price:</label>
+                                            <input id="sellPrices" name="sellPrice" class="form-control buy-text" type="text" value="0" disabled>
+                                        </div>
+                                        <div class="col-sm-4 btn-group">
+                                            <label for="sellType">Sell Type:</label>
+                                            <select id="sellType" name="sellType" class="form-control">
+                                                <option value="Market">Market</option>
+                                                <option value="Market-On-Close">Market-On-Close</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                    <input name="an" class="hidden acctNum"/>
+                                    <input name="ss" class="hidden stockSymbol"/>
+                                    <input id="sell-submit" name="submit" class="btn btn-default pull-right" value="Sell Shares" type="submit">
+                                </form>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Add Trailing Stop
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        trailing stop goes here 
-                                    </div>
-                                </div>
+
+                            <div class="tab-pane" id="trailing">
+                                <h2>Add Trailing Stop</h2>                       
+
+                                <label for="trailingStop">Trailing Amount:</label>
+                                <input id="trailingStop" name="number-shares" class="form-control" type="number" value="" min="0">
+                                <input id="trailing-submit" name="submit" class="btn btn-default pull-right" value="Add Trailing" type="submit">
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingThree">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Add Hidden Stops
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                    <div class="panel-body">
-                                        stuff for hidden stop goes here 
-                                    </div>
-                                </div>
+                            <div class="tab-pane" id="hidden">                                
+                                <h2>Add Hidden Stop</h2>                       
+
+                                <label for="hiddenStop">Hidden Stop Percentage:</label>
+                                <input id="hiddenStop" name="number-shares" class="form-control" type="number" value="" min="0">
+                                <input id="hidden-submit" name="submit" class="btn btn-default pull-right" value="Add Hidden" type="submit">
                             </div>
-                        </div>                    </div>
-                    <div stlye="width:100%; height:5%;" class="modal-footer">
+                        </div>
+
+
+
+
+                    </div>
+                    <div  class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
