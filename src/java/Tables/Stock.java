@@ -85,6 +85,7 @@ public class Stock implements Serializable, DataRepo{
 
     
     
+    @Override
     public void set(ResultSet res) {
         try {
             this.stockSymbol = res.getString("StockSymbol");

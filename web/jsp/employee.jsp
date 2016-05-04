@@ -511,9 +511,17 @@
 
 
 
-    </c:if>  
-    
-    <table class="table table-hover table-condensed" style="display: none">
+    </c:if> 
+    <h4>Click for suggestions</h4>
+    <div class="customerSuggestions col-xs-12">
+        <c:forEach var="c" items="${customers}">
+            <div class="btn btn-default customerSugestion col-xs-3" >
+                <p>${c.firstName} ${c.lastName}</p>
+                <div class="customerSugID" style="display: none">${c.socialSecurityNumber}</div>
+            </div>
+        </c:forEach>
+    </div>
+    <table class="table table-hover table-condensed custSuggestList" style="display: none">
         
     </table>
 </div>

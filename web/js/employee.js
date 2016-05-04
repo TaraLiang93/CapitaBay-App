@@ -313,6 +313,44 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
                                     });
         });
     });
+    
+    $(".customerSugestion").each(function() {
+        $(this).click(function() {
+            
+            $.get("/MakeStockSuggestionList", {"suggestionSSN" : $(this).find(".customerSugID").text()},"json")
+                    .done(function(data) {
+                        console.log("the data came back");
+                $(".custSuggestList").html("");
+                $(".custSuggestList").append(
+                        $("<thead></thead>").append(
+                            $("<th></th>").html("Stock Symbol"),
+                            $("<th></th>").html("Stock Name"),
+                            $("<th></th>").html("Stock Type"),
+                            $("<th></th>").html("Share Price"),
+                            $("<th></th>").html("Shares Availiable")
+                        ),
+                        $("<tbody></tbody>")
+                        );
+                $.each(data.stockSugesst,function(key,value){
+                    $(".custSuggestList").find("tbody").append(
+                                $("<tr><tr>").append(
+                                    $("<td></td>").html(value.ss),
+                                    $("<td></td>").html(value.sn),
+                                    $("<td></td>").html(value.st),
+                                    $("<td></td>").html(value.sp),
+                                    $("<td></td>").html(value.nos)
+                                )
+                            );
+                    $(".custSuggestList").show();
+                });
+                        
+            })
+                    .fail(function(){
+                        console.log("failed to find results");
+            });
+            
+        });
+    })
 
 });
 
@@ -321,10 +359,10 @@ function buildCustomerRevTable(table) {
     $("#revCustomerTable").append(
             $("<thead></thead>").append(
             $("<tr></tr>").append(
-            $("<th></th>").html("Customer ID"),
-            $("<th></th>").html("First Name"),
-            $("<th></th>").html("Last Name"),
-            $("<th></th>").html("Revenue")
+                $("<th></th>").html("Customer ID"),
+                $("<th></th>").html("First Name"),
+                $("<th></th>").html("Last Name"),
+                $("<th></th>").html("Revenue")
             )
             ),
             $("<tbody></tbody>")
@@ -333,10 +371,10 @@ function buildCustomerRevTable(table) {
     $.each(table, function (key, value) {
         $("#revCustomerTable").find("tbody").append(
                 $("<tr></tr>").append(
-                $("<td></td>").html(value.ssn),
-                $("<td></td>").html(value.firstname),
-                $("<td></td>").html(value.lastname),
-                $("<td></td>").html(value.revenue)
+                    $("<td></td>").html(value.ssn),
+                    $("<td></td>").html(value.firstname),
+                    $("<td></td>").html(value.lastname),
+                    $("<td></td>").html(value.revenue)
                 )
                 );
     });
@@ -350,8 +388,8 @@ function buildStockRevTable(table) {
     $("#revStockTable").append(
             $("<thead></thead>").append(
             $("<tr></tr>").append(
-            $("<th></th>").html("Stock Symbol"),
-            $("<th></th>").html("Revenue")
+                $("<th></th>").html("Stock Symbol"),
+                $("<th></th>").html("Revenue")
             )
             ),
             $("<tbody></tbody>")
@@ -359,8 +397,8 @@ function buildStockRevTable(table) {
     $.each(table, function (key, value) {
         $("#revStockTable").find("tbody").append(
                 $("<tr></tr>").append(
-                $("<td></td>").html(value.ss),
-                $("<td></td").html(value.rev)
+                    $("<td></td>").html(value.ss),
+                    $("<td></td").html(value.rev)
                 )
                 );
     });
