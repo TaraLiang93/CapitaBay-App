@@ -25,7 +25,7 @@
             <td class="stockSymbol">${stock.stockSymbol}</td>
             <td>${stock.stockType}</td>
             <td>${stock.stockName}</td>
-            <td>${stock.sharePrice}</td>
+            <td>$${stock.sharePrice}</td>
             <td>${stock.stockDate}</td>
             <td>${stock.stockTime}</td>
             <td>${stock.numberOfSharesAvaliable}</td>

@@ -42,16 +42,30 @@ public class getStocksByKeyword extends HttpServlet{
                 
         try {
             String keyword = req.getParameter("keyword");
-            String query = "call getStockByKeyword('"+keyword+"');";
-            ResultSet res = CapitaBay.ExecuteQuery(query);
-            LinkedList<Stock> result = new LinkedList<Stock>();
-            while(res.next()){
-                Stock current = new Stock();
-                current.set(res);
-                result.add(current);
-            };
-            req.setAttribute("keywordResult", result);
-            req.setAttribute("searchResultsName", keyword);
+            String type = req.getParameter("search-type");
+            if(type.equals("name")) {
+                String query = "SELECT s.StockSymbol, s.StockName, s.StockType, s.SharePrice, s.StockDate, s.StockTime, s.NumberOfSharesAvaliable FROM StockTable s WHERE s.StockName LIKE CONCAT(\"%\", \"" + keyword + "\", \"%\");";
+                ResultSet res = CapitaBay.ExecuteQuery(query);
+                LinkedList<Stock> result = new LinkedList<Stock>();
+                while(res.next()){
+                    Stock current = new Stock();
+                    current.set(res);
+                    result.add(current);
+                };
+                req.setAttribute("keywordResult", result);
+                req.setAttribute("searchResultsName", keyword);
+            } else {
+                String query = "SELECT s.StockSymbol, s.StockName, s.StockType, s.SharePrice, s.StockDate, s.StockTime, s.NumberOfSharesAvaliable FROM StockTable s WHERE s.StockType LIKE CONCAT(\"%\", \""+ keyword +"\", \"%\");";
+                ResultSet res = CapitaBay.ExecuteQuery(query);
+                LinkedList<Stock> result = new LinkedList<Stock>();
+                while(res.next()){
+                    Stock current = new Stock();
+                    current.set(res);
+                    result.add(current);
+                };
+                req.setAttribute("keywordResult", result);
+                req.setAttribute("searchResultsName", keyword);
+            }
 
             
         } catch (ClassNotFoundException |SQLException ex) {
