@@ -7,6 +7,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
 
 <div class="display-content employeeTabs col-md-12">
 <ul class="nav nav-tabs" role="tablist">
@@ -14,9 +15,7 @@
     <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
-<c:if test="${userBean.status == 'Manager'}">
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
-</c:if>
 </ul>
 
     
@@ -342,7 +341,7 @@
 
             <c:if test="${userBean.status != 'Customer'}">
                 
-            <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
+            
             
             <sql:query dataSource="${snapshot}" var="mailingList" sql="SELECT P.SocialSecurityNumber, P.Username, P.FirstName, P.LastName, C.Email FROM Person P INNER JOIN Customer C ON P.SocialSecurityNumber = C.SocialSecurityNumber ORDER BY SocialSecurityNumber ASC;" />
             
@@ -452,64 +451,83 @@
 </div><!-- /.modal -->
             
      </div>
-<c:if test="${userBean.status == 'Manager'}">
-     <div role="tabpanel" class="tab-pane" id="stock">
-   <table class = "table allStocksTable table-condensed ">
-   <caption>All Stocks</caption>
-   <thead>
-      <tr>
-          <td>Stock symbol</td>
-           <td>Stock type</td>
-           <td>Stock name</td>
-           <td>Share Price</td>
-           <td>Stock Date</td>
-           <td>Shares Avaliable</td>
-           <td>Update</td>
-      </tr>
-   </thead>
-   
-   <tbody class="employeeData">
-    <c:forEach var="s" items="${listAllStocks}" >
-      <tr>
-          <td class="stockSymbol">${s.stockSymbol}</td>
-          <td>${s.stockType}</td>
-          <td>${s.stockName}</td>
-          <td><input type="number" class="sharePrice" value="${s.sharePrice}"/></td>
-          <td>${s.stockDate}</td>
-          <td>${s.numberOfSharesAvaliable}</td>
-          <td><button class="btn btn-info updateStock">Update</button>
-      </tr>
-    </c:forEach>
-   </tbody>
-	
-</table>
-         
-   <table class = "table popStocksTable table-condensed table-bordered">
-   <caption>Most Traded Stocks</caption>
-   <thead>
-      <tr>
-          <td>Stock symbol</td>
-           <td>Stock name</td>
-           <td>Share Price</td>
-           <td>Shares Avaliable</td>
-      </tr>
-   </thead>
-   
-   <tbody class="popularStocks">
-    <c:forEach var="s" items="${popularStocks}" >
-      <tr>
-          <td class="stockSymbol">${s.stockSymbol}</td>
-          <td>${s.stockName}</td>
-          <td>${s.sharePrice}</td>
-          <td>${s.numberOfSharesAvaliable}</td>
-      </tr>
-    </c:forEach>
-   </tbody>
-	
-</table>
-         
-     </div>
-</c:if>
+
+<div role="tabpanel" class="tab-pane" id="stock">
+    <c:if test="${userBean.status == 'Manager'}">
+        <table class = "table allStocksTable table-condensed ">
+            <caption>All Stocks</caption>
+            <thead>
+                <tr>
+                    <td>Stock symbol</td>
+                    <td>Stock type</td>
+                    <td>Stock name</td>
+                    <td>Share Price</td>
+                    <td>Stock Date</td>
+                    <td>Shares Avaliable</td>
+                    <td>Update</td>
+                </tr>
+            </thead>
+
+            <tbody class="employeeData">
+                <c:forEach var="s" items="${listAllStocks}" >
+                    <tr>
+                        <td class="stockSymbol">${s.stockSymbol}</td>
+                        <td>${s.stockType}</td>
+                        <td>${s.stockName}</td>
+                        <td><input type="number" class="sharePrice" value="${s.sharePrice}"/></td>
+                        <td>${s.stockDate}</td>
+                        <td>${s.numberOfSharesAvaliable}</td>
+                        <td><button class="btn btn-info updateStock">Update</button>
+                    </tr>
+                </c:forEach>
+            </tbody>
+
+        </table>
+
+
+        <table class = "table popStocksTable table-condensed table-bordered">
+            <caption>Most Traded Stocks</caption>
+            <thead>
+                <tr>
+                    <td>Stock symbol</td>
+                    <td>Stock name</td>
+                    <td>Share Price</td>
+                    <td>Shares Avaliable</td>
+                </tr>
+            </thead>
+
+            <tbody class="popularStocks">
+                <c:forEach var="s" items="${popularStocks}" >
+                    <tr>
+                        <td class="stockSymbol">${s.stockSymbol}</td>
+                        <td>${s.stockName}</td>
+                        <td>${s.sharePrice}</td>
+                        <td>${s.numberOfSharesAvaliable}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+
+        </table>
+
+
+
+    </c:if> 
+    <h4>Click for suggestions</h4>
+    <div class="customerSuggestions col-xs-12">
+        <c:forEach var="c" items="${customers}">
+            <div class="btn btn-default customerSugestion col-xs-3" >
+                <p>${c.firstName} ${c.lastName}</p>
+                <div class="customerSugID" style="display: none">${c.socialSecurityNumber}</div>
+            </div>
+        </c:forEach>
+    </div>
+    <table class="table table-hover table-condensed custSuggestList" style="display: none">
+        
+    </table>
+</div>
+
+
+
   </div>
 </div>
 <jsp:include page="footer.jsp"/>

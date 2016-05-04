@@ -22,3 +22,16 @@ and open the template in the editor.
     margin-top: 3%;
 }
 
+.customerSugestion {
+   border: 1px solid black;
+   border-radius: 12px;
+   /*margin : 1%;*/
+}
+.customerSuggestions {
+    padding: 1%;
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: 1px solid black;
+}
+
