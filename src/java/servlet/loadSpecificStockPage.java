@@ -116,6 +116,7 @@ public class loadSpecificStockPage extends HttpServlet {
                 result.add(current);                      
             }          
             request.setAttribute("h", result);
+            request.setAttribute("count", result.size());
             request.setAttribute("m", month);
             
             query = "SELECT p.FirstName, p.LastName, p.SocialSecurityNumber FROM Person p, Employee e WHERE p.SocialSecurityNumber = e.SocialSecurityNumber;";
@@ -133,7 +134,7 @@ public class loadSpecificStockPage extends HttpServlet {
             request.setAttribute("p", pResult);
             
             request.setAttribute("a", userBean.getAccountNumbers());
-            request.setAttribute("pos", userBean.getPosition());
+            
           
             
             
