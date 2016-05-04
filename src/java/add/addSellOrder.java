@@ -41,47 +41,53 @@ public class addSellOrder extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
-        try{
+        try {
             UserBean userBean = (UserBean) session.getAttribute("userBean");
-            if(userBean == null){
+            if (userBean == null) {
                 userBean = new UserBean();
                 session.setAttribute("userBean", userBean);
             }
             long ssn = userBean.getSocialSecurityNumber();
-            int nos = Integer.parseInt(request.getParameter("number-shares"));
+            int nos = Integer.parseInt(request.getParameter("shareNums"));
             LocalTime o_time = new LocalTime();
             int an = Integer.parseInt(request.getParameter("an"));
             String ss = request.getParameter("ss");
             LocalDate dat = new LocalDate();
             String ot = "sell";
             long e_ssn = 0;
-            
-            
-            String getEmployee = "select EmployeeSSN from Orders where SocialSecurityNumber = "+ssn+" AND StockSymbol=\""+ss+"\" LIMIT 1;";
+            String type = request.getParameter("sellType");
+
+            String getEmployee = "select EmployeeSSN from Orders where SocialSecurityNumber = " + ssn + " AND StockSymbol=\"" + ss + "\" LIMIT 1;";
             ResultSet res = CapitaBay.ExecuteQuery(getEmployee);
-            if(res.next()){
+            if (res.next()) {
                 e_ssn = res.getLong("EmployeeSSN");
             }
-            
-            
+            String query = new String();
 
-            
-            
-            
+            if (type.equalsIgnoreCase("market") == true) {
+                query = "call addMarket(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\",\"sell\")";
+            } else if (type.equalsIgnoreCase("market-on-close") == true) {
+                query = "call addMarketOnClose(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\",\"sell\")";
+            }
+            System.out.println(query);
+
+            CapitaBay.ExecuteQuery(query);
+            session.setAttribute("userBean", userBean);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/customer");
+            dispatcher.forward(request, response);
+
         } catch (SQLException ex) {
             Logger.getLogger(addSellOrder.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(addSellOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 //        CREATE PROCEDURE addMarketOnClose(IN ssn INTEGER, IN nos INTEGER, IN o_time TIME, 
 //		IN e_ssn INTEGER,IN an INTEGER, IN ss VARCHAR(10), IN dat DATE, IN m_ot VARCHAR(32))
 //        
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/customer");
-        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

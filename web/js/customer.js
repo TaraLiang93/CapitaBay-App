@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     $("[type=range]").change(function () {
         var newval = $(this).val();
-        $("#number-shares").val(newval);
+        $("#shareNums").val(newval);
         $("#shares-upper").text(newval);
         var price = $("#currentPrice").text();
         price = price * newval;
@@ -62,10 +62,10 @@ $(document).ready(function () {
     $(".saveChanges").each(function () {
         $(this).click(function () {
             var parent = $(this).parent().parent();
-            $(".stockSymbol").text(parent.find(".stockSymbol").text());
+            $(".stockSymbol").val(parent.find(".stockSymbol").text());
             $("#numShares").text(parent.find(".totalShares").text());
             $("#currentPrice").text(parent.find(".price").text());
-            $(".acctNum").text(parent.find(".accountNumber").text());
+            $(".acctNum").val(parent.find(".accountNumber").text());
             $("#shares-upper").attr({max: parent.find(".totalShares").text()});
             $("#shares-upper").text(parent.find(".totalShares").text());
             $("#shares").attr({max: parent.find(".totalShares").text()});

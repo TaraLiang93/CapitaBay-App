@@ -24,7 +24,7 @@
 
         <div class="display-content customerTabs col-md-12" 
              style="background-color: rgba(0,0,0,0.7); border-radius: 15px;
-             color: white; height:60vh;">
+             color: white; height:60vh; overflow-y: scroll;">
 
             <h1>${userBean.username }'s Profile</h1>       
 
@@ -43,7 +43,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <form action="/logOutServlet" method="GET">
-                        <button class="btn btn-default" type="submit">Log Out</button>
+                        <button class="btn btn-error pull-right" style="color: red; margin: 1%;" type="submit">Log Out</button>
                     </form>
                 </div>
 
@@ -186,22 +186,12 @@
                         <div >
                             <div  class="row">
                                 <div class="col-sm-6">
-                                    <label for="stockSymbol">Stock Symbol</label>
-                                    <p class="stockSymbol"></p>
+                                    <label for="numShares">Number Shares Owned</label>
+                                    <p id="numShares"></p>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="currentPrice">Current Price Per Share</label> 
                                     <p id="currentPrice"></p>
-                                </div>
-                            </div>
-                            <div  class="row">
-                                <div class="col-sm-6">
-                                    <label for="acctNum">Account Number</label>
-                                    <p class="acctNum"></p>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="numShares">Number Shares Owned</label>
-                                    <p id="numShares"></p>
                                 </div>
                             </div>
                         </div>
@@ -215,32 +205,40 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="sell">
-                                <h2>Sell Stock</h2>                       
-                                <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
-                                <input id="shares" type="range" name="shares"
-                                       value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
-                                <h3 id="shares-upper" class="shares-bounds">  </h3>
-                                <br><br><br>
-                                <form action="/addSellOrder">
+                                <form action="/addSellOrder" method="post">
+                                    <h2>Sell Stock</h2>           
+                                    <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                                    <input id="shares" type="range" name="shares"
+                                           value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
+                                    <h3 id="shares-upper" class="shares-bounds">  </h3>
+                                    <br><br><br>
+                                    <div  class="row">
+                                        <div class="col-sm-6">
+                                            <label for="ss">Stock Symbol</label>
+                                            <input type="text" name="ss" id="ss" class="stockSymbol" readonly/>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="an">Account Number</label>
+                                            <input type="text" name="an" id="an" class="acctNum" readonly/>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label for="number-shares">Number of Shares:</label>
-                                            <input id="number-shares" name="number-shares" class="form-control buy-text" type="text" value="0" disabled>
+                                            <label for="shareNums">Number of Shares:</label>
+                                            <input id="shareNums" name='shareNums' class="form-control buy-text" type="text" value="0" readonly />
                                         </div>
                                         <div class="col-sm-4">
                                             <label for="sellPrices">Total Sell Price:</label>
-                                            <input id="sellPrices" name="sellPrice" class="form-control buy-text" type="text" value="0" disabled>
+                                            <input id="sellPrices" name="sellPrice" class="form-control buy-text" type="text" value="0" readonly />
                                         </div>
                                         <div class="col-sm-4 btn-group">
                                             <label for="sellType">Sell Type:</label>
                                             <select id="sellType" name="sellType" class="form-control">
-                                                <option value="Market">Market</option>
-                                                <option value="Market-On-Close">Market-On-Close</option>
+                                                <option name='Market' value="Market">Market</option>
+                                                <option name='Market-On-Close' value="Market-On-Close">Market-On-Close</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <input name="an" class="hidden acctNum"/>
-                                    <input name="ss" class="hidden stockSymbol"/>
                                     <input id="sell-submit" name="submit" class="btn btn-default pull-right" value="Sell Shares" type="submit">
                                 </form>
                             </div>
