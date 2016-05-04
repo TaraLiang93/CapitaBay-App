@@ -6,7 +6,7 @@
 </jsp:include>
 
 <div class="search">
-<table class="table table-hover" style="margin-top: 300px">
+<table class="table table-hover table-bordered searchResultsTable" style="margin-top: 300px">
     
     <thead>
         <tr>

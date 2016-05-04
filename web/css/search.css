@@ -12,3 +12,7 @@ and open the template in the editor.
     background-color: white;
 }
 
+.searchResultsTable {
+    background-color: #555;
+    color: #00f417;
+}
