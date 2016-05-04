@@ -6,6 +6,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
     $(document).ready(function(){
+    $("#chart-overlay").hide();
+    var count = 0;
     var chart = new CanvasJS.Chart("chartContainer", {
     backgroundColor: "#333",
             title:{
@@ -26,15 +28,22 @@
                     color: "rgba(0,235,47,.7)",
                     showInLegend: true,
                     dataPoints: [
-    <c:forEach var="his" items="${h}">
-                    { label: "${his.stockDate}", y: ${his.sharePrice} },
+    <c:forEach var="his" items="${h}" varStatus="loopStatus">
+                            
+                    { label: "${his.stockDate}", y: ${his.sharePrice} }
+                     <c:if test="${!loopStatus.last}">, </c:if>       
     </c:forEach>
-                    { label: "${s.stockDate}", y: ${s.sharePrice} }
+        
                     ]
             }
             ]
     });
     chart.render();
+    if(${count} == 1) {
+        $("#chart-overlay").show();
+    }
+  
+    
     $("[type=range]").change(function(){
     var newval = $(this).val();
     $("#number-shares").val(newval);
@@ -152,7 +161,12 @@
             </div>
         </div>      
 
-        <div id="chartContainer"></div>
+        <div id="chart-holder">
+            <div id="chart-overlay">
+                <div> <h1> Sorry, no results for ${m} months back </h1> </div>
+            </div> 
+            <div id="chartContainer"></div>               
+        </div>
         <div id="chart-control">
             <h4> Currently Showing ${m} Months Back </h4>
             <label for="months">Adjust Months:</label>

@@ -3,15 +3,19 @@
     <jsp:param name="css" value="" />
     <jsp:param name="js" value="/js/script1.js" />
 </jsp:include>
-
+<link href='https://fonts.googleapis.com/css?family=Patrick+Hand+SC' rel='stylesheet' type='text/css'>
 
     
 
 
 
     <!-- Main component for a primary marketing message or call to action -->
-
-    <div class="jumbotron" id="home-content1">
+    <div id="home-content1">
+        <div class="home1-half" id="home1-first"><div> <h1> Spot Trends First and Maximize Your Gains  </h1></div> </div>
+        <div class="home1-half" id="home1-second"><div> <h1> Using Our Intuitive, Cutting-Edge Technology </h1></div> </div>
+    </div>
+    
+    <div class="jumbotron" id="home-content2">
       <h1>Welcome to Capita Bay</h1>
       <p>Capita Bay</p>
       <p>To see the difference between static and fixed top navbars, just scroll.</p>
@@ -46,8 +50,6 @@
 
 
 
-<div id="home-content">
 
-</div>
 
 <jsp:include page="footer.jsp"/>
