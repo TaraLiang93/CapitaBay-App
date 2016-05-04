@@ -331,7 +331,7 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
                         ),
                         $("<tbody></tbody>")
                         );
-                $.each(data.stockSugesst,function(key,value){
+                $.each(data.stockSugest,function(key,value){
                     $(".custSuggestList").find("tbody").append(
                                 $("<tr><tr>").append(
                                     $("<td></td>").html(value.ss),
