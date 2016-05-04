@@ -84,6 +84,7 @@ public class RichestRep extends HttpServlet {
                     richestRep.put("revenue",revenue);
                     System.out.println(richestRep);
             response.getWriter().print(richestRep);
+            response.getWriter().flush();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ListOrders.class.getName()).log(Level.SEVERE, null, ex);
         }
