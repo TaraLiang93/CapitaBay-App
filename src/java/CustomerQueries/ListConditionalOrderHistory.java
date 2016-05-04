@@ -75,7 +75,7 @@ public class ListConditionalOrderHistory extends HttpServlet {
                 response.setContentType("application/json");
 //                response.setCharacterEncoding("UTF-8");
                 json.put("history", jarr);
-                response.getWriter().print(jarr.toString());
+                response.getWriter().print(json);
                 response.getWriter().flush();
             }
         } catch (SQLException ex) {

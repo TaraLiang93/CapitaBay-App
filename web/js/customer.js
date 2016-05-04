@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $("#gcoSubmit").click(function () {
 
-        $.get("/ListConditionalOrderHistory", {"orderID": $("#orderID").val()})
+        $.get("/ListConditionalOrderHistory", {"orderID": $("#orderID").val()},"json")
                 .done(function (data) {
 
                     var code = "";
@@ -16,10 +16,10 @@ $(document).ready(function () {
 //                    for(; index<data.history.length; index++){
 //                        console.log("yaya")
 //                    }
-                    data = $.parseJSON('' + data + '');
+//                    data = $.parseJSON('' + data + '');
                     var test = data;
                     console.log(data);
-                    $.each(data, function (key, value) {
+                    $.each(data.history, function (key, value) {
                         console.log("key: " + key + " value: " + value);
                         code = "";
                         code = "<tr>" +

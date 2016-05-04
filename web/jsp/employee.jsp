@@ -16,6 +16,7 @@
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
+    <a href="/logOutServlet" class="btn btn-error pull-right" style="color: red; margin: 1%;">Log Out</a>
 </ul>
 
     
