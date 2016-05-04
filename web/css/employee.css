@@ -9,13 +9,21 @@ and open the template in the editor.
 */
 
 .employeeTabs {
-    background-color: white;
     height: 65%;
     overflow-y: scroll;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 15px;
+    color: white;
+    
 }
 
-.employeeButtons {
-    
+.employeeTabs table {
+    color: white;
+}
+
+
+.jumbotron {
+    background-color: rgba(0,235,47,.7);
 }
 
 .mailingList {

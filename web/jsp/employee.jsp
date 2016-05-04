@@ -10,13 +10,14 @@
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/CAPITABAY?zeroDateTimeBehavior=convertToNull"  user="root"  password="${PASSWD}"/>
 
 <div class="display-content employeeTabs col-md-12">
+    <h1>${userBean.username }'s Profile</h1>    
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Main Page</a></li>
     <li role="presentation" class=""><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff</a></li>
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
-    <a href="/logOutServlet" class="btn btn-error pull-right" style="color: red; margin: 1%;">Log Out</a>
+    <button class="btn btn-error pull-right logoutEmployee" style="color: red;">Log Out</button>
 </ul>
 
     
@@ -119,7 +120,7 @@
              <div class="btn-inline">
                 $
                 <div class="btn-group">
-                   <input class="col-md-8 input" type="text" name="hourRate" value="${e.hourlyRate}"/>
+                   <input class="col-md-8 input form-control" type="text" name="hourRate" value="${e.hourlyRate}"/>
                 </div>
              </div>
          </td>
@@ -475,7 +476,7 @@
                         <td class="stockSymbol">${s.stockSymbol}</td>
                         <td>${s.stockType}</td>
                         <td>${s.stockName}</td>
-                        <td><input type="number" class="sharePrice" value="${s.sharePrice}"/></td>
+                        <td><input type="number" class="sharePrice form-control" value="${s.sharePrice}"/></td>
                         <td>${s.stockDate}</td>
                         <td>${s.numberOfSharesAvaliable}</td>
                         <td><button class="btn btn-info updateStock">Update</button>

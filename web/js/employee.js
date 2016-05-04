@@ -81,7 +81,7 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
                                 "<td>" + $("#phoneNum").val() + "</td>" +
                                 "<td>" + $("#zip").val() + "</th>" +
                                 "<td><select class='employeePos form-control new'><option name='Manager' value='Manager'>Manager</option><option name='CustomerRep' value='CustomerRep'>Customer Rep</option></select></td>"+
-                                "<td><div class='btn-inline'>$<div class='btn-group'> <input class='col-md-8 input' type='text' name='hourRate' value='"+ $("#newHourlyRate").val() + "' /></div></div></td>" +
+                                "<td><div class='btn-inline'>$<div class='btn-group'> <input class='col-md-8 form-control' type='text' name='hourRate' value='"+ $("#newHourlyRate").val() + "' /></div></div></td>" +
                                 "<td><a class='saveChanges btn btn-primary'>Save</a></td>" +
                                 "</tr>";
                         $(".employeeData").append(code);
@@ -350,7 +350,11 @@ $("#addEmployeeModal").on('shown.bs.modal', function () {
             });
             
         });
-    })
+    });
+    
+    $(".logoutEmployee").click(function() {
+        $(location).attr("href","/logOutServlet");
+    });
 
 });
 
