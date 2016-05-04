@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Tables;
+import Bean.DataRepo;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,12 +12,13 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
  * @author root
  */
-public class Stock implements Serializable{
+public class Stock implements Serializable, DataRepo{
     private String stockSymbol;
     private String stockType;
     private String stockName;
@@ -95,6 +97,22 @@ public class Stock implements Serializable{
         } catch (SQLException ex) {
             Logger.getLogger(Orders.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public JSONObject getJson() {
+        JSONObject json = new JSONObject();
+        
+        json.put("ss", this.stockSymbol);
+        json.put("nos", this.numberOfSharesAvaliable);
+        json.put("st", this.stockType);
+        json.put("sn", this.stockName);
+        json.put("s_time", this.stockTime);
+        json.put("s_date", this.stockDate);
+        json.put("sp", this.sharePrice);
+        
+
+        return json;
     }
     
 }
