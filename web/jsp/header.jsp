@@ -58,12 +58,17 @@
                     <div id="user-portal">
                         <span id="welcome"> Welcome </span>
                         <c:choose>
-                            <c:when test = "${userBean.username == null}">
+                            <c:when test = "${userBean.status == null}">
                                 <a href="/jsp/loginPage.jsp" id="user">Hello</a>
                             </c:when>
-                            <c:when test="${userBean.username != null}">
-                                <a href="/jsp/loginPage.jsp" id="user">${userBean.username}</a>
-
+                            <c:when test="${userBean.status == 'customer'}">
+                                <a href="/customer" id="user">${userBean.username}</a>
+                            </c:when>
+                            <c:when test="${userBean.status == 'Manager'}">
+                                <a href="/employeePage" id="user">${userBean.username}</a>
+                            </c:when>
+                            <c:when test="${userBean.status == 'CustomerRep'}">
+                                <a href="/employeePage" id="user">${userBean.username}</a>
                             </c:when>
                         </c:choose> 
                     </div>
