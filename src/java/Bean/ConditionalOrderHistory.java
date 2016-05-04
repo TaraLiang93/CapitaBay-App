@@ -46,7 +46,7 @@ public class ConditionalOrderHistory implements Serializable {
         JSONObject json = new JSONObject();
 
         json.put("sharePrice", this.sharePrice);
-        json.put("stockDate", this.stockDate);
+        json.put("stockDate", this.stockDate.toString());
         
         return json;
     }

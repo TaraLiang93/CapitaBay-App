@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -108,8 +109,8 @@ public class Stock implements Serializable, DataRepo{
         json.put("nos", this.numberOfSharesAvaliable);
         json.put("st", this.stockType);
         json.put("sn", this.stockName);
-        json.put("s_time", this.stockTime);
-        json.put("s_date", this.stockDate);
+        json.put("s_time", this.stockTime.toString());
+        json.put("s_date", this.stockDate.toString());
         json.put("sp", this.sharePrice);
         
 

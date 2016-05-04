@@ -68,7 +68,7 @@ public class MakeStockSuggestionList extends HttpServlet {
             }
             response.setContentType("application/json");
             json.put("stockSugest", jarr);
-            response.getWriter().print(json);
+            response.getWriter().println(json);
             response.getWriter().flush();
         } catch (SQLException ex) {
             Logger.getLogger(MakeStockSuggestionList.class.getName()).log(Level.SEVERE, null, ex);
