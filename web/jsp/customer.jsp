@@ -245,7 +245,7 @@
                                 <div class="tab-pane" id="hidden">
                                     <div class="col-sm-10">
                                         <label for="an">Hidden Stop Price:</label>
-                                        <input type="number" name="hiddenStopPrice" id="an" class="acctNum" max="" value="" step="any"/>
+                                        <input type="number" name="hiddenStopPrice" id="an" class="form-control" value="-1" step="any" />
                                     </div>
                                     <input type="text" name="hiddenType" style="display:none;" value="hidden"/>
 
@@ -253,7 +253,7 @@
                                 <div class="tab-pane" id="trailing">                                
                                     <div>
                                         <label for="trailingStop">Trailing Stop Percentage(Minimum:0 - Maximum:100):</label>
-                                        <input id="trailingStop" name="trailPercent" class="form-control" type="number" value="" min="0" >
+                                        <input id="trailingStop" name="trailPercent" class="form-control" type="number" value="-1" step="any"/>
                                     </div>
                                     <input type="text" name="trailType" style="display:none;" value="trailing"/>
 
