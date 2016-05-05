@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $("#gcoSubmit").click(function () {
 
-        $.get("/ListConditionalOrderHistory", {"orderID": $("#orderID").val()},"json")
+        $.get("/ListConditionalOrderHistory", {"orderID": $("#orderID").val(),"conditionalType":$("#conditionalType").val()}, "json")
                 .done(function (data) {
 
                     var code = "";
@@ -24,7 +24,8 @@ $(document).ready(function () {
                         code = "";
                         code = "<tr>" +
                                 "<td>" + value.sharePrice + "</td>" +
-                                "<td>" + value.stockDate + "</td>" +
+                                "<td>" + value.orderID + "</td>" +
+                                 "<td>" + value.percentage + "</td>" +
                                 "</tr>";
 
                         $("#condHistory").append(code);
@@ -57,11 +58,20 @@ $(document).ready(function () {
         $("#sellPrices").val(price);
 
     });
-    
+
+//    $(".tab").click(function () {
+//        console.log("new tab clicked");
+//        var parent = $(this).parent().parent();
+//        $("#shares-upper").attr({max:$("#numShares")});
+//        $("#shares-upper").val($("#numShares").text());
+//        $("#shares").attr({max: $("#numShares")});
+//
+//    });
 
     $(".saveChanges").each(function () {
         $(this).click(function () {
             var parent = $(this).parent().parent();
+            $("#trailingStopPrice").attr({max: parent.find(".price").text()});
             $(".stockSymbol").val(parent.find(".stockSymbol").text());
             $("#numShares").text(parent.find(".totalShares").text());
             $("#currentPrice").text(parent.find(".price").text());

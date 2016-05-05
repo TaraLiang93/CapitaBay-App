@@ -58,6 +58,8 @@ public class addSellOrder extends HttpServlet {
             String ot = "sell";
             long e_ssn = 0;
             String type = request.getParameter("sellType");
+            String trail = request.getParameter("trailPercent");
+            String hidden = request.getParameter("hiddenStopPrice");
 
             String getEmployee = "select EmployeeSSN from Orders where SocialSecurityNumber = " + ssn + " AND StockSymbol=\"" + ss + "\" LIMIT 1;";
             ResultSet res = CapitaBay.ExecuteQuery(getEmployee);
@@ -66,7 +68,14 @@ public class addSellOrder extends HttpServlet {
             }
             String query = new String();
 
-            if (type.equalsIgnoreCase("market") == true) {
+            if (hidden != null) {
+                double hiddenPrice = Double.parseDouble(request.getParameter("hiddenStopPrice"));
+                query = "call addHiddenStop(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\"," + hiddenPrice + ")";
+            } else if (trail != null) {
+                double trailPercent = Double.parseDouble(request.getParameter("trailPercent")) / 100;
+                query = "call addTrailingStop(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\"," + trailPercent + ")";
+            }
+            else if (type.equalsIgnoreCase("market") == true) {
                 query = "call addMarket(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\",\"sell\")";
             } else if (type.equalsIgnoreCase("market-on-close") == true) {
                 query = "call addMarketOnClose(" + ssn + "," + nos + ",\"" + o_time + "\"," + e_ssn + "," + an + ",\"" + ss + "\",\"" + dat + "\",\"sell\")";
