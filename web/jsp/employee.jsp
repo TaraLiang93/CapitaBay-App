@@ -270,6 +270,44 @@
              </table>
          </div>
         </c:if>
+         
+         <c:if test="${userBean.status eq 'CustomerRep'}" >
+             <h3 class="text-center">${userBean.username}'s Orders Receipt</h3>
+             
+             
+             <sql:query dataSource="${snapshot}" var="repOrders" sql="SELECT O.* FROM Orders O INNER JOIN Employee E ON O.EmployeeSSN = E.SocialSecurityNumber WHERE O.EmployeeSSN = ${userBean.socialSecurityNumber}" />
+             
+             <table class="table table-bordered repOrders">
+                 <thead>
+                     <tr>
+                        <th>Order ID</th>
+                        <th>Order Type</th>
+                        <th>Customer SSN</th>
+                        <th>Employee SSN</th>
+                        <th>Account Number</th>
+                        <th>Order Date</th>
+                        <th>Order Time</th>
+                        <th>Shares Brought</th>
+                        <th>Share Price</th>  
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <c:forEach var="repOrder" items="${repOrders.rows}">
+                         <tr>
+                             <td>${repOrder.OrderID}</td>
+                             <td>${repOrder.OrderType}</td>
+                             <td>${repOrder.SocialSecurityNumber}</td>
+                             <td>${repOrder.EmployeeSSN}</td>
+                             <td>${repOrder.AccountNumber}</td>
+                             <td>${repOrder.OrderDate}</td>
+                             <td>${repOrder.OrderTime}</td>
+                             <td>${repOrder.NumberOfShares}</td>
+                             <td>${repOrder.SharePrice}</td>
+                         </tr>
+                     </c:forEach>
+                 </tbody>
+             </table>
+         </c:if>
      </div>
      <div role="tabpanel" class="tab-pane" id="customrs">
     <c:if test="${userBean.status == 'Manager'}">
