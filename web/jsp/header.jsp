@@ -58,7 +58,7 @@
                     <div id="user-portal">
                         <span id="welcome"> Welcome </span>
                         <c:choose>
-                            <c:when test = "${userBean.status == null}">
+                            <c:when test = "${userBean.username eq null || userBean.status == null}">
                                 <a href="/jsp/loginPage.jsp" id="user">Hello</a>
                             </c:when>
                             <c:when test="${userBean.status == 'customer'}">
