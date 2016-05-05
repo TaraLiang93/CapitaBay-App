@@ -13,7 +13,7 @@ $(document).ready(function() {
            });          
         });
         
-  
+        $("#help-buy").click();
         
 });
 
