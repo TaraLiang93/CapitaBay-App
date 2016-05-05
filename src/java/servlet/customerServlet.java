@@ -65,9 +65,9 @@ public class customerServlet extends HttpServlet{
             }
             request.setAttribute("currentStockHoldings", results);
          
-            
-            //get Order History
             Long c_ssn = userBean.getSocialSecurityNumber();
+         
+            //get Order History
             query = "call OrderHistory("+c_ssn+");";
             res = CapitaBay.ExecuteQuery(query);
             LinkedList<Transaction> result = new LinkedList<Transaction>();

@@ -37,16 +37,23 @@
                 <li role="presentation"><a href="#conditionalOrder" aria-controls="conditionalOrder" role="tab" data-toggle="tab">Conditional Order History</a></li>
 
 
-                <div role="tabpanel" class="tab-pane active" id="home">
-                    <form action="/logOutServlet" method="GET">
-                        <button class="btn btn-error pull-right" style="color: red; margin: 1%;" type="submit">Log Out</button>
-                    </form>
-                </div>
+
+
             </ul>
 
             <!--                 Tab panes -->
             <div class="tab-content">
 
+
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <form action="/logOutServlet" method="GET">
+                        <button class="btn btn-error pull-right" style="color: red; margin: 1%;" type="submit">Log Out</button>
+                    </form>
+                    
+                    <label for="revenue">Customer's Revenue</label>
+                    <p id="revenue"></p>
+                    
+                </div>
 
 
                 <!--//current stock Holding-->
@@ -166,11 +173,11 @@
                         </tbody>
                     </table>
                 </div>
-            
-            
+
+
             </div>
 
-            
+
 
 
 
