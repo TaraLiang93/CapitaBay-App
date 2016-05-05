@@ -98,8 +98,7 @@
                             <li><a href="/jsp/about.jsp">About</a></li>
                             <li><a href="/loadStockListingsPage">Trading</a></li>
                             <li><a href="/bestSelling">Best Selling</a></li>
-                            <li><a href="#contact">Statistics</a></li>
-                            <li><a href="../navbar/">Help</a></li>
+                            <li><a href="/jsp/help.jsp">Help</a></li>
                             <!--<li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock Market<span class="caret"></span></a>
                               <ul class="dropdown-menu">

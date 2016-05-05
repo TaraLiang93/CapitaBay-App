@@ -19,7 +19,7 @@
       <h1>Welcome to Capita Bay</h1>
       <p style="text-align:justify;">If you are a new user please click the button below to register with us as a Capita Bay member. We also provide a comprehensive <a class="home2-link" href="#">help</a> facility to guide you through the process of navigating our system. Still not convinced we are right for you? Visit our <a class="home2-link" href="/jsp/about.jsp">about</a> page to learn the advantages of buying and selling stocks with Capita Bay!  </p>
       <p>
-        <a class="btn btn-lg btn-success" href="/jsp/loginPage.jsp" role="button">Register as New User &raquo;</a>
+        <a class="btn btn-lg btn-success" href="/jsp/signupPage.jsp" role="button">Register as New User &raquo;</a>
       </p>
     </div>
 
