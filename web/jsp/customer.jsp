@@ -156,7 +156,8 @@
                         <thead>
                             <tr>
                                 <th>Share Price</th>
-                                <th>Date</th>
+                                <th>Order ID</th>
+                                <th>Percentage</th>
                             </tr>
                         </thead>
                         <tbody id="condHistory">
@@ -196,42 +197,42 @@
                             </div>
                         </div>
 
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
-                            <li class="active"><a href="#sell" data-toggle="tab">Sell Stock</a></li>
-                            <li><a href="#trailing" data-toggle="tab">Add Trailing Stop</a></li>
-                            <li><a href="#hidden" data-toggle="tab">Add Hidden Stop</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="sell">
-                                <form action="/addSellOrder" method="post">
-                                    <h2>Sell Stock</h2>           
-                                    <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
-                                    <input id="shares" type="range" name="shares"
-                                           value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
-                                    <h3 id="shares-upper" class="shares-bounds">  </h3>
-                                    <br><br><br>
-                                    <div  class="row">
-                                        <div class="col-sm-6">
-                                            <label for="ss">Stock Symbol</label>
-                                            <input type="text" name="ss" id="ss" class="stockSymbol" readonly/>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="an">Account Number</label>
-                                            <input type="text" name="an" id="an" class="acctNum" readonly/>
-                                        </div>
-                                    </div>
+                        <form action="/addSellOrder" method="post">           
+                            <h3 id="shares-lower" class="shares-bounds"> 0 </h3>
+                            <input id="shares" type="range" name="shares"
+                                   value="0" min="0" max="" data-highlight="true" data-show-value="true" />  
+                            <h3 id="shares-upper" class="shares-bounds">  </h3>
+                            <br><br><br>
+                            <div  class="row">
+                                <div class="col-sm-4">
+                                    <label for="ss">Stock Symbol</label>
+                                    <input type="text" name="ss" id="ss" class="stockSymbol" readonly/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="an">Account Number</label>
+                                    <input type="text" name="an" id="an" class="acctNum" readonly/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="shareNums">Number of Shares:</label>
+                                    <input id="shareNums" name="shareNums" class="form-control buy-text" type="text" value="0" readonly />
+                                </div>
+                            </div>
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+                                <li class="active" ><a href="#sell" data-toggle="tab" class="tab">Sell Stock</a></li>
+                                <li><a href="#trailing" data-toggle="tab" class="tab">Add Trailing Stop</a></li>
+                                <li><a href="#hidden" data-toggle="tab" class="tab">Add Hidden Stop</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="sell">
                                     <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="shareNums">Number of Shares:</label>
-                                            <input id="shareNums" name='shareNums' class="form-control buy-text" type="text" value="0" readonly />
-                                        </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <label for="sellPrices">Total Sell Price:</label>
                                             <input id="sellPrices" name="sellPrice" class="form-control buy-text" type="text" value="0" readonly />
                                         </div>
-                                        <div class="col-sm-4 btn-group">
+                                        <div class="col-sm-6 btn-group">
                                             <label for="sellType">Sell Type:</label>
                                             <select id="sellType" name="sellType" class="form-control">
                                                 <option name='Market' value="Market">Market</option>
@@ -239,25 +240,28 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <input id="sell-submit" name="submit" class="btn btn-default pull-right" value="Sell Shares" type="submit">
-                                </form>
-                            </div>
+                                </div>
 
-                            <div class="tab-pane" id="trailing">
-                                <h2>Add Trailing Stop</h2>                       
+                                <div class="tab-pane" id="hidden">
+                                    <div class="col-sm-10">
+                                        <label for="an">Hidden Stop Price:</label>
+                                        <input type="number" name="hiddenStopPrice" id="an" class="acctNum" max="" value="" step="any"/>
+                                    </div>
+                                    <input type="text" name="hiddenType" style="display:none;" value="hidden"/>
 
-                                <label for="trailingStop">Trailing Amount:</label>
-                                <input id="trailingStop" name="number-shares" class="form-control" type="number" value="" min="0">
-                                <input id="trailing-submit" name="submit" class="btn btn-default pull-right" value="Add Trailing" type="submit">
-                            </div>
-                            <div class="tab-pane" id="hidden">                                
-                                <h2>Add Hidden Stop</h2>                       
+                                </div>
+                                <div class="tab-pane" id="trailing">                                
+                                    <div>
+                                        <label for="trailingStop">Trailing Stop Percentage(Minimum:0 - Maximum:100):</label>
+                                        <input id="trailingStop" name="trailPercent" class="form-control" type="number" value="" min="0" >
+                                    </div>
+                                    <input type="text" name="trailType" style="display:none;" value="trailing"/>
 
-                                <label for="hiddenStop">Hidden Stop Percentage:</label>
-                                <input id="hiddenStop" name="number-shares" class="form-control" type="number" value="" min="0">
-                                <input id="hidden-submit" name="submit" class="btn btn-default pull-right" value="Add Hidden" type="submit">
+                                </div>
                             </div>
-                        </div>
+                            <br>
+                            <input  name="submit" class="btn btn-default pull-right" value="Submit" type="submit">
+                        </form>
 
 
 

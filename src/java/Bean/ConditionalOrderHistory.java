@@ -19,8 +19,27 @@ import org.json.JSONObject;
 public class ConditionalOrderHistory implements Serializable {
 
     private double sharePrice;
-    private Date stockDate;
+    private int orderID;
+    private double percentage;
 
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+    
+        
+    
     public double getSharePrice() {
         return sharePrice;
     }
@@ -29,24 +48,17 @@ public class ConditionalOrderHistory implements Serializable {
         this.sharePrice = sharePrice;
     }
 
-    public Date getStockDate() {
-        return stockDate;
-    }
-
-    public void setStockDate(Date stockDate) {
-        this.stockDate = stockDate;
-    }
-
+    
     public void set(ResultSet res) throws SQLException {
         this.sharePrice = res.getDouble("sharePrice");
-        this.stockDate = res.getDate("stockDate");
     }
 
     public JSONObject getJson() {
         JSONObject json = new JSONObject();
 
         json.put("sharePrice", this.sharePrice);
-        json.put("stockDate", this.stockDate.toString());
+        json.put("orderID", this.orderID);
+        json.put("percentage",this.percentage);
         
         return json;
     }

@@ -52,39 +52,49 @@ public class ListConditionalOrderHistory extends HttpServlet {
         }
         try {
             long ssn = userBean.getSocialSecurityNumber();
+            String type = request.getParameter("conditionalType");
 //            LinkedList<ConditionalOrderHistory> results = new LinkedList<ConditionalOrderHistory>();
-            String check = "select count(*) from Orders where Orders.OrderID=" + request.getParameter("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ";";
-//            System.out.println(check);
-            ResultSet res = CapitaBay.ExecuteQuery(check);
-            int checkSSN = -1;
-            if (res.next()) {
-                checkSSN = res.getInt("count(*)");
+//            String check = "select count(*) from Orders where Orders.OrderID=" + request.getParameter("orderID") + " AND Orders.SocialSecurityNumber = " + ssn + ";";
+//            System.out.println(check)
+//            ResultSet res = CapitaBay.ExecuteQuery(check);
+//            int checkSSN = -1;
+//            if (res.next()) {
+//                checkSSN = res.getInt("count(*)");
+//            }
+//            if (checkSSN > 0) {
+            String query = "select * from Orders;";
+            if (type.equalsIgnoreCase("Trailing Stop")) {
+                query = "select TrailingStop.* from TrailingStop, Orders where Orders.SocialSecurityNumber=" + ssn + " AND Orders.OrderID = TrailingStop.OrderID;";
+
+            } else if (type.equalsIgnoreCase("Hidden Stop")) {
+                query = "select HiddenStop.* from HiddenStop, Orders where Orders.SocialSecurityNumber=" + ssn + " AND Orders.OrderID = HiddenStop.OrderID;";
             }
-            if (checkSSN > 0) {
-                String query = "call getConditionalOrderHistory(" + request.getParameter("orderID") + ");";
-                res = CapitaBay.ExecuteQuery(query);
-                
-                JSONObject json = new JSONObject();
-                JSONArray jarr = new JSONArray();
-                
-                while (res.next()) {
-                    ConditionalOrderHistory conditionalOrderHistory = new ConditionalOrderHistory();
-                    conditionalOrderHistory.set(res);
-                    jarr.put(conditionalOrderHistory.getJson());
+            ResultSet res = CapitaBay.ExecuteQuery(query);
+
+            JSONObject json = new JSONObject();
+            JSONArray jarr = new JSONArray();
+
+            while (res.next()) {
+                ConditionalOrderHistory conditionalOrderHistory = new ConditionalOrderHistory();
+                conditionalOrderHistory.setSharePrice(res.getDouble("PricePerShare"));
+                conditionalOrderHistory.setOrderID(res.getInt("OrderID"));
+                if (type.equalsIgnoreCase("Trailing Stop")) {
+                    conditionalOrderHistory.setPercentage(res.getDouble("Percentage"));
                 }
-                response.setContentType("application/json");
-//                response.setCharacterEncoding("UTF-8");
-                json.put("history", jarr);
-                response.getWriter().print(json);
-                response.getWriter().flush();
+                jarr.put(conditionalOrderHistory.getJson());
             }
+            response.setContentType("application/json");
+//                response.setCharacterEncoding("UTF-8");
+            json.put("history", jarr);
+            response.getWriter().print(json);
+            response.getWriter().flush();
+
         } catch (SQLException ex) {
             Logger.getLogger(ListConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ListConditionalOrderHistory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     /**
      * Returns a short description of the servlet.
