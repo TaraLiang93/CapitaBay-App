@@ -7,6 +7,11 @@
 $(document).ready(function() {
         var helpBuy = true;
         var helpSell = true;
+        var helpSearch = true;
+        var helpHoldings = true;
+        var helpConditional = true;
+        var helpSuggestion = true;
+        var helpHistory = true;
         
         $(".stockListing").each(function(){
             $(this).click(function(){
@@ -48,68 +53,83 @@ $(document).ready(function() {
         
         $("#help-search-answ").hide();
         $("#help-search").click(function() {
-            if(helpSell) {
+            if(helpSearch) {
                 $("#help-search-answ").show();
                 $("#help-search span").removeClass("glyphicon-chevron-right");
                 $("#help-search span").addClass("glyphicon-chevron-down");
-                helpSell = false;
+                helpSearch = false;
             } else {
                 $("#help-search-answ").hide();
                 $("#help-search span").removeClass("glyphicon-chevron-down");
                 $("#help-search span").addClass("glyphicon-chevron-right");
                 
-                helpSell = true;
+                helpSearch = true;
             }           
         });
         
         $("#help-history-answ").hide();
         $("#help-history").click(function() {
-            if(helpSell) {
+            if(helpHistory) {
                 $("#help-history-answ").show();
                 $("#help-history span").removeClass("glyphicon-chevron-right");
                 $("#help-history span").addClass("glyphicon-chevron-down");
-                helpSell = false;
+                helpHistory = false;
             } else {
                 $("#help-history-answ").hide();
                 $("#help-history span").removeClass("glyphicon-chevron-down");
                 $("#help-history span").addClass("glyphicon-chevron-right");
                 
-                helpSell = true;
+                helpHistory = true;
             }           
         });
         
         $("#help-holdings-answ").hide();
         $("#help-holdings").click(function() {
-            if(helpSell) {
+            if(helpHoldings) {
                 $("#help-holdings-answ").show();
                 $("#help-holdings span").removeClass("glyphicon-chevron-right");
                 $("#help-holdings span").addClass("glyphicon-chevron-down");
-                helpSell = false;
+                helpHoldings = false;
             } else {
                 $("#help-holdings-answ").hide();
                 $("#help-holdings span").removeClass("glyphicon-chevron-down");
                 $("#help-holdings span").addClass("glyphicon-chevron-right");
                 
-                helpSell = true;
+                helpHoldings = true;
             }           
         });
         
         $("#help-conditional-answ").hide();
         $("#help-conditional").click(function() {
-            if(helpSell) {
+            if(helpConditional) {
                 $("#help-conditional-answ").show();
                 $("#help-conditional span").removeClass("glyphicon-chevron-right");
                 $("#help-conditional span").addClass("glyphicon-chevron-down");
-                helpSell = false;
+                helpConditional = false;
             } else {
                 $("#help-conditional-answ").hide();
                 $("#help-conditional span").removeClass("glyphicon-chevron-down");
                 $("#help-conditional span").addClass("glyphicon-chevron-right");
                 
-                helpSell = true;
+                helpConditional = true;
             }           
         });
         
+        $("#help-suggestion-answ").hide();
+        $("#help-suggestion").click(function() {
+            if(helpSuggestion) {
+                $("#help-suggestion-answ").show();
+                $("#help-suggestion span").removeClass("glyphicon-chevron-right");
+                $("#help-suggestion span").addClass("glyphicon-chevron-down");
+                helpSuggestion = false;
+            } else {
+                $("#help-suggestion-answ").hide();
+                $("#help-suggestion span").removeClass("glyphicon-chevron-down");
+                $("#help-suggestion span").addClass("glyphicon-chevron-right");
+                
+                helpSuggestion = true;
+            }           
+        });
         
       
 });
