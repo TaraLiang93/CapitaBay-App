@@ -172,22 +172,17 @@ transition: color .3s ease-in-out;
     position:relative;
     top:50%;
     transform:translateY(-50%);
-    //font-family: 'Patrick Hand SC', cursive;
     font-family: 'VT323', Arial, Helvetica, sans-serif;
     color:#00f417;
     font-size: 60px; 
 }
 
 #home1-first {
-    //background-color:#005800;
     background-image:url("/images/money.jpg");
-    //color:#00f417;
 }
 
 #home1-second {
-    //background-color:#00f417;    
     background-image:url("/images/technology.jpg");
-    //color:#005800;
 }
 
 #home-content2 {
