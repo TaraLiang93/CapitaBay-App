@@ -17,6 +17,9 @@
     <li role="presentation" class=""><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
     <li role="presentation" class=""><a href="#customrs" aria-controls="customers" role="tab" data-toggle="tab">Customers</a></li>
     <li role="presentation" class=""><a href="#stock" aria-controls="stock" role="tab" data-toggle="tab">Stock</a></li>
+    <c:if test="${userBean.status eq 'Manager'}">
+    <li role="presentation"><a href="#addStock" aria-controls="addStock" role="tab" data-toggle="tab">Add Stock</a></li>
+    </c:if>
     <button class="btn btn-error pull-right logoutEmployee" style="color: red;">Log Out</button>
 </ul>
 
@@ -565,6 +568,37 @@
         
     </table>
 </div>
+
+    <div role="tabpanel" class="tab-pane" id="addStock">
+                <form action="/addStock" method="post">
+                    <div class="form-group row">
+                        <div class="col-sm-4"> 
+                            <label for="stockSymbol">Stock Symbol</label>
+                            <input type="text" class="form-control" id="stockSymbol" name="stockSymbol" placeholder="Stock Symbol">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="stockName">Stock Name</label>
+                            <input type="text" class="form-control" name="stockName" id="stockName" placeholder="Stock Name">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="stockType">Stock Type</label>
+                            <input type="text" class="form-control" id="stockType" name="stockType" placeholder="Stock Type">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="price">Price Per Share</label>
+                            <input type="number" class="form-control" name="price" id="price" placeholder="Price">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="nos">Number of Share</label>
+                            <input type="number" class="form-control" name="nos" id="nos" placeholder="Number of Share">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-error pull-right" type="submit" style="color:black;">Add Stock</button>
+                </form>
+            </div>
 
 
 

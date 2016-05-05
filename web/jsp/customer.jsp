@@ -35,7 +35,6 @@
                 <li role="presentation"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Order History</a></li>
                 <li role="presentation"><a href="#sugesstions" aria-controls="sugesstions" role="tab" data-toggle="tab">Stock Suggestion</a></li>
                 <li role="presentation"><a href="#conditionalOrder" aria-controls="conditionalOrder" role="tab" data-toggle="tab">Conditional Order History</a></li>
-                <li role="presentation"><a href="#addStock" aria-controls="addStock" role="tab" data-toggle="tab">Add Stock</a></li>
 
 
                 <div role="tabpanel" class="tab-pane active" id="home">
@@ -168,37 +167,6 @@
                     </table>
                 </div>
             
-                
-                <div role="tabpanel" class="tab-pane" id="addStock">
-                <form action="/addStock" method="post">
-                    <div class="form-group row">
-                        <div class="col-sm-4"> 
-                            <label for="stockSymbol">Stock Symbol</label>
-                            <input type="text" class="form-control" id="stockSymbol" name="stockSymbol" placeholder="Stock Symbol">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="stockName">Stock Name</label>
-                            <input type="text" class="form-control" name="stockName" id="stockName" placeholder="Stock Name">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="stockType">Stock Type</label>
-                            <input type="text" class="form-control" id="stockType" name="stockType" placeholder="Stock Type">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="price">Price Per Share</label>
-                            <input type="number" class="form-control" name="price" id="price" placeholder="Price">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="nos">Number of Share</label>
-                            <input type="number" class="form-control" name="nos" id="nos" placeholder="Number of Share">
-                        </div>
-                    </div>
-                    <br>
-                    <button class="btn btn-error pull-right" type="submit" style="color:black;">Add Stock</button>
-                </form>
-            </div>
             
             </div>
 
