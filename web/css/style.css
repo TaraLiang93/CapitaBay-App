@@ -193,6 +193,17 @@ transition: color .3s ease-in-out;
 #home-content2 {
     margin-top: 50px;
     margin-bottom: 100px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color:#00f417;
+}
+
+.home2-link {
+    color:#00f417;
+    text-decoration:underline;
+}
+
+.home2-link:hover {
+    color:#0daa1c;
 }
 
 .display-content {

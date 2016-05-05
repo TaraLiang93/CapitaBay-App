@@ -79,7 +79,7 @@
                                 <option value="type">Type</option>
                         </select>
                         <span class="input-group-btn">
-                            <button href="#" class="btn btn-primary glyphicon glyphicon-search" type="submit"></button>
+                            <button href="#" class="btn btn-success glyphicon glyphicon-search" type="submit"></button>
                         </span>
                     </form>
                 </div>
