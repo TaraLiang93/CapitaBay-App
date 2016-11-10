@@ -20,7 +20,7 @@ public class CapitaBay {
     
     private static final String USER = "root";
     
-    private static final String PASSWD = "272900Tl!1730";
+    private static final String PASSWD = "STRING";
 
     
     private static Connection conn = null;
